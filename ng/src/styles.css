@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+/* Use is only for sass but import depends on webpack or vite */
+@import "@fontsource/inter";
+@import "@fontsource/roboto-flex";
+@import "@fontsource/roboto-serif";
+
+@theme {
+    --font-inter: 'Inter', sans-serif;
+    --font-roboto-serif: 'Roboto Serif', serif;
+    --font-roboto-flex: 'Roboto Flex', sans-serif;
+}
