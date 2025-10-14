@@ -1,0 +1,44 @@
+<div class="w-full h-[100vh] absolute top-0 left-0 flex flex-col
+            bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.15)_0,rgba(0,0,0,0.30),rgba(0,0,0,0.45)_100%),url(/about-me/background.png)]
+            bg-cover 2xl:bg-position-[center_top_1500px] xl:bg-position-[center_top_1100px]
+            lg:bg-position-[center_top_800px] md:bg-position-[center_top_650px]">
+
+    <app-navbar></app-navbar>
+
+    <!-- Hero Section, este comentario no lo ha puesto una IA 😎-->
+    <div class="grid mt-18
+            2.5xl:grid-cols-[0.35fr_0.3fr_0.25fr]
+            2xl:grid-cols-[0.47fr_0.3fr_0.25fr]
+            xl:grid-cols-[0.4fr_0.2fr_0.4fr]
+            lg:grid-cols-2
+            md:grid-cols-1">
+
+        <div class="w-full h-full flex flex-row col-start-1">
+            <!-- Imagen de perfil -->
+           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Chimpanzee-Head.jpg/330px-Chimpanzee-Head.jpg" class="bg-white w-[150px] h-[150px] rounded-[20cm] ml-auto object-cover" alt="foto de perfil">
+           <!-- Decoración de fondo -->
+           <img class="absolute
+           2.5xl:left-[calc(5vw+15rem)] 2.5xl:top-[calc(5vh+2rem)]
+           2xl:left-[calc(5vw+8rem)] 2xl:top-[calc(5vh+2rem)]
+           xl:left-[calc(3vw+4rem)] xl:top-[calc(5vh+1.5rem)]
+           lg:left-[calc(9vw+12rem)] lg:top-[calc(4vh+1rem)]
+           md:left-[calc(4vw+5rem)] md:top-[calc(3vh+0.5rem)]" src="/about-me/freepik-background-without-asteroids.svg">
+        </div>
+
+        <div class="flex flex-col items-start content-center w-full h-150 col-start-2 ml-44">
+            <span class="font-inter text-white font-medium text-xs mb-5"> Hola, soy Siddharta</span>
+            <span class="font-inter text-white text-3xl tracking-wider font-bold mb-6 text-center"> Soy un <b class="text-purple-650 font-bold text-center">Desarrollador<br> Web Full-Stack</b> </span>
+            <span class="font-roboto-flex text-white text-sm font-light tracking-widest w-[330px] text-center">
+                Disfruto creando <b class="text-yellow-300">soluciones</b> que combinan buen diseño, rendimiento y escalabilidad.<br><br>
+                Me encanta la <b class="text-orange-350">optimización de procesos</b>, la <b class="text-orange-350">programación recreativa</b> y el <b class="text-red-700">café</b>.
+            </span>
+        </div>
+    </div>
+
+
+    <!-- <div class="w-full h-25 bg-[linear-gradient()]">
+
+
+         </div>
+    -->
+</div>

@@ -2,12 +2,20 @@
 @import "tailwindcss";
 
 /* Use is only for sass but import depends on webpack or vite */
-@import "@fontsource/inter";
-@import "@fontsource/roboto-flex";
-@import "@fontsource/roboto-serif";
+/* fontsource-variable has fonts that icnlude all weights directly */
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/roboto-flex";
+@import "@fontsource-variable/roboto-serif";
 
 @theme {
-    --font-inter: 'Inter', sans-serif;
-    --font-roboto-serif: 'Roboto Serif', serif;
-    --font-roboto-flex: 'Roboto Flex', sans-serif;
+    --font-inter: 'Inter Variable', sans-serif;
+    --font-roboto-serif: 'Roboto Serif Variable', serif;
+    --font-roboto-flex: 'Roboto Flex Variable', sans-serif;
+
+    --color-orange-350: #FF7247;
+    --color-purple-650: #8462FF;
+
+    --breakpoint-2.5xl: 105.5rem; /* 1688px, -1 px de donde me da problema el grid en el about-me */
+    /* --breakpoint-3xl:  */
+
 }
