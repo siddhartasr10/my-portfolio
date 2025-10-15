@@ -18,4 +18,19 @@
     --breakpoint-2.5xl: 105.5rem; /* 1688px, -1 px de donde me da problema el grid en el about-me */
     /* --breakpoint-3xl:  */
 
+    --animate-floating-slow: floating 3.5s ease-in-out infinite;
+    --animate-floating-mid: floating 2.5s ease-in-out infinite;
+    --animate-floating-fast: floating 1.5s ease-in-out infinite;
+
+    @keyframes floating {
+        0% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(10px);
+        }
+        100% {
+            transform: translateY(0px);
+        }
+    }
 }

@@ -1,44 +1,79 @@
-<div class="w-full h-[100vh] absolute top-0 left-0 flex flex-col
+<div class="w-full min-h-screen absolute top-0 left-0 flex flex-col
             bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.15)_0,rgba(0,0,0,0.30),rgba(0,0,0,0.45)_100%),url(/about-me/background.png)]
             bg-cover 2xl:bg-position-[center_top_1500px] xl:bg-position-[center_top_1100px]
             lg:bg-position-[center_top_800px] md:bg-position-[center_top_650px]">
-
     <app-navbar></app-navbar>
+    <!-- TODO: añade esto cuando tengas la pagina:  snap-y snap-mandatory-->
 
     <!-- Hero Section, este comentario no lo ha puesto una IA 😎-->
     <div class="grid mt-18
             2.5xl:grid-cols-[0.35fr_0.3fr_0.25fr]
             2xl:grid-cols-[0.47fr_0.3fr_0.25fr]
             xl:grid-cols-[0.4fr_0.2fr_0.4fr]
-            lg:grid-cols-2
-            md:grid-cols-1">
+            lg:grid-cols-[0.35fr_0.15fr_0.55fr]
+            md:grid-cols-[0.35fr_0.15fr_0.55fr]">
 
         <div class="w-full h-full flex flex-row col-start-1">
             <!-- Imagen de perfil -->
            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Chimpanzee-Head.jpg/330px-Chimpanzee-Head.jpg" class="bg-white w-[150px] h-[150px] rounded-[20cm] ml-auto object-cover" alt="foto de perfil">
+
            <!-- Decoración de fondo -->
-           <img class="absolute
-           2.5xl:left-[calc(5vw+15rem)] 2.5xl:top-[calc(5vh+2rem)]
-           2xl:left-[calc(5vw+8rem)] 2xl:top-[calc(5vh+2rem)]
-           xl:left-[calc(3vw+4rem)] xl:top-[calc(5vh+1.5rem)]
-           lg:left-[calc(9vw+12rem)] lg:top-[calc(4vh+1rem)]
-           md:left-[calc(4vw+5rem)] md:top-[calc(3vh+0.5rem)]" src="/about-me/freepik-background-without-asteroids.svg">
+           <img class="absolute animate-floating-fast
+           2.5xl:left-[calc(5vw+12rem)] 2.5xl:top-[calc(5vh+2rem)]
+           2xl:left-[calc(5vw+5rem)] 2xl:top-[calc(5vh+2rem)]
+           xl:left-[calc(2vw+1rem)] xl:top-[calc(5vh+1.5rem)]
+           lg:left-[calc(-2.5vw-5.5rem)] lg:top-[calc(4vh+1rem)]
+           md:left-[calc(1vw-9rem)] md:top-[calc(3vh+1.5rem)]" src="/about-me/freepik-background-without-asteroids-and-moon.svg">
+
+           <img class="absolute animate-floating-slow
+            2.5xl:left-[calc(12vw+22.5rem)] 2.5xl:top-[calc(12vh+20rem)]
+            2xl:left-[calc(12vw+12rem)] 2xl:top-[calc(12vh+18rem)]
+            xl:left-[calc(10vw+6rem)] xl:top-[calc(14vh+15rem)]
+            lg:left-[calc(8vw+2rem)] lg:top-[calc(8vh+20rem)]
+            md:left-[calc(6vw-1rem)] md:top-[calc(6vh+20rem)]" src="/about-me/luna_oscura.svg">
         </div>
 
-        <div class="flex flex-col items-start content-center w-full h-150 col-start-2 ml-44">
-            <span class="font-inter text-white font-medium text-xs mb-5"> Hola, soy Siddharta</span>
-            <span class="font-inter text-white text-3xl tracking-wider font-bold mb-6 text-center"> Soy un <b class="text-purple-650 font-bold text-center">Desarrollador<br> Web Full-Stack</b> </span>
-            <span class="font-roboto-flex text-white text-sm font-light tracking-widest w-[330px] text-center">
+        <!-- Bloque de texto -->
+        <div class="flex flex-col items-start content-center w-full h-150 col-start-2 ml-27">
+            <span class="font-inter text-white font-medium text-base mb-5"> Hola, soy Siddharta</span>
+            <span class="font-inter text-white text-4xl tracking-wider font-bold mb-10 text-center"> Soy un <b class="text-purple-650 font-bold text-center">Desarrollador<br> Web Full-Stack</b> </span>
+            <!-- estaba en 330px -->
+            <span class="font-roboto-flex text-white text-md font-light tracking-widest w-[370px] text-center ml-2.5">
                 Disfruto creando <b class="text-yellow-300">soluciones</b> que combinan buen diseño, rendimiento y escalabilidad.<br><br>
                 Me encanta la <b class="text-orange-350">optimización de procesos</b>, la <b class="text-orange-350">programación recreativa</b> y el <b class="text-red-700">café</b>.
             </span>
         </div>
+
+        <!-- Decoración de fondo planetas morados. (estan aqui por organización pero tienen posicion absoluta) -->
+        <div>
+            <img class="animate-floating-slow absolute
+            2.5xl:top-[30rem] 2.5xl:right-[21rem]
+            2xl:top-[28rem] 2xl:right-[18rem]
+            xl:top-[25rem] xl:right-[15rem]
+            lg:top-[22rem] lg:right-[1rem]
+            md:top-[18rem] md:right-[-1rem]" src="/about-me/saturno.svg" alt="planeta parecido a saturno"/>
+
+            <img class="animate-floating-mid absolute
+            2.5xl:top-[10rem] 2.5xl:right-[31rem]
+            2xl:top-[9rem] 2xl:right-[26rem]
+            xl:top-[8rem] xl:right-[22rem]
+            lg:top-[7rem] lg:right-[16rem]
+            md:top-[6rem] md:right-[15rem]" src="/about-me/ceres_oscuro.svg" alt="planeta enano"/>
+
+            <img class="animate-floating-fast absolute
+            2.5xl:top-[16rem] 2.5xl:right-[9rem]
+            2xl:top-[14rem] 2xl:right-[7rem]
+            xl:top-[12rem] xl:right-[6rem]
+            lg:top-[10rem] lg:right-[5rem]
+            md:top-[8rem] md:right-[4rem]" src="/about-me/pluton_oscuro.svg" alt="planeta enano parecido a pluton"/>
+        </div>
     </div>
 
 
-    <!-- <div class="w-full h-25 bg-[linear-gradient()]">
+    <div class="w-full min-h-[450px] mt-29 mb-25 bg-[linear-gradient(135deg,rgba(100,0,255,0.2),rgba(0,200,255,0.15))]
+                mix-blend-soft-light backdrop-blur-[4px] shadow-[0px_0px_16px_7px_rgba(0,200,255,0.2),0px_0px_20px_2px_rgba(255,255,255,0.2)] border-y-10 border-white box-content">
+        <!-- mix-blend-overlay sin bordes era la idea original, y sin blur pero sin blur no se ve un carajo. -->
+        <h1 class="text-white"> ola </h1>
+    </div>
 
-
-         </div>
-    -->
 </div>
