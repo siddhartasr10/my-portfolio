@@ -1,18 +1,18 @@
 <nav #navbar class="w-70 h-[15vh] flex flex-row items-center justify-center mx-auto
             font-inter text-lg text-white/[0.85] gap-40 break-keep">
     <a routerLink="/">
-        <span [class.font-extralight!]="this.section !== ''" class="whitespace-nowrap">Sobre mí</span>
+        <span [class]="(this.section  == '') ? 'font-semibold' : 'font-extralight'" class="whitespace-nowrap">Sobre mí</span>
     </a>
 
     <a routerLink="/proyectos">
-        <span [class.font-extralight!]="this.section !== 'proyectos'" class="">Proyectos</span>
+        <span [class]="(this.section == 'proyectos') ? 'font-semibold' : 'font-extralight'">Proyectos</span>
     </a>
 
     <a routerLink="/blog">
-        <span [class.font-extralight!]="this.section !== 'blog'" class="">Blog</span>
+        <span [class]="(this.section == 'blog') ? 'font-semibold' : 'font-extralight'">Blog</span>
     </a>
 
     <a routerLink="/contacto">
-        <span [class.font-extralight!]="this.section !== 'contacto'" class="">Contacto</span>
+        <span [class]="(this.section == 'contacto') ? 'font-semibold' : 'font-extralight'">Contacto</span>
     </a>
 </nav>

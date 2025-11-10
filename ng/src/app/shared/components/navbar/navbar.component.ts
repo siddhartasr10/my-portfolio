@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild} from '@angular/core';
+import { NgClass } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
@@ -8,12 +9,13 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  section: string = "";
   @ViewChild('navbar') navbar: ElementRef | undefined;
+  section: string = "";
 
   constructor(route: ActivatedRoute) {
     route.url.subscribe(url => {
       this.section = url[0].toString();
+      if (!this.navbar) return;
     })
   }
 
