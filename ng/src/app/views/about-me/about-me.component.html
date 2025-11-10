@@ -1,16 +1,25 @@
 <div class="w-full min-h-screen absolute top-0 left-0 flex flex-col
             bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.15)_0,rgba(0,0,0,0.30),rgba(0,0,0,0.45)_100%),url(/about-me/background.png)]
             bg-cover 2xl:bg-position-[center_top_1500px] xl:bg-position-[center_top_1100px]
-            lg:bg-position-[center_top_800px] md:bg-position-[center_top_650px]">
+            lg:bg-position-[center_top_800px] md:bg-position-[center_top_650px] snap-y snap-mandatory overflow-hidden">
     <app-navbar></app-navbar>
+    <!-- Estrellas paralaje -->
+    <!-- shorthand for shadow-[var(<custom-property>)] -->
+    <div class="h-[1px] w-[1px] bg-transparent animate-star-fast shadow-(--small-shadows) pointer-events-none absolute overflow-hidden"></div>
+
+    <div class="h-[1px] w-[1px] bg-transparent animate-star-fast shadow-(--small-shadows) pointer-events-none absolute overflow-hidden top-[2000px]"></div>
+
+    <div class="h-[2px] w-[2px] bg-transparent animate-star-mid shadow-(--medium-shadows) pointer-events-none absolute overflow-hidden"></div>
+    <div class="h-[2px] w-[2px] bg-transparent animate-star-mid shadow-(--medium-shadows) pointer-events-none absolute overflow-hidden top-[2000px]"></div>
+
+    <div class="h-[3px] w-[3px] bg-transparent animate-star-slow shadow-(--big-shadows) pointer-events-none absolute overflow-hidden"></div>
+    <div class="h-[3px] w-[3px] bg-transparent animate-star-slow shadow-(--big-shadows) pointer-events-none absolute overflow-hidden top-[2000px]"></div>
     <!-- TODO: añade esto cuando tengas la pagina:  snap-y snap-mandatory-->
 
     <!-- Hero Section, este comentario no lo ha puesto una IA 😎-->
-    <div class="grid mt-18
-            2.5xl:grid-cols-[0.35fr_0.3fr_0.25fr]
-            2xl:grid-cols-[0.47fr_0.3fr_0.25fr]
-            xl:grid-cols-[0.4fr_0.2fr_0.4fr]
-            lg:grid-cols-[0.35fr_0.15fr_0.55fr]
+    <div class="grid mt-18 snap-always snap-center
+            2.5xl:grid-cols-[0.35fr_0.3fr_0.25fr] 2xl:grid-cols-[0.47fr_0.3fr_0.25fr]
+            xl:grid-cols-[0.4fr_0.2fr_0.4fr] lg:grid-cols-[0.35fr_0.15fr_0.55fr]
             md:grid-cols-[0.35fr_0.15fr_0.55fr]">
 
         <div class="w-full h-full flex flex-row col-start-1">
@@ -18,19 +27,21 @@
            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Chimpanzee-Head.jpg/330px-Chimpanzee-Head.jpg" class="bg-white w-[150px] h-[150px] rounded-[20cm] ml-auto object-cover" alt="foto de perfil">
 
            <!-- Decoración de fondo -->
-           <img class="absolute animate-floating-fast
-           2.5xl:left-[calc(5vw+12rem)] 2.5xl:top-[calc(5vh+2rem)]
-           2xl:left-[calc(5vw+5rem)] 2xl:top-[calc(5vh+2rem)]
-           xl:left-[calc(2vw+1rem)] xl:top-[calc(5vh+1.5rem)]
-           lg:left-[calc(-2.5vw-5.5rem)] lg:top-[calc(4vh+1rem)]
-           md:left-[calc(1vw-9rem)] md:top-[calc(3vh+1.5rem)]" src="/about-me/freepik-background-without-asteroids-and-moon.svg">
+           <img class="absolute animate-floating-mid
+            2.5xl:left-[calc(12vw+22.5rem)] 2.5xl:top-[calc(12vh+20rem)] 2xl:left-[calc(12vw+12rem)] 2xl:top-[calc(12vh+18rem)]
+            xl:left-[calc(10vw+6rem)] xl:top-[calc(14vh+15rem)] lg:left-[calc(8vw+2rem)] lg:top-[calc(8vh+20rem)]
+            md:left-[calc(6vw-1rem)] md:top-[calc(6vh+20rem)]" src="/about-me/luna_oscura.svg">
 
            <img class="absolute animate-floating-slow
-            2.5xl:left-[calc(12vw+22.5rem)] 2.5xl:top-[calc(12vh+20rem)]
-            2xl:left-[calc(12vw+12rem)] 2xl:top-[calc(12vh+18rem)]
-            xl:left-[calc(10vw+6rem)] xl:top-[calc(14vh+15rem)]
-            lg:left-[calc(8vw+2rem)] lg:top-[calc(8vh+20rem)]
-            md:left-[calc(6vw-1rem)] md:top-[calc(6vh+20rem)]" src="/about-me/luna_oscura.svg">
+           2.5xl:left-[calc(12vw+24rem)] 2.5xl:top-[calc(6vh+3rem)] 2xl:left-[calc(15.5vw+15.5rem)] 2xl:top-[calc(5vh+3rem)]
+           xl:left-[calc(10vw+6rem)] xl:top-[calc(5vh+1.5rem)] lg:left-[calc(3.5vw+7.5rem)] lg:top-[calc(4vh+3rem)]
+           md:left-[calc(1vw+7rem)] md:top-[calc(3vh+3.5rem)]" src="/about-me/luna_grande.svg">
+
+           <img class="absolute animate-floating-fast
+           2.5xl:left-[calc(6.5vw+12rem)] 2.5xl:top-[calc(5vh+3.5rem)] 2xl:left-[calc(5vw+5rem)] 2xl:top-[calc(5vh+2rem)]
+           xl:left-[calc(2vw+1rem)] xl:top-[calc(5vh+1.5rem)] lg:left-[calc(2vw+1.5rem)] lg:top-[calc(4vh+1rem)]
+           md:left-[calc(1vw)] md:top-[calc(3vh+3.5rem)]" src="/about-me/satelite.svg">
+
         </div>
 
         <!-- Bloque de texto -->
@@ -47,33 +58,43 @@
         <!-- Decoración de fondo planetas morados. (estan aqui por organización pero tienen posicion absoluta) -->
         <div>
             <img class="animate-floating-slow absolute
-            2.5xl:top-[30rem] 2.5xl:right-[21rem]
-            2xl:top-[28rem] 2xl:right-[18rem]
-            xl:top-[25rem] xl:right-[15rem]
-            lg:top-[22rem] lg:right-[1rem]
+            2.5xl:top-[30rem] 2.5xl:right-[21rem] 2xl:top-[28rem] 2xl:right-[18rem]
+            xl:top-[25rem] xl:right-[15rem] lg:top-[22rem] lg:right-[1rem]
             md:top-[18rem] md:right-[-1rem]" src="/about-me/saturno.svg" alt="planeta parecido a saturno"/>
 
             <img class="animate-floating-mid absolute
-            2.5xl:top-[10rem] 2.5xl:right-[31rem]
-            2xl:top-[9rem] 2xl:right-[26rem]
-            xl:top-[8rem] xl:right-[22rem]
-            lg:top-[7rem] lg:right-[16rem]
+            2.5xl:top-[10rem] 2.5xl:right-[31rem] 2xl:top-[9rem] 2xl:right-[26rem]
+            xl:top-[8rem] xl:right-[22rem] lg:top-[7rem] lg:right-[16rem]
             md:top-[6rem] md:right-[15rem]" src="/about-me/ceres_oscuro.svg" alt="planeta enano"/>
 
             <img class="animate-floating-fast absolute
-            2.5xl:top-[16rem] 2.5xl:right-[9rem]
-            2xl:top-[14rem] 2xl:right-[7rem]
-            xl:top-[12rem] xl:right-[6rem]
-            lg:top-[10rem] lg:right-[5rem]
+            2.5xl:top-[16rem] 2.5xl:right-[9rem] 2xl:top-[14rem] 2xl:right-[7rem]
+            xl:top-[12rem] xl:right-[6rem] lg:top-[10rem] lg:right-[5rem]
             md:top-[8rem] md:right-[4rem]" src="/about-me/pluton_oscuro.svg" alt="planeta enano parecido a pluton"/>
         </div>
     </div>
 
 
-    <div class="w-full min-h-[450px] mt-29 mb-25 bg-[linear-gradient(135deg,rgba(100,0,255,0.2),rgba(0,200,255,0.15))]
-                mix-blend-soft-light backdrop-blur-[4px] shadow-[0px_0px_16px_7px_rgba(0,200,255,0.2),0px_0px_20px_2px_rgba(255,255,255,0.2)] border-y-10 border-white box-content">
+    <div class="w-full min-h-[450px] mt-29 mb-25 bg-[linear-gradient(135deg,rgba(100,0,255,0.2),rgba(0,200,255,0.15))] snap-always snap-end
+                mix-blend-soft-light backdrop-blur-[4px] shadow-[0px_0px_16px_7px_rgba(0,200,255,0.2),0px_0px_20px_2px_rgba(255,255,255,0.2)]
+                border-y-10 border-white box-content flex flex-row justify-evenly items-center gap-4">
+
+        <!-- <h1 class="text-white text-[25px] font-inter bg-black font-black z-[20] before:content-[' '] before:absolute before:w-10 before:h-10 before:bg-white before:z-[20]"> Lenteja </h1> -->
+        <!-- <video autoplay class="w-200 h-80 rounded-[20cm] object-cover hover:bg-white transition-color duration-450 duration-100 before:w-1000 before:h-50 before:content-[' '] before:bg-red-500 before:absolute before:left-0 before:top-0">
+             <source src="/about-me/print(motivacion)blanco.webm" type="video/webm">
+             </video>
+        -->
+
+
+        <!--
+             No le queda bien, se ve muy poco en esa seccion
+             <video autoplay class="w-200 h-80 rounded-2xl isolate object-cover">
+             <source src="/about-me/print(motivacion)blanco.webm" type="video/webm">
+             </video> -->
+
         <!-- mix-blend-overlay sin bordes era la idea original, y sin blur pero sin blur no se ve un carajo. -->
-        <h1 class="text-white"> ola </h1>
+        <!-- <h1 class="text-white"> </h1> -->
     </div>
+
 
 </div>
