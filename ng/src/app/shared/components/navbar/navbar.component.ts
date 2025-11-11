@@ -14,8 +14,8 @@ export class NavbarComponent {
 
   constructor(route: ActivatedRoute) {
     route.url.subscribe(url => {
-      this.section = url[0].toString();
-      if (!this.navbar) return;
+      this.section = (url[0] === undefined)
+        ? "/" : url[0].toString();
     })
   }
 
