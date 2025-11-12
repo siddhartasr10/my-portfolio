@@ -75,26 +75,36 @@
     </div>
 
 
+    <!-- Sección transparente, para poder poner texto opaco he tenido que usar un elemento absoluto
+    y coger las coordenadas donde van los textos mediante elementos invisibles... -->
     <div class="w-full min-h-[450px] mt-29 mb-25 bg-[linear-gradient(135deg,rgba(100,0,255,0.2),rgba(0,200,255,0.15))] snap-always snap-end
                 mix-blend-soft-light backdrop-blur-[4px] shadow-[0px_0px_16px_7px_rgba(0,200,255,0.2),0px_0px_20px_2px_rgba(255,255,255,0.2)]
-                border-y-10 border-white box-content flex flex-row justify-evenly items-center gap-4">
+                border-y-10 border-white box-content flex flex-row justify-evenly items-start gap-x-100 z-[0] text-white text-3xl">
 
-        <!-- <h1 class="text-white text-[25px] font-inter bg-black font-black z-[20] before:content-[' '] before:absolute before:w-10 before:h-10 before:bg-white before:z-[20]"> Lenteja </h1> -->
-        <!-- <video autoplay class="w-200 h-80 rounded-[20cm] object-cover hover:bg-white transition-color duration-450 duration-100 before:w-1000 before:h-50 before:content-[' '] before:bg-red-500 before:absolute before:left-0 before:top-0">
-             <source src="/about-me/print(motivacion)blanco.webm" type="video/webm">
-             </video>
-        -->
+        <!-- NOTA: Las guías se ocultan en el JS con display: none.  -->
+        <div #motivacionGuia class="flex flex-col items-center gap-y-14 mt-10">
+            <h2 class="font-extrabold font-inter"> Motivación </h2>
+            <p class="text-xl font-roboto-serif"> guia lentejilla </p>
+        </div>
+
+        <div #objetivosGuia class="flex flex-col items-center gap-y-14 mt-48">
+            <h2 class="font-extrabold font-inter"> Objetivos </h2>
+            <p class="text-xl font-roboto-flex"> guia lentejilla </p>
+        </div>
 
 
-        <!--
-             No le queda bien, se ve muy poco en esa seccion
-             <video autoplay class="w-200 h-80 rounded-2xl isolate object-cover">
-             <source src="/about-me/print(motivacion)blanco.webm" type="video/webm">
-             </video> -->
-
-        <!-- mix-blend-overlay sin bordes era la idea original, y sin blur pero sin blur no se ve un carajo. -->
-        <!-- <h1 class="text-white"> </h1> -->
     </div>
 
+    <div #motivacion class="absolute flex flex-col items-center gap-y-14 text-white"
+         [ngStyle]="motPos()">
+        <h2 class="text-3xl font-extrabold font-inter"> Motivación </h2>
+        <p class="text-xl font-roboto-serif"> Ehhh ola </p>
+    </div>
+
+    <div #objetivos class="absolute flex flex-col items-center gap-y-14 text-white"
+         [ngStyle]="objPos()">
+        <h2 class="text-3xl font-extrabold font-inter"> Objetivos </h2>
+        <p class="text-xl font-roboto-flex"> Lentejas </p>
+    </div>
 
 </div>
