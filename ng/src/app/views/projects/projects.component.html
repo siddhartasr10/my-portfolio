@@ -1,0 +1,26 @@
+<div class="w-screen min-h-screen flex flex-col items-center bg-black">
+    <app-navbar></app-navbar>
+
+    <!-- NOTA: la altura de la imagen seleccionada (la del medio) es mayor que las de los lados
+    La anchura un poco tambien mayor pero muy poco -->
+
+    <!-- Carrusel -->
+    <div class="w-screen h-140 bg-white flex flex-col snap-x snap-mandatory">
+        <h2 class="text-2xl font-semibold font-roboto-flex my-6 text-center"> Algunos de mis proyectos </h2>
+        <div class="flex flex-row justify-center items-center w-screen h-6/8 bg-blue-200 overflow-x-scroll overflow-y-hidden gap-x-45">
+            <!-- En la version final lo suyo es que haya un for con todos los proyectos, y que haya una clase
+                 "focused" que se le aplique al de en medio, con un indice o algo [class.focused]="this.caridx == index"
+                 Y que haga al elemento mas grande, aparte de que cambiar ese indice cambia la posicion del scroll. -->
+            <div [class.h-full]="" class="w-70 h-8/10 shadow-[0_20px_25px_3px_rgba(0,0,0,0.25)] border-black/33 border-b-2 rounded-xs
+                                   bg-cover bg-no-repeat bg-center bg-[url(https://imagenes.elpais.com/resizer/v2/WG5X6FXPXBHD5IS3ONZTMEO6PM.JPG?auth=5a147a0c2b979fb0b9ec0073d6d92d20dd041d34efd7eee8e1dab11222c2d8a3&width=414)]"> </div>
+
+            <div [class.h-full]="" class="w-85 h-full
+                                   bg-cover bg-no-repeat bg-center bg-[url(https://imagenes.elpais.com/resizer/v2/WG5X6FXPXBHD5IS3ONZTMEO6PM.JPG?auth=5a147a0c2b979fb0b9ec0073d6d92d20dd041d34efd7eee8e1dab11222c2d8a3&width=414)]"> </div>
+
+            <div [class.h-full]="" class="w-70 h-8/10
+                                   bg-cover bg-no-repeat bg-center bg-[url(https://imagenes.elpais.com/resizer/v2/WG5X6FXPXBHD5IS3ONZTMEO6PM.JPG?auth=5a147a0c2b979fb0b9ec0073d6d92d20dd041d34efd7eee8e1dab11222c2d8a3&width=414)]"> </div>
+        </div>
+    </div>
+
+
+</div>

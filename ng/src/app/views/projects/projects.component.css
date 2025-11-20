@@ -1,0 +1,18 @@
+
+/*
+    Source - https://stackoverflow.com/a
+    Posted by Richrd, modified by community. See post 'Timeline' for change history
+    Retrieved 2025-11-19, License - CC BY-SA 4.0
+*/
+
+/* Hay que tapa la scrollbar loco */
+
+/* div { */
+/*     scrollbar-width: none; /\* Firefox *\/ */
+/*     -ms-overflow-style: none;  /\* Internet Explorer 10+ *\/ */
+/* } */
+
+/* div::-webkit-scrollbar { /\* WebKit *\/ */
+/*     width: 0; */
+/*     height: 0; */
+/* } */
