@@ -14,10 +14,9 @@
 
     <div class="h-[3px] w-[3px] bg-transparent animate-star-slow shadow-(--big-shadows) pointer-events-none absolute overflow-hidden"></div>
     <div class="h-[3px] w-[3px] bg-transparent animate-star-slow shadow-(--big-shadows) pointer-events-none absolute overflow-hidden top-[2000px]"></div>
-    <!-- TODO: añade esto cuando tengas la pagina:  snap-y snap-mandatory-->
 
     <!-- Hero Section, este comentario no lo ha puesto una IA 😎-->
-    <div class="grid mt-18 snap-always snap-center
+    <div class="grid mt-18 snap-start snap-always
             2.5xl:grid-cols-[0.35fr_0.3fr_0.25fr] 2xl:grid-cols-[0.47fr_0.3fr_0.25fr]
             xl:grid-cols-[0.4fr_0.2fr_0.4fr] lg:grid-cols-[0.35fr_0.15fr_0.55fr]
             md:grid-cols-[0.35fr_0.15fr_0.55fr]">
@@ -47,10 +46,10 @@
         <!-- Bloque de texto -->
         <div class="flex flex-col items-start content-center w-full h-150 col-start-2 ml-27">
             <span class="font-inter text-white font-medium text-base mb-5"> Hola, soy Siddharta</span>
-            <span class="font-inter text-white text-4xl tracking-wider font-bold mb-10 text-center"> Soy un <b class="text-purple-650 font-bold text-center">Desarrollador<br> Web Full-Stack</b> </span>
+            <span class="font-inter text-white text-4xl tracking-wider font-medium mb-10 text-center"> Soy un <b class="text-purple-650 font-extrabold text-center">Desarrollador<br> Web Full-Stack</b> </span>
             <!-- estaba en 330px -->
-            <span class="font-roboto-flex text-white text-md font-light tracking-widest w-[370px] text-center ml-2.5">
-                Disfruto creando <b class="text-yellow-300">soluciones</b> que combinan buen diseño, rendimiento y escalabilidad.<br><br>
+            <span class="font-roboto-flex text-white text-md font-normal tracking-wider w-[415px] text-center text-lg">
+                Disfruto creando <b class="text-yellow-300">soluciones</b> que combinan<br> buen diseño, rendimiento y escalabilidad.<br><br>
                 Me encanta la <b class="text-orange-350">optimización de procesos</b>, la <b class="text-orange-350">programación recreativa</b> y el <b class="text-red-700">café</b>.
             </span>
         </div>
@@ -77,34 +76,34 @@
 
     <!-- Sección transparente, para poder poner texto opaco he tenido que usar un elemento absoluto
     y coger las coordenadas donde van los textos mediante elementos invisibles... -->
-    <div class="w-full min-h-[450px] mt-29 mb-25 bg-[linear-gradient(135deg,rgba(100,0,255,0.2),rgba(0,200,255,0.15))] snap-always snap-end
+    <div class="w-full min-h-[450px] mt-45 mb-25 bg-[linear-gradient(135deg,rgba(100,0,255,0.2),rgba(0,200,255,0.15))] snap-always snap-end
                 mix-blend-soft-light backdrop-blur-[4px] shadow-[0px_0px_16px_7px_rgba(0,200,255,0.2),0px_0px_20px_2px_rgba(255,255,255,0.2)]
                 border-y-10 border-white box-content flex flex-row justify-evenly items-start gap-x-100 z-[0] text-white text-3xl">
 
         <!-- NOTA: Las guías se ocultan en el JS con display: none.  -->
-        <div #motivacionGuia class="flex flex-col items-center gap-y-14 mt-10">
-            <h2 class="font-extrabold font-inter"> Motivación </h2>
-            <p class="text-xl font-roboto-serif"> guia lentejilla </p>
+        <div #motivacionGuia class="flex flex-col gap-y-10 mt-12 w-110 items-start">
+            <h2 class="text-3xl font-extrabold font-roboto-serif tracking-wide"> ¿Qué me motiva? </h2>
+            <p class="text-xl/8 font-roboto-flex tracking-wider">  Me gusta crear experiencias que sirven como herramientas y darle vida a las ideas que se me vienen a la cabeza.  </p>
         </div>
 
-        <div #objetivosGuia class="flex flex-col items-center gap-y-14 mt-48">
-            <h2 class="font-extrabold font-inter"> Objetivos </h2>
-            <p class="text-xl font-roboto-flex"> guia lentejilla </p>
+        <div #objetivosGuia class="flex flex-col gap-y-10 mt-48 w-100 items-end">
+            <h2 class="text-3xl font-extrabold font-roboto-serif"> Hoja de Ruta </h2>
+            <p class="text-xl/8 font-roboto-flex tracking-wider text-right">  Seguir creando y aprendiendo todo lo posible, con suerte crear algo que influya en el mundo.  </p>
         </div>
 
 
     </div>
 
-    <div #motivacion class="absolute flex flex-col items-center gap-y-14 text-white"
+    <div #motivacion class="absolute flex flex-col gap-y-10 text-white w-110"
          [ngStyle]="motPos()">
-        <h2 class="text-3xl font-extrabold font-inter"> Motivación </h2>
-        <p class="text-xl font-roboto-serif"> Ehhh ola </p>
+        <h2 class="text-3xl font-bold font-roboto-serif tracking-wide"> ¿Qué me motiva? </h2>
+        <p class="text-xl/8 font-roboto-flex tracking-wider"> Me gusta crear <b class="text-yellow-400">experiencias</b> que sirven como herramientas y darle <b class="text-green-400">vida</b> a las <b class="text-red-400">ideas</b> que se me vienen a la <b class="text-orange-500">cabeza</b>. </p>
     </div>
 
-    <div #objetivos class="absolute flex flex-col items-center gap-y-14 text-white"
-         [ngStyle]="objPos()">
-        <h2 class="text-3xl font-extrabold font-inter"> Objetivos </h2>
-        <p class="text-xl font-roboto-flex"> Lentejas </p>
+    <div #objetivos class="absolute flex flex-col gap-y-10 text-white w-100 items-end"
+        [ngStyle]="objPos()">
+        <h2 class="text-3xl font-extrabold font-roboto-serif tracking-wide"> Hoja de Ruta </h2>
+        <p class="text-xl/8 font-roboto-flex tracking-wider text-right"> Seguir <b class="text-green-400">creando</b> y <b class="text-yellow-400">aprendiendo</b> todo lo posible, con suerte crear algo que <b class="text-pink-500">influya</b> en el mundo. </p>
     </div>
 
 </div>

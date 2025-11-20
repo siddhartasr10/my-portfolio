@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 /* Use is only for sass but import depends on webpack or vite */
-/* fontsource-variable has fonts that icnlude all weights directly */
+/* fontsource-variable has fonts that include all weights directly */
 @import "@fontsource-variable/inter";
 @import "@fontsource-variable/roboto-flex";
 @import "@fontsource-variable/roboto-serif";
