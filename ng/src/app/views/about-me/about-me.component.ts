@@ -26,10 +26,10 @@ export class AboutMeComponent {
 
 
   multipleBoxShadow(n: number): string {
-    let rand = `${Math.random() * 2000}px ${Math.random() * 2000}px #FFF`;
+    let rand = `${(Math.random() * 2000).toFixed(2)}px ${Math.random() * 2000}px #FFF`;
 
     for (let i = 0; i < n; i++)
-      rand += `, ${Math.random() * 2000}px ${Math.random() * 2000}px #FFF`;
+      rand += `, ${(Math.random() * 2000).toFixed(2)}px ${Math.random() * 2000}px #FFF`;
 
     return rand;
   }
