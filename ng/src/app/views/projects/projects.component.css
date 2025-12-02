@@ -1,3 +1,6 @@
+:host {
+    --slider-end-transform: 6rem;
+}
 
 /*
     Source - https://stackoverflow.com/a
@@ -7,12 +10,12 @@
 
 /* Hay que tapa la scrollbar loco */
 
-/* div { */
-/*     scrollbar-width: none; /\* Firefox *\/ */
-/*     -ms-overflow-style: none;  /\* Internet Explorer 10+ *\/ */
-/* } */
+div {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
 
-/* div::-webkit-scrollbar { /\* WebKit *\/ */
-/*     width: 0; */
-/*     height: 0; */
-/* } */
+div::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+}
