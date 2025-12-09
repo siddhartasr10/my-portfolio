@@ -1,67 +1,71 @@
-<div class="w-screen min-h-screen flex flex-col items-center bg-[#1F1F1F]">
+<div class="w-screen min-h-screen flex flex-col items-center bg-linear-to-b from-[#061426] to-[#0B1726]"> <!-- bg-[#1F1F1F] -->
     <app-navbar class="flex flex-row items-center justify-center h-[10vh] w-screen"></app-navbar>
 
-  <!-- Toggle -->
-  <form class="relative flex flex-row items-center justify-center border-2 border-[#7DF9FF] rounded-[2cm] z-0">
-    <!-- Slider del toggle -->
-    <div class="w-30 h-14 absolute top-0 left-0 flex flex-row items-center z-2 rounded-[2cm] transition-[left_0.375s_ease-out_0.1s] bg-[#7DF9FF]
-                after:content-[''] after:w-6 after:h-[inherit] after:z-3 after:relative after:bg-[#7DF9FF] after:transition-[transform_0.3s_ease-out_0.1s]
-                after:block after:translate-x-(--slider-end-transform)"
-         [class.left-[120px]]="sliderState()"></div>
+    <div class="grid grid-cols-[0.75fr_0.25fr] w-screen my-10 self-start">
 
-    <label class="relative flex items-center justify-center w-30 h-14 font-bolder text-center rounded-[2cm] z-3 transition-[color_0.45s_ease-out_0.1s]"
-           [class.text-[#7DF9FF]]="sliderState()"
-           for="radio1">
-      <input checked  type="radio" id="radio1" name="radioGroup1" (change)="sliderOnChange($event)" [ngClass]="(sliderState()) ? 'cursor-pointer' : 'cursor-auto'"
-             class="z-1 w-30 h-14 absolute appearance-none rounded-[2cm]"/>
-      Vertical
-    </label>
+        <span class="text-white font-inter font-semibold tracking-wide self-start text-3xl drop-shadow-[1px_2px_4px_rgba(0,0,0,0.3)] col-start-1 place-self-center">Algunos proyectos recientes</span>
+        <!-- Toggle (las dimensiones las pongo para que no se estire en el contenedor si no estuviera en un grid no seria necesario)-->
+        <form class="relative flex flex-row items-center justify-center border-1 border-[#7DF9FF] rounded-[2cm] z-0 text-xs mr-o col-start-2 place-self-center h-7.5 w-36.5">
 
-    <label class="relative flex items-center justify-center w-30 h-14 font-bolder text-center rounded-[2cm] z-3 transition-[color_0.45s_ease-out_0.1s] text-[#7DF9FF]"
-          [class.text-[#7DF9FF]]="!sliderState()"   for="radio2">
-      <input type="radio" id="radio2" name="radioGroup1" (change)="sliderOnChange($event)" [ngClass]="(!sliderState()) ? 'cursor-pointer' : 'cursor-auto'"
-             class="z-1 w-30 h-14 absolute appearance-none rounded-[2cm]"/>
-      Horizontal
-    </label>
-  </form>
+        <!-- Por algún extraño motivo las transiciones no las coge tailwind asi css y palante sorry -->
+        <!-- Transiciones en style y en el css porque tailwind no las aplica
+            after:transition-[transform_10s_ease-out_1000ms] transition-[left_3000000000ms_ease-out_1000ms]
+            Además: after:translate-x-(--slider-end-transform) funciona pero el uso de clases de tailwind con variables por algun motivo
+            hace que la transition del translate aun estando aplicada desde css y pudiendose ver en el dev tools no se aplique. por lo que al css tambien -->
+
+            <!-- Slider 'knob' element -->
+            <div class="w-18 h-7 absolute top-0 left-0 flex flex-row items-center z-2 rounded-[2cm] bg-[#7DF9FF]
+                after:content-[''] after:w-3 after:h-[inherit] after:z-3 after:relative after:bg-[#7DF9FF]
+                after:block " [class.left-[72px]]="sliderState()" [class.w-[70px]!]="!sliderState()"> <!-- 70px en el estado inicial, sino ocupa demasiado el primer estado  -->
+            </div>
+
+            <label class="relative flex items-center justify-center w-18 h-7 font-bolder text-center rounded-[2cm] z-3 transition-[color_0.45s_ease-out_0.1s]"
+                [class.text-[#7DF9FF]]="sliderState()" for="radio1">
+
+                <input checked type="radio" id="radio1" name="radioGroup1" (change)="sliderOnChange($event)"
+                    class="z-1 w-18 h-7 absolute appearance-none rounded-[2cm]" [ngClass]="(sliderState()) ? 'cursor-pointer' : 'cursor-auto'"/>
+                Vertical
+            </label>
+
+            <label class="relative flex items-center justify-center w-18 h-7 font-bolder text-center rounded-[2cm] z-3 transition-[color_0.45s_ease-out_0.1s] text-[#7DF9FF]"
+                [class.text-[#7DF9FF]]="!sliderState()" for="radio2">
+
+                <input type="radio" id="radio2" name="radioGroup1" (change)="sliderOnChange($event)"
+                    class="z-1 w-18 h-7 absolute appearance-none rounded-[2cm]" [ngClass]="(!sliderState()) ? 'cursor-pointer' : 'cursor-auto'"/>
+                Horizontal
+            </label>
+        </form>
+    </div>
 
 
     <!-- NOTA: la altura de la imagen seleccionada (la del medio) es mayor que las de los lados
     La anchura un poco tambien mayor pero muy poco -->
     <!-- Carrusel --> <!-- bg-radial from-rose-300 to-blue-200 -->
-    <div class="w-screen h-200 bg-linear-to-r from-[#0f0c29] via-[#302b63] to-[#24243e] flex flex-col snap-x snap-mandatory">
+    <div (wheel)="wheelMoveCarrousel($event)" class="w-[92%] h-[70vh] bg-radial-[at_50%_55%] from-white/20 to-[rgba(6,20,38,0.7)] flex flex-row snap-x snap-mandatory items-center justify-center transform-3d rounded-md">
         <!-- <h2 class="text-2xl/6 font-extrabold font-roboto-flex my-6 text-center bg-linear-to-r from-blue-600 to-black bg-clip-text text-transparent tracking-wide invisible"> a </h2> -->
-        <span class="text-start text-black font-inter font-bold tracking-wide self-start text-3xl w-fit mt-15 ml-75 drop-shadow-[1px_2px_4px_rgba(0,0,0,0.3)]">Algunos proyectos recientes</span>
-        <div class="mt-10 flex flex-row justify-center items-center w-screen h-6/8 overflow-x-scroll overflow-y-hidden gap-x-15 h-9/10">
-            <img #leftArrow (click)="moveCarrousel(leftArrow)" class="absolute size-8 left-10 cursor-pointer z-100" src="/projects/left-arrow-svgrepo2.svg" alt="flecha para mover el carrousel a la izquierda" id="left"/>
-            <img #rightArrow (click)="moveCarrousel(rightArrow)" class="absolute size-8 right-10 cursor-pointer z-100" src="/projects/right-arrow-svgrepo2.svg" alt="flecha para mover el carrousel a la derecha" id="right"/>
-            <!-- En la version final lo suyo es que haya un for con todos los proyectos, y que haya una clase
-                 "focused" que se le aplique al de en medio, con un indice o algo [class.focused]="this.caridx == index"
-                 Y que haga al elemento mas grande, aparte de que cambiar ese indice cambia la posicion del scroll. -->
-            <!-- 115 uds de tailwind es 28.75 rem o 460px -->
-            <div [class.translate-x-115]="this.carrouselIdx == 0" [class.translate-x-[-460px]]="this.carrouselIdx == 2"
-                 [class.scale-124]="this.carrouselIdx == 0"
-                 class="w-100 h-140 drop-shadow-[3px_6px_9px_rgba(26,26,52,0.25),6px_12px_25px_rgba(26,26,52,0.25),12px_24px_36px_rgba(26,26,52,0.25)] rounded-2xl box-content transition-transform duration-350 ease-out
-                 bg-cover bg-no-repeat bg-center
-                 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.3),rgba(0,0,0,0.15)_15%,rgba(0,0,0,0.3)_85%),url(https://imagenes.elpais.com/resizer/v2/WG5X6FXPXBHD5IS3ONZTMEO6PM.JPG?auth=5a147a0c2b979fb0b9ec0073d6d92d20dd041d34efd7eee8e1dab11222c2d8a3&width=414)]">
-
+            <img #leftArrow (click)="moveCarrousel(leftArrow)" class="absolute size-8 left-10 cursor-pointer z-100" src="/projects/left-arrow-svgrepo-white.png" alt="flecha para mover el carrousel a la izquierda" id="left"/>
+            <img #rightArrow (click)="moveCarrousel(rightArrow)" class="absolute size-8 right-10 cursor-pointer z-100" src="/projects/right-arrow-svgrepo-white.png" alt="flecha para mover el carrousel a la derecha" id="right"/>
+            <!-- IMPORTANTE CAMBIALO DESPUES: el color de fondo variara del proyecto por supuesto no van a ser todos del mismo color.-->
+            <!-- TODO: prueba transiciones para el cambio de tamaño algo más rapidas que para el transform. -->
+            <div [class.translate-x-70]="this.carrouselIdx == 0" [class.-translate-x-70]="this.carrouselIdx == 2"
+                 [ngClass]="(this.carrouselIdx == 0) ? 'w-1/4 z-2 h-87/100 hover:-translate-y-2 rounded-2xl border-2 border-white/10' : 'w-1/5 h-74/100 z-1 blur-[2px] rounded-xl border-2 border-white/20'"
+                 class="drop-shadow-[3px_6px_9px_rgba(26,26,52,0.25),6px_12px_25px_rgba(26,26,52,0.25),12px_24px_36px_rgba(26,26,52,0.25)]
+                        backdrop-blur-[4px] backdrop-saturate-120 box-content ttransition-transform duration-850 ease-[cubic-bezier(.2,.9,3.3,1)]ransition-transform duration-850 ease-[cubic-bezier(.2,.9,3.3,1)] bg-cover bg-no-repeat bg-center
+                        bg-cyan-500/30 bg-radial-[at_50%_-20%] from-white/20 to-black/35">
             </div>
 
-            <div [class.translate-x-115]="this.carrouselIdx == 0" [class.translate-x-[-460px]]="this.carrouselIdx == 2"
-                 [class.scale-124]=""
-                 class="w-100 h-140 drop-shadow-[3px_6px_9px_rgba(26,26,52,0.25),6px_12px_25px_rgba(26,26,52,0.25),12px_24px_36px_rgba(26,26,52,0.25)] rounded-2xl box-content transition-transform duration-350 ease-out
-                 bg-cover bg-no-repeat bg-center
-                 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.3),rgba(0,0,0,0.15)_15%,rgba(0,0,0,0.3)_85%),url(https://imagenes.elpais.com/resizer/v2/WG5X6FXPXBHD5IS3ONZTMEO6PM.JPG?auth=5a147a0c2b979fb0b9ec0073d6d92d20dd041d34efd7eee8e1dab11222c2d8a3&width=414)]">
-
+            <div [class.translate-x-70]="this.carrouselIdx == 0" [class.-translate-x-70]="this.carrouselIdx == 2" [class.hover:-translate-y-2]="this.carrouselIdx == 1"
+                 [ngClass]="(this.carrouselIdx == 1) ? 'w-1/4 z-2 h-87/100 hover:-translate-y-2 rounded-2xl border-2 border-white/10' : 'w-1/5 h-74/100 z-1 blur-[2px] rounded-xl border-2 border-white/20'"
+                 class="-mx-14 drop-shadow-[3px_6px_9px_rgba(26,26,52,0.25),6px_12px_25px_rgba(26,26,52,0.25),12px_24px_36px_rgba(26,26,52,0.25)]
+                        backdrop-blur-[4px] backdrop-saturate-120 box-content transition-transform duration-850 ease-[cubic-bezier(.2,.9,.5,1)] bg-cover bg-no-repeat bg-center
+                        bg-radial-[at_50%_-20%] from-white/20 to-black/35 bg-cyan-500/30">
              </div>
 
-            <div [class.translate-x-115]="this.carrouselIdx == 0" [class.translate-x-[-460px]]="this.carrouselIdx == 2"
-                 [class.scale-124]="this.carrouselIdx == 2"
-                 class="w-100 h-140 drop-shadow-[3px_6px_9px_rgba(26,26,52,0.25),6px_12px_25px_rgba(26,26,52,0.25),12px_24px_36px_rgba(26,26,52,0.25)] rounded-2xl box-content transition-transform duration-350 ease-out
-                 bg-cover bg-no-repeat bg-center
-                 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.3),rgba(0,0,0,0.15)_15%,rgba(0,0,0,0.3)_85%),url(https://imagenes.elpais.com/resizer/v2/WG5X6FXPXBHD5IS3ONZTMEO6PM.JPG?auth=5a147a0c2b979fb0b9ec0073d6d92d20dd041d34efd7eee8e1dab11222c2d8a3&width=414)]">
-
+            <div [class.translate-x-70]="this.carrouselIdx == 0" [class.-translate-x-70]="this.carrouselIdx == 2"
+                 [ngClass]="(this.carrouselIdx == 2) ? 'w-1/4 z-2 h-87/100 hover:-translate-y-2 rounded-2xl border-2 border-white/10' : 'w-1/5 h-74/100 z-1 blur-[2px] rounded-xl border-2 border-white/20'"
+                 class="drop-shadow-[3px_6px_9px_rgba(26,26,52,0.25),6px_12px_25px_rgba(26,26,52,0.25),12px_24px_36px_rgba(26,26,52,0.25)]
+                        backdrop-blur-[4px] backdrop-saturate-120 box-content transition-transform duration-850 ease-[cubic-bezier(.2,.9,.8,1)] bg-cover bg-no-repeat bg-center
+                        bg-cyan-500/30 bg-radial-[at_50%_-20%] from-white/20 to-black/35">
              </div>
-        </div>
     </div>
 </div>
