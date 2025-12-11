@@ -31,3 +31,13 @@ form > div::after {
 form > label {
     transition: color 450ms ease-out 100ms;
 }
+
+.animated-card {
+    transition: width 300ms cubic-bezier(.4,0,1,2),
+                height 300ms cubic-bezier(.4,0,1,2),
+                transform 800ms cubic-bezier(.4,0,1,1),
+                bottom 200ms cubic-bezier(.4,0,1,1);
+
+    /* sino la animacion de bottom ni va */
+    bottom: 0px;
+}

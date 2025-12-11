@@ -10,24 +10,34 @@ import { NavbarComponent } from '../../shared/components/navbar/navbar.component
 })
 export class ProjectsComponent {
   sliderState: WritableSignal<number> = signal(0);
-  carrouselIdx: number = 1;
 
-  wheelStates: Set<String> = new Set();
+  carrouselIdx: number = 1;
+  // Indice de la tarjeta del carrousel que esté hovereada. (hago esto porque añadir estilos mediante clases de tailwind con hover o mediante css vanilla no funciona.
+  // tailwind tiene ya bugeado al navegador.
+  hoverIdx: number = -1;
+
+  transformStyle: WritableSignal<string> = signal("");
+
+  wheelInputs: Set<String> = new Set();
+
 
   constructor(private hostRef: ElementRef) {
+    // Controla la velocidad de movimiento del carrusel con el scroll.
     setInterval(() => {
-      if (this.wheelStates.has("up")) ++this.carrouselIdx;
-      if (this.wheelStates.has("down")) --this.carrouselIdx;
-      this.wheelStates.delete("up");
-      this.wheelStates.delete("down");
+      if (this.wheelInputs.has("up")) ++this.carrouselIdx;
+      if (this.wheelInputs.has("down")) --this.carrouselIdx;
+      this.wheelInputs.delete("up");
+      this.wheelInputs.delete("down");
 
       if (this.carrouselIdx === -1)
         this.carrouselIdx = 2;
 
       if (this.carrouselIdx === 3)
         this.carrouselIdx = 0;
+      // Actualizo el estilo del transform para cada cambio de índice del carrusel.
+      this.updateTransform();
 
-    }, 150)
+    }, 100)
 
   }
 
@@ -53,12 +63,14 @@ export class ProjectsComponent {
     // Casos en los que overflowea:
     if (img.id === "left" && this.carrouselIdx == 0) {
       this.carrouselIdx = 2;
+      this.updateTransform();
       // console.log("Indice carrusel: ", this.carrouselIdx);
       return;
     }
 
     if (img.id === "right" && this.carrouselIdx == 2) {
       this.carrouselIdx = 0;
+      this.updateTransform();
       // console.log("Indice carrusel: ", this.carrouselIdx);
       return;
     }
@@ -67,6 +79,7 @@ export class ProjectsComponent {
     (img.id === "left")
       ? --this.carrouselIdx
       : ++this.carrouselIdx;
+    this.updateTransform();
   }
 
   wheelMoveCarrousel(ev: WheelEvent): void {
@@ -75,13 +88,34 @@ export class ProjectsComponent {
     //   : --this.carrouselIdx;
 
     (ev.deltaY > 0)
-      ? this.wheelStates.add("up")
-      : this.wheelStates.add("down");
+      ? this.wheelInputs.add("up")
+      : this.wheelInputs.add("down");
 
     // if (this.carrouselIdx === -1)
     //   this.carrouselIdx = 2;
 
     // if (this.carrouselIdx === 3)
     //   this.carrouselIdx = 0;
+
   }
+
+  updateTransform(): void {
+    switch(this.carrouselIdx) {
+      case 0: return this.transformStyle.set("translateX(17.5rem)");
+      case 2: return this.transformStyle.set("translateX(-17.5rem)");
+      default: return this.transformStyle.set("translateX(0)");
+    }
+  }
+
+  registerHover(ev: MouseEvent): void {
+    let card = ev.target as HTMLDivElement;
+    this.hoverIdx = (!isNaN(Number(card.id.at(-1))))
+      ? Number(card.id.at(-1))
+      : -1;
+  }
+
+  unlistHover(): void {
+    this.hoverIdx = -1;
+  }
+
 }
