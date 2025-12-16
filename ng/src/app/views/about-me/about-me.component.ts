@@ -35,7 +35,7 @@ export class AboutMeComponent {
   }
 
   ngOnInit() {
-    let root = document.documentElement;
+    const root = document.documentElement;
     root.style.setProperty("--small-shadows", this.shadows[0]);
     root.style.setProperty("--medium-shadows", this.shadows[1]);
     root.style.setProperty("--big-shadows", this.shadows[2]);
@@ -59,10 +59,7 @@ export class AboutMeComponent {
     motGuiaDiv = this.motGuia.nativeElement as HTMLDivElement;
 
     if (localStorage.getItem("objPos") && localStorage.getItem("motPos")) {
-
-      objGuiaDiv.style.display = "none";
-      motGuiaDiv.style.display = "none";
-
+      objGuiaDiv.style.display = "none", motGuiaDiv.style.display = "none";
       return;
     }
 
@@ -91,8 +88,8 @@ export class AboutMeComponent {
   }
 
   coordToPos(obj: Coords) : {left: string, top: string} {
-    console.log("Coords: ", obj);
-    console.log("To pos: ", `left: ${obj.x.toFixed(2)}px, top: ${obj.y.toFixed(2)}px;`);
+    // console.log("Coords: ", obj);
+    // console.log("To pos: ", `left: ${obj.x.toFixed(2)}px, top: ${obj.y.toFixed(2)}px;`);
     return {
       left: obj.x.toFixed(2) + 'px',
       top: obj.y.toFixed(2) + 'px'
