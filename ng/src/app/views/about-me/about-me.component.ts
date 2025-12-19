@@ -69,7 +69,10 @@ export class AboutMeComponent {
 
 
     objGuiaDiv.style.display = "none";
+    objGuiaDiv.style.visibility = "hidden";
+
     motGuiaDiv.style.display = "none";
+    motGuiaDiv.style.visibility = "hidden";
 
     // console.log("objPos: ", this.objPos, " motPos: ", this.motPos);
 
