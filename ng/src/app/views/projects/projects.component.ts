@@ -12,17 +12,15 @@ export class ProjectsComponent {
   sliderState: WritableSignal<number> = signal(0);
 
   carrouselIdx: number = 1;
-  // Indice de la tarjeta del carrousel que esté hovereada. (hago esto porque añadir estilos mediante clases de tailwind con hover o mediante css vanilla no funciona.
-  // tailwind tiene ya bugeado al navegador.
+  // Indice de la tarjeta del carrousel que esté hovereada. (hago esto porque añadir estilos mediante clases de tailwind con hover o mediante css vanilla no funciona. tailwind tiene ya bugeado al navegador.
   hoverIdx: number = -1;
 
   transformStyle: WritableSignal<string> = signal("");
 
   wheelInputs: Set<String> = new Set();
 
-
   constructor(private hostRef: ElementRef) {
-    // Controla la velocidad de movimiento del carrusel con el scroll.
+    // Controla la velocidad de movimiento del carrusel con el scroll, evita el lag.
     setInterval(() => {
       if (this.wheelInputs.has("up")) ++this.carrouselIdx;
       if (this.wheelInputs.has("down")) --this.carrouselIdx;
@@ -57,7 +55,7 @@ export class ProjectsComponent {
     console.log("sliderState: ", this.sliderState());
   }
 
-  // Move Carrousel with the arrows.
+  // Move Carrousel with the arrows. Executes on click.
   moveCarrousel(img: HTMLImageElement): void {
     // console.log("img.id: ", img.id)
     // Casos en los que overflowea:
@@ -82,14 +80,19 @@ export class ProjectsComponent {
     this.updateTransform();
   }
 
+  // Executes on wheel Move.
   wheelMoveCarrousel(ev: WheelEvent): void {
-    // (ev.deltaY > 0)
-    //   ? ++this.carrouselIdx
-    //   : --this.carrouselIdx;
+    ev.preventDefault();
 
     (ev.deltaY > 0)
       ? this.wheelInputs.add("up")
       : this.wheelInputs.add("down");
+
+
+    // Funcionamiento antiguo, causa lag.
+    // (ev.deltaY > 0)
+    //   ? ++this.carrouselIdx
+    //   : --this.carrouselIdx;
 
     // if (this.carrouselIdx === -1)
     //   this.carrouselIdx = 2;
@@ -107,6 +110,7 @@ export class ProjectsComponent {
     }
   }
 
+  /* Methods for accounting hover on the cards, tailwind's :hover:bottom-6 doesn't work with transition */
   registerHover(ev: MouseEvent): void {
     let card = ev.target as HTMLDivElement;
     this.hoverIdx = (!isNaN(Number(card.id.at(-1))))
@@ -117,5 +121,4 @@ export class ProjectsComponent {
   unlistHover(): void {
     this.hoverIdx = -1;
   }
-
 }
