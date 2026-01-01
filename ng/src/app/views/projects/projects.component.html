@@ -4,7 +4,7 @@
     <div class="grid grid-cols-[0.75fr_0.25fr] w-screen my-10 self-start items-baseline">
 
         <!-- Toggle (las dimensiones las pongo para que no se estire en el contenedor si no estuviera en un grid no seria necesario)-->
-        <form class="relative flex flex-row items-center justify-center border-1 border-[#7DF9FF] rounded-[2cm] z-0 text-xs col-start-2 place-self-center h-7.5 w-36.5 mt-1">
+        <form class="relative flex flex-row items-center justify-center outline-1 outline-[#7DF9FF] rounded-[2cm] z-0 text-xs col-start-2 place-self-center h-7.5 w-36.5 mt-1">
 
         <!-- Por algún extraño motivo las transiciones no las coge tailwind asi que css y palante sorry -->
         <!-- Transiciones en el css porque tailwind no las aplica
@@ -76,15 +76,46 @@
                         bg-gray-500/30 bg-radial-[at_50%_-20%] from-white/20 to-black/35">
             </div>
     </div>
+    <!-- A veces comento en español a veces en ingles me estoy volviendo loco -->
 
-    <div class="flex flex-col items-start text-white mt-30 self-start mx-0 w-10">
-        <div class="grid grid-cols-[.3fr_.7fr] w-20">
-            <img alt="Imagen proyecto" src="" class="col-start-1"/>
-            <div class="col-start-2">
-                <h2> título </h2>
+    <!-- Lista vertical (proyectos secundarios) -->
+    <div class="flex flex-col items-center text-white mt-30 mx-0 max-w-screen w-[70%] gap-y-8">
+        <!-- Grid with image and description columns -->
+        <!-- NOTA: prueba a añadir borde inferior del mismo color que el fondo para dar efecto extrusión 3d -->
+        <!-- Y añade sombras a los grids y quizas a la barra separadora (no es ta funcionando en este momento) -->
+        <div class="grid grid-cols-[.3fr_.7fr] relative w-full h-[280px] justify-items-center gap-x-17 mb-5 rounded-2xl bg-black/20 border-4 border-[#0B1726] outline-2 outline-white/5 box-border
+                    after:content-[''] after:absolute after:-bottom-8 after:h-[2px] after:w-full after:bg-gray-600 after:rounded-xl">
+            <!--  after:shadow-[inset_0_1px_5px_0_rgba(255,255,255,.2)] -->
 
+            <img alt="Imagen proyecto" src="https://i.redd.it/q26o6vbbgjr81.gif"
+                 class="col-start-1 object-fit rounded-xl size-55 self-center"/>
+
+            <div class="col-start-2 flex flex-col items-start w-full mt-3">
+                <h2 class="font-roboto-serif text-xl"> Título </h2>
+                <!-- Row with the technologies used. (I'll try 20px sizes for the PNGs) -->
+                <div class="flex flex-row max-w-9/10 h-[40px] bg-white justify-center items-center">
+
+                </div>
+                <p class="font-inter"> Descripción </p>
             </div>
+        </div>
 
+        <!-- Otro grid para ver como se ven varios -->
+        <div class="grid grid-cols-[.3fr_.7fr] relative w-full h-[280px] justify-items-center gap-x-17 mb-5 rounded-2xl bg-cyan-300/5 border-4 border-[#0B1726] outline-2 outline-white/5 box-border
+                    after:content-[''] after:absolute after:-bottom-3.5 after:h-[2px] after:w-full after:bg-cyan-300/10 after:shadow-[0px_2px_4px_0_rgba(25,255,255,.34)]">
+            <!--  after:shadow-[inset_0_1px_5px_0_rgba(255,255,255,.2)] -->
+
+            <img alt="Imagen proyecto" src="https://i.redd.it/q26o6vbbgjr81.gif"
+                 class="col-start-1 object-fit rounded-xl size-55 self-center"/>
+
+            <div class="col-start-2 flex flex-col items-start w-full mt-3">
+                <h2 class="font-roboto-serif text-xl"> Título </h2>
+                <!-- Row with the technologies used. (I'll try 20px sizes for the PNGs) -->
+                <div class="flex flex-row max-w-9/10 h-[40px] bg-white justify-center items-center">
+
+                </div>
+                <p class="font-inter"> Descripción </p>
+            </div>
         </div>
 
     </div>
