@@ -87,9 +87,8 @@
                     bg-[radial-gradient(circle_farthest-side_at_65%_50%,rgba(25,255,255,.1)_0%,rgba(16,16,16,.15)_99%)]">
 
             <!--  after:shadow-[inset_0_1px_5px_0_rgba(255,255,255,.2)] -->
-
             <img alt="Imagen proyecto" src="https://i.redd.it/q26o6vbbgjr81.gif"
-                 class="col-start-1 object-fit rounded-xl size-55 self-center"/>
+                 class="col-start-1 object-fit rounded-xl size-60 self-center"/>
 
             <div class="col-start-2 flex flex-col items-start w-full mt-3">
                 <h2 class="font-roboto-serif text-xl"> Título </h2>
@@ -104,13 +103,15 @@
         <!-- Otro grid para ver como se ven varios -->
         <!-- la vignette usa stone-700 o a lo mejor stone-800 y cyan-300/5 de fondo -->
         <!-- TODO: prueba tarjetas mas grandes para una imagen mas grande. -->
+        <!-- IMPORTANTE: El primer diseño come nabo es feo de cojones sorry. -->
+        <!-- dependiendo del proyecto que ponga, un color u otro de fondo, el color de fondo se craftea con un degradado y un bg-black transparente + bg-blend mode de overlay. -->
         <div class="grid grid-cols-[.3fr_.7fr] relative w-[80%] h-[280px] justify-items-center gap-x-17 mb-5 rounded-md outline-1 outline-gray-800
                     bg-[radial-gradient(circle_farthest-side_at_85%_50%,rgba(0,184,219,.15)_0%,rgba(16,16,16,.15)_90%)]
                     box-border bg-black/20 bg-blend-overlay shadow-[inset_-5px_5px_5px_0_rgba(25,25,25,.15),inset_5px_-5px_5px_0_rgba(25,25,25,.1505),inset_-5px_5px_5px_0_rgba(25,25,25,.1501),inset_5px_-5px_5px_0_rgba(25,25,25,.1501)]">
-            <!--  after:shadow-[inset_0_1px_5px_0_rgba(255,255,255,.2)] -->
 
+            <!--  after:shadow-[inset_0_1px_5px_0_rgba(255,255,255,.2)] -->
             <img alt="Imagen proyecto" src="https://i.redd.it/q26o6vbbgjr81.gif"
-                 class="col-start-1 object-fit rounded-xl size-55 self-center"/>
+                 class="col-start-1 object-fit rounded-xl size-60 self-center"/>
 
             <div class="col-start-2 flex flex-col items-start w-full mt-3">
                 <h2 class="font-roboto-serif text-xl"> Título </h2>
@@ -124,12 +125,32 @@
 
 
         <div class="grid grid-cols-[.3fr_.7fr] relative w-[80%] h-[280px] justify-items-center gap-x-17 mb-5 rounded-md outline-1 outline-gray-800
+                    bg-[radial-gradient(circle_farthest-side_at_85%_50%,rgba(170,50,50,.21)_0%,rgba(16,16,70,.15)_90%)]
+                    box-border bg-black/22 bg-blend-overlay shadow-[inset_-5px_5px_5px_0_rgba(25,25,25,.15),inset_5px_-5px_5px_0_rgba(25,25,25,.1505),inset_-5px_5px_5px_0_rgba(25,25,25,.1501),inset_5px_-5px_5px_0_rgba(25,25,25,.1501)]">
 
+            <!--  after:shadow-[inset_0_1px_5px_0_rgba(255,255,255,.2)] -->
+            <img alt="Imagen proyecto" src="https://i.redd.it/q26o6vbbgjr81.gif"
+                 class="col-start-1 object-fit rounded-xl size-60 self-center"/>
+
+            <div class="col-start-2 flex flex-col items-start w-full mt-3">
+                <h2 class="font-roboto-serif text-xl"> Título </h2>
+                <!-- Row with the technologies used. (I'll try 20px sizes for the PNGs) -->
+                <div class="flex flex-row max-w-9/10 h-[40px] bg-white justify-center items-center">
+
+                </div>
+                <p class="font-inter"> Descripción </p>
+            </div>
+        </div>
+
+
+        <div class="grid grid-cols-[.3fr_.7fr] relative w-[80%] h-[280px] justify-items-center gap-x-17 mb-5 rounded-2xl outline-1 outline-gray-800
+                    bg-[radial-gradient(circle_farthest-side_at_85%_50%,oklch(0.66_0.21_37/15%)_0%,rgba(16,16,70,.15)_95%)]
                     box-border bg-black/20 bg-blend-overlay shadow-[inset_-5px_5px_5px_0_rgba(25,25,25,.15),inset_5px_-5px_5px_0_rgba(25,25,25,.1505),inset_-5px_5px_5px_0_rgba(25,25,25,.1501),inset_5px_-5px_5px_0_rgba(25,25,25,.1501)]">
-            <!--  after:shadow-[inset_0_1px_5px_0_rgba(255,255,255,.2)] -->
+            <!-- No me interesa:
+                 after:shadow-[inset_0_1px_5px_0_rgba(255,255,255,.2)]  after:content-[''] after:absolute after:-bottom-3.5 after:h-[2px] after:w-full after:shadow-[0px_2px_4px_0_rgba(25,255,255,.34)] -->
 
             <img alt="Imagen proyecto" src="https://i.redd.it/q26o6vbbgjr81.gif"
-                 class="col-start-1 object-fit rounded-xl size-55 self-center"/>
+                 class="col-start-1 object-fit rounded-sm size-60 self-center"/>
 
             <div class="col-start-2 flex flex-col items-start w-full mt-3">
                 <h2 class="font-roboto-serif text-xl"> Título </h2>
@@ -142,13 +163,14 @@
         </div>
 
 
-        <div class="grid grid-cols-[.3fr_.7fr] relative w-[80%] h-[280px] justify-items-center gap-x-17 mb-5 rounded-2xl
-                    box-border bg-black/20 bg-blend-overlay shadow-[inset_-5px_5px_5px_0_rgba(255,255,255,.05),inset_5px_-5px_5px_0_rgba(255,255,255,.05)]
-                    after:content-[''] after:absolute after:-bottom-3.5 after:h-[2px] after:w-full after:shadow-[0px_2px_4px_0_rgba(25,255,255,.34)]">
-            <!--  after:shadow-[inset_0_1px_5px_0_rgba(255,255,255,.2)] -->
+        <div class="grid grid-cols-[.3fr_.7fr] relative w-[80%] h-[280px] justify-items-center gap-x-17 mb-5 rounded-2xl outline-1 outline-gray-800
+                    bg-[radial-gradient(circle_farthest-side_at_85%_50%,oklch(62.7%_0.265_303.9/20%)_0%,rgba(16,16,70,.15)_90%)]
+                    box-border bg-black/30 bg-blend-overlay shadow-[inset_-5px_5px_5px_0_rgba(25,25,25,.15),inset_5px_-5px_5px_0_rgba(25,25,25,.1505),inset_-5px_5px_5px_0_rgba(25,25,25,.1501),inset_5px_-5px_5px_0_rgba(25,25,25,.1501)]">
+            <!-- No me interesa:
+                 after:shadow-[inset_0_1px_5px_0_rgba(255,255,255,.2)]  after:content-[''] after:absolute after:-bottom-3.5 after:h-[2px] after:w-full after:shadow-[0px_2px_4px_0_rgba(25,255,255,.34)] -->
 
             <img alt="Imagen proyecto" src="https://i.redd.it/q26o6vbbgjr81.gif"
-                 class="col-start-1 object-fit rounded-sm size-65 self-center"/>
+                 class="col-start-1 object-fit rounded-sm size-60 self-center"/>
 
             <div class="col-start-2 flex flex-col items-start w-full mt-3">
                 <h2 class="font-roboto-serif text-xl"> Título </h2>
@@ -159,7 +181,4 @@
                 <p class="font-inter"> Descripción </p>
             </div>
         </div>
-
-    </div>
-
 </div>
