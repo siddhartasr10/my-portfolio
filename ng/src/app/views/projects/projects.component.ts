@@ -55,7 +55,7 @@ export class ProjectsComponent {
     console.log("sliderState: ", this.sliderState());
   }
 
-  // Move Carrousel with the arrows. Executes on click.
+  // Move Carrousel with the arrows. Executes on click on the arrows.
   moveCarrousel(img: HTMLImageElement): void {
     // console.log("img.id: ", img.id)
     // Casos en los que overflowea:
@@ -80,7 +80,7 @@ export class ProjectsComponent {
     this.updateTransform();
   }
 
-  // Executes on wheel Move.
+  // Executes on wheel Move inside the carrousel.
   wheelMoveCarrousel(ev: WheelEvent): void {
     ev.preventDefault();
 
@@ -89,7 +89,8 @@ export class ProjectsComponent {
       : this.wheelInputs.add("down");
 
 
-    // Funcionamiento antiguo, causa lag.
+    // Ahora se ejecuta en un intervalo
+    // Funcionamiento antiguo, causa lag porque no espera.
     // (ev.deltaY > 0)
     //   ? ++this.carrouselIdx
     //   : --this.carrouselIdx;
@@ -100,6 +101,12 @@ export class ProjectsComponent {
     // if (this.carrouselIdx === 3)
     //   this.carrouselIdx = 0;
 
+  }
+
+  // Executes onclick on the carrousel cards
+  clickMoveCarrousel(ev: MouseEvent): void {
+    let target = ev.target as HTMLDivElement;
+    this.carrouselIdx = Number(target.id.at(-1));
   }
 
   updateTransform(): void {
@@ -113,6 +120,7 @@ export class ProjectsComponent {
   /* Methods for accounting hover on the cards, tailwind's :hover:bottom-6 doesn't work with transition */
   registerHover(ev: MouseEvent): void {
     let card = ev.target as HTMLDivElement;
+    // Id of the cards is card-x (0,1,2)
     this.hoverIdx = (!isNaN(Number(card.id.at(-1))))
       ? Number(card.id.at(-1))
       : -1;
