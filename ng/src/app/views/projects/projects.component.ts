@@ -104,8 +104,17 @@ export class ProjectsComponent {
   }
 
   // Executes onclick on the carrousel cards
+  // This function only executes as click event inside the carrousel.
+  // So if the code doesn't find the card's parent div it will search recursively.
+  // the c counter is to avoid infinite loops
   clickMoveCarrousel(ev: MouseEvent): void {
-    let target = ev.target as HTMLDivElement;
+    let target = ev.target as HTMLDivElement, targetIdNumber, c = 0;
+
+    while (Number.isNaN(targetIdNumber = Number(target.id.at(-1))) || c > 15) {
+      target = target.parentElement as HTMLDivElement;
+      c++;
+    }
+
     this.carrouselIdx = Number(target.id.at(-1));
   }
 
