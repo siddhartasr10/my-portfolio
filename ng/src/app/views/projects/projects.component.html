@@ -52,31 +52,59 @@
                  mediante las clases de tailwind. ya que tailwind cambia la variable de dentro del translateX y el navegador ve 'practicamente' el mismo valor. -->
             <div [style.transform]="this.transformStyle()" [style.bottom.rem]="(this.hoverIdx == 0) ? 1.5 : 0"
                  (mouseenter)="this.registerHover($event)" (mouseleave)="this.unlistHover()" (click)="this.clickMoveCarrousel($event)"
-                 [ngClass]="(this.carrouselIdx == 0) ? 'w-1/4 z-2 h-87/100 rounded-2xl outline-2 outline-cyan-600/30' : 'w-1/5 h-74/100 z-1 blur-[2px] rounded-xl outline-3 outline-cyan-600/30'"
+                 [ngClass]="(this.carrouselIdx == 0) ? 'w-1/4 z-2 h-87/100 rounded-2xl outline-2' : 'w-1/5 h-74/100 z-1 blur-[2px] rounded-xl outline-5'"
                  id="card-0"
                  class="relative drop-shadow-[3px_6px_9px_rgba(26,26,52,0.25),6px_12px_25px_rgba(26,26,52,0.25),12px_24px_36px_rgba(26,26,52,0.25)]
                         backdrop-blur-[4px] backdrop-saturate-120 box-content bg-cover bg-no-repeat bg-center transform-gpu animated-card
-                        bg-cyan-500/30 bg-radial-[circle_farthest-side_at_50%_0%] from-cyan-200/30 to-black/35">
+                        outline-orange-600/30 bg-orange-500/30 bg-radial-[circle_farthest-side_at_50%_0%] from-orange-500/30 to-black/35">
+
+                <!-- TEST: algo así sería -->
+                <!-- TODO: ngClass para que los font sizes encojan con la tarjeta cuando se desfocusea. -->
+                <div class="flex-col items-center w-full h-full box-border pt-4">
+                    <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size] duration-[0.3s] delay-0"
+                        [ngClass]="(this.carrouselIdx == 0) ? 'text-3xl font-semibold' : 'text-2xl font-thin'"> Lentejas </h1>
+                    <video></video>
+                    <p></p>
+                </div>
+
             </div>
+
             <!-- el bottom tambien necesita style para que detecte la transicion, tailwind tiene ralladisimo al navegador -->
             <div [style.transform]="this.transformStyle()" [style.bottom.rem]="(this.hoverIdx == 1) ? 1.5 : 0"
                  (mouseenter)="this.registerHover($event)" (mouseleave)="this.unlistHover()" (click)="this.clickMoveCarrousel($event)"
-                 [ngClass]="(this.carrouselIdx == 1) ? 'w-1/4 z-2 h-87/100 rounded-2xl outline-2 outline-cyan-600/30' : 'w-1/5 h-74/100 z-1 blur-[2px] rounded-xl outline-3 outline-cyan-600/30'"
+                 [ngClass]="(this.carrouselIdx == 1) ? 'w-1/4 z-2 h-87/100 rounded-2xl outline-2' : 'w-1/5 h-74/100 z-1 blur-[2px] rounded-xl outline-5'"
                  id="card-1"
                  class="-mx-14 relative drop-shadow-[3px_6px_9px_rgba(26,26,52,0.25),6px_12px_25px_rgba(26,26,52,0.25),12px_24px_36px_rgba(26,26,52,0.25)]
                         backdrop-blur-[4px] backdrop-saturate-120 box-content bg-cover bg-no-repeat bg-center transform-gpu animated-card
-                        bg-cyan-500/30 bg-radial-[circle_farthest-side_at_50%_0%] from-cyan-200/30 to-black/35">
+                        outline-cyan-600/30 bg-cyan-500/30 bg-radial-[circle_farthest-side_at_50%_0%] from-cyan-200/30 to-black/35">
 
+                <!-- TEST: algo así sería -->
+                <div class="flex-col items-center w-full h-full box-border pt-4">
+                    <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size] duration-[0.3s] delay-0"
+                        [ngClass]="(this.carrouselIdx == 1) ? 'text-3xl font-semibold' : 'text-2xl font-thin'"> Lentejas </h1>
+                    <video></video>
+                    <p></p>
+                </div>
             </div>
 
             <!-- Como solo tienes ahora mismo vuela21 y sporwatch pon aquí una tarjeta: '?' para proyectos que se vienen. -->
             <div [style.transform]="this.transformStyle()" [style.bottom.rem]="(this.hoverIdx == 2) ? 1.5 : 0"
                  (mouseenter)="this.registerHover($event)" (mouseleave)="this.unlistHover()" (click)="this.clickMoveCarrousel($event)"
-                 [ngClass]="(this.carrouselIdx == 2) ? 'w-1/4 z-2 h-87/100 rounded-2xl outline-2 outline-gray-600/30' : 'w-1/5 h-74/100 z-1 blur-[2px] rounded-xl outline-3 outline-gray-600/30'"
+                 [ngClass]="(this.carrouselIdx == 2) ? 'w-1/4 z-2 h-87/100 rounded-2xl outline-2' : 'w-1/5 h-74/100 z-1 blur-[2px] rounded-xl outline-5'"
                  id="card-2"
                  class="relative drop-shadow-[3px_6px_9px_rgba(26,26,52,0.25),6px_12px_25px_rgba(26,26,52,0.25),12px_24px_36px_rgba(26,26,52,0.25)]
                         backdrop-blur-[4px] backdrop-saturate-120 box-content bg-cover bg-no-repeat bg-center transform-gpu animated-card
-                        bg-gray-500/30 bg-radial-[circle_farthest-side_at_50%_0%,oklch(100%_0.055_261.325/.2)_0%,rgba(0,0,0,.25)_98%]">
+                        outline-gray-600/30 bg-gray-500/30 bg-radial-[circle_farthest-side_at_50%_0%,oklch(100%_0.055_261.325/.2)_0%,rgba(0,0,0,.25)_98%]">
+
+
+                <!-- TEST: algo así sería -->
+                <!-- TODO: ngClass para que los font sizes encojan con la tarjeta cuando se desfocusea. -->
+                <div class="flex-col items-center w-full h-full box-border pt-4">
+                    <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size] duration-[0.3s] delay-0"
+                        [ngClass]="(this.carrouselIdx == 2) ? 'text-3xl font-semibold' : 'text-2xl font-thin'"> Lentejas </h1>
+                    <video></video>
+                    <p></p>
+                </div>
             </div>
     </div>
     <!-- A veces comento en español a veces en ingles me estoy volviendo loco -->
@@ -150,22 +178,28 @@
         </div>
 
 
-        <div class="grid grid-cols-[.3fr_.7fr] relative w-[80%] h-[280px] justify-items-center gap-x-17 mb-5 rounded-2xl outline-1 outline-gray-800
-                    bg-[radial-gradient(circle_farthest-side_at_90%_50%,oklch(48.7%_0.265_303.9/20%)_0%,rgba(10,10,10,.15)_85%)]
-                    box-border bg-black/20 bg-blend-overlay shadow-[inset_-5px_5px_5px_0_rgba(25,25,25,.15),inset_5px_-5px_5px_0_rgba(25,25,25,.1505),inset_-5px_5px_5px_0_rgba(25,25,25,.1501),inset_5px_-5px_5px_0_rgba(25,25,25,.1501)]">
-            <!-- No me interesa:
-                 after:shadow-[inset_0_1px_5px_0_rgba(255,255,255,.2)]  after:content-[''] after:absolute after:-bottom-3.5 after:h-[2px] after:w-full after:shadow-[0px_2px_4px_0_rgba(25,255,255,.34)] -->
 
+        <!-- Prueba, probablemente se elimine sin coger nada. -->
+        <div class="flex flex-row w-screen justify-center items-center max-w-screen h-90 gap-x-20 bg-clip-text">
+            <div class="size-90 bg-black/10 flex border-y-2 border-y-white/20">
             <img alt="Imagen proyecto" src="https://i.redd.it/q26o6vbbgjr81.gif"
-                 class="col-start-1 object-fit rounded-sm size-60 self-center"/>
+                class="object-fit rounded-sm size-70 self-center mx-auto my-auto"/>
+            </div>
 
-            <div class="col-start-2 flex flex-col items-start w-full mt-3">
-                <h2 class="font-roboto-serif text-xl"> Título </h2>
+            <div class="flex flex-col relative w-250 h-[280px] justify-items-center rounded-md border-y-3 border-x-2 border-white/5 border-l-[rgba(0,0,0,.2)] items-center
+                        bg-[radial-gradient(circle_farthest-side_at_90%_50%,oklch(48.7%_0.265_303.9/20%)_0%,rgba(10,10,10,.15)_85%)]
+                        box-border bg-black/20 bg-blend-overlay shadow-[inset_-5px_5px_5px_0_rgba(25,25,25,.15),inset_5px_-5px_5px_0_rgba(25,25,25,.1505),inset_-5px_5px_5px_0_rgba(25,25,25,.1501),inset_5px_-5px_5px_0_rgba(25,25,25,.1501)]">
+                <!-- No me interesa:
+                    after:shadow-[inset_0_1px_5px_0_rgba(255,255,255,.2)]  after:content-[''] after:absolute after:-bottom-3.5 after:h-[2px] after:w-full after:shadow-[0px_2px_4px_0_rgba(25,255,255,.34)] -->
+
+                <!-- <img alt="Imagen proyecto" src="https://i.redd.it/q26o6vbbgjr81.gif"
+                                    class="col-start-1 object-fit rounded-sm size-60 self-center"/> -->
+                <h2 class="font-roboto-serif text-xl mt-3"> Título </h2>
                 <!-- Row with the technologies used. (I'll try 20px sizes for the PNGs) -->
-                <div class="flex flex-row max-w-9/10 h-[40px] bg-white justify-center items-center">
+                <div class="flex flex-row max-w-9/10 h-[40px] bg-white justify-center items-center"></div>
 
-                </div>
                 <p class="font-inter"> Descripción </p>
             </div>
         </div>
+    </div>
 </div>
