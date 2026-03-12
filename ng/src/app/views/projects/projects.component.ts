@@ -112,10 +112,11 @@ export class ProjectsComponent {
 
     while (Number.isNaN(targetIdNumber = Number(target.id.at(-1))) || c > 15) {
       target = target.parentElement as HTMLDivElement;
+      // console.log("clickMoveCarrousel: ", target);
       c++;
     }
 
-    this.carrouselIdx = Number(target.id.at(-1));
+    this.carrouselIdx = targetIdNumber;
   }
 
   updateTransform(): void {

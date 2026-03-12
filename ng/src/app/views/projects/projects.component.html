@@ -40,6 +40,7 @@
 
 
     <!-- NOTA: la altura de la imagen seleccionada (la del medio) es mayor que las de los lados La anchura un poco tambien mayor pero muy poco -->
+    <!-- INFO: Las animaciones de transition se llevan por la clase de css animated-card -->
     <!-- Carrusel -->
     <div (wheel)="wheelMoveCarrousel($event)" id="carrousel"
          class="w-[92%] h-[70vh] bg-radial-[circle_farthest-side_at_50%_55%] from-[#81A9DA]/50 to-[rgba(6,20,38,0.7)] flex flex-row items-center justify-center
@@ -52,18 +53,28 @@
                  mediante las clases de tailwind. ya que tailwind cambia la variable de dentro del translateX y el navegador ve 'practicamente' el mismo valor. -->
             <div [style.transform]="this.transformStyle()" [style.bottom.rem]="(this.hoverIdx == 0) ? 1.5 : 0"
                  (mouseenter)="this.registerHover($event)" (mouseleave)="this.unlistHover()" (click)="this.clickMoveCarrousel($event)"
-                 [ngClass]="(this.carrouselIdx == 0) ? 'w-1/4 z-2 h-87/100 rounded-2xl outline-2' : 'w-1/5 h-74/100 z-1 blur-[2px] rounded-xl outline-5'"
-                 id="card-0"
+                 [ngClass]="(this.carrouselIdx == 0)
+                                    ? 'w-[457px] h-[578px] z-2 rounded-2xl outline-2 shadow-[0_0_8px_0_hsla(32_100%_35%/.18),0_0_8px_0_hsla(32_100%_65%/.18)] inset-shadow-[0_0_14px_hsla(32_100%_50%_/.3)]'
+                                    : 'w-[353px] h-[478px] z-1 blur-[2px] rounded-xl outline-5 scale-90 saturate-60 brightness-80'"
                  class="relative drop-shadow-[3px_6px_9px_rgba(26,26,52,0.25),6px_12px_25px_rgba(26,26,52,0.25),12px_24px_36px_rgba(26,26,52,0.25)]
-                        backdrop-blur-[4px] backdrop-saturate-120 box-content bg-cover bg-no-repeat bg-center transform-gpu animated-card
-                        outline-orange-600/30 bg-orange-500/30 bg-radial-[circle_farthest-side_at_50%_0%] from-orange-500/30 to-black/35">
+                        backdrop-blur-[4px] backdrop-saturate-120 box-content bg-cover bg-no-repeat bg-center transform-gpu animated-card outline-orange-600/30" id="card-0">
+
+                <!--  bg-position-[30%_20%]-->
+
 
                 <!-- TEST: algo así sería -->
                 <!-- TODO: ngClass para que los font sizes encojan con la tarjeta cuando se desfocusea. -->
-                <div class="flex-col items-center w-full h-full box-border pt-4">
-                    <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size] duration-[0.3s] delay-0"
-                        [ngClass]="(this.carrouselIdx == 0) ? 'text-3xl font-semibold' : 'text-2xl font-thin'"> Lentejas </h1>
-                    <video></video>
+                <div class="items-center w-full h-full box-border">
+                    <img src="/projects/lentejilla2.png" class="w-full box-border object-cover object-[50%_0%] rounded-t-xl animated-card h-full"/>
+
+                    <!-- TODO: PRUEBA EN VEZ DE UN DEG NARANJA UN VIGÑETTE O NARANJA OSCURO U OTRA COSA, AHI SI QUE PUEDE COGER LA IMAGEN POR ENCIMA CON H-FULL -->
+                    <div class="flex flex-col w-full h-4/10 z-4 absolute bottom-0 bg-[linear-gradient(to_bottom,rgba(50,50,50,.35)_0%,rgba(16,16,16,.51)_90%),linear-gradient(to_bottom,transparent_1%,oklch(70.5%_0.213_47.604_/40%)_30%,oklch(70.5%_0.213_47.604_/50%)_80%)] backdrop-blur-sm rounded-b-xl z-0 backdrop-saturate-150">
+                        <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size] duration-[0.3s] delay-0 tracking-wide z-30"
+                            [ngClass]="(this.carrouselIdx == 0) ? 'text-3xl font-semibold' : 'text-2xl font-thin'">
+                            Vuela21
+                        </h1>
+                    </div>
+                    <!-- <video></video> -->
                     <p></p>
                 </div>
 
@@ -72,7 +83,9 @@
             <!-- el bottom tambien necesita style para que detecte la transicion, tailwind tiene ralladisimo al navegador -->
             <div [style.transform]="this.transformStyle()" [style.bottom.rem]="(this.hoverIdx == 1) ? 1.5 : 0"
                  (mouseenter)="this.registerHover($event)" (mouseleave)="this.unlistHover()" (click)="this.clickMoveCarrousel($event)"
-                 [ngClass]="(this.carrouselIdx == 1) ? 'w-1/4 z-2 h-87/100 rounded-2xl outline-2' : 'w-1/5 h-74/100 z-1 blur-[2px] rounded-xl outline-5'"
+                 [ngClass]="(this.carrouselIdx == 1)
+                                    ? 'w-[457px] h-[578px] z-2  rounded-2xl outline-2 shadow-[0_0_8px_0_hsla(213_100%_35%/.18),0_0_8px_0_hsla(213_100%_65%/.18)] inset-shadow-[0_0_14px_hsla(213_100%_50%_/.3)]'
+                                    : 'w-[353px] h-[478px] z-1 blur-[2px] rounded-xl outline-5 scale-90 saturate-60 brightness-80'"
                  id="card-1"
                  class="-mx-14 relative drop-shadow-[3px_6px_9px_rgba(26,26,52,0.25),6px_12px_25px_rgba(26,26,52,0.25),12px_24px_36px_rgba(26,26,52,0.25)]
                         backdrop-blur-[4px] backdrop-saturate-120 box-content bg-cover bg-no-repeat bg-center transform-gpu animated-card
@@ -80,7 +93,7 @@
 
                 <!-- TEST: algo así sería -->
                 <div class="flex-col items-center w-full h-full box-border pt-4">
-                    <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size] duration-[0.3s] delay-0"
+                    <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size] duration-[0.3s] delay-0 mt-5 tracking-wide"
                         [ngClass]="(this.carrouselIdx == 1) ? 'text-3xl font-semibold' : 'text-2xl font-thin'"> Lentejas </h1>
                     <video></video>
                     <p></p>
@@ -90,7 +103,9 @@
             <!-- Como solo tienes ahora mismo vuela21 y sporwatch pon aquí una tarjeta: '?' para proyectos que se vienen. -->
             <div [style.transform]="this.transformStyle()" [style.bottom.rem]="(this.hoverIdx == 2) ? 1.5 : 0"
                  (mouseenter)="this.registerHover($event)" (mouseleave)="this.unlistHover()" (click)="this.clickMoveCarrousel($event)"
-                 [ngClass]="(this.carrouselIdx == 2) ? 'w-1/4 z-2 h-87/100 rounded-2xl outline-2' : 'w-1/5 h-74/100 z-1 blur-[2px] rounded-xl outline-5'"
+                 [ngClass]="(this.carrouselIdx == 2)
+                                    ? 'w-[457px] h-[578px] z-2 rounded-2xl outline-2 shadow-[0_0_8px_0_hsla(213_100%_100%/.18),0_0_8px_0_hsla(213_100%_100%/.18)] inset-shadow-[0_0_14px_hsla(213_100%_100%_/.3)]'
+                                    : 'w-[353px] h-[478px] z-1 blur-[2px] rounded-xl outline-5 scale-90 saturate-60 brightness-80'"
                  id="card-2"
                  class="relative drop-shadow-[3px_6px_9px_rgba(26,26,52,0.25),6px_12px_25px_rgba(26,26,52,0.25),12px_24px_36px_rgba(26,26,52,0.25)]
                         backdrop-blur-[4px] backdrop-saturate-120 box-content bg-cover bg-no-repeat bg-center transform-gpu animated-card
@@ -100,7 +115,7 @@
                 <!-- TEST: algo así sería -->
                 <!-- TODO: ngClass para que los font sizes encojan con la tarjeta cuando se desfocusea. -->
                 <div class="flex-col items-center w-full h-full box-border pt-4">
-                    <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size] duration-[0.3s] delay-0"
+                    <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size] duration-[0.3s] delay-0 mt-5 tracking-wide"
                         [ngClass]="(this.carrouselIdx == 2) ? 'text-3xl font-semibold' : 'text-2xl font-thin'"> Lentejas </h1>
                     <video></video>
                     <p></p>
@@ -118,11 +133,10 @@
         <!-- Otro grid para ver como se ven varios -->
         <!-- la vignette usa stone-700 o a lo mejor stone-800 y cyan-300/5 de fondo -->
         <!-- TODO: prueba tarjetas mas grandes para una imagen mas grande. -->
-        <!-- IMPORTANTE: El primer diseño come nabo es feo de cojones sorry. -->
+        <!-- IMPORTANTE: El primer diseño es feo de cojones sorry. -->
         <!-- dependiendo del proyecto que ponga, un color u otro de fondo, el color de fondo se craftea con un degradado y un bg-black transparente + bg-blend mode de overlay. -->
-        <div class="grid grid-cols-[.3fr_.7fr] relative w-[80%] h-[280px] justify-items-center gap-x-17 mb-5 rounded-md border-y-4 border-white/5 
-                    bg-[radial-gradient(circle_farthest-side_at_85%_50%,rgba(0,184,219,.15)_0%,rgba(16,16,16,.15)_90%)] bg-black/20 bg-blend-overlay
-                    box-border"> 
+        <div class="grid grid-cols-[.3fr_.7fr] relative w-[50%] h-[280px] justify-items-center gap-x-17 mb-5 rounded-md border-b-9 border-r-9 border-b-[rgba(0,184,219,.01)] border-r-[rgba(0,184,219,.15)]
+                    bg-[radial-gradient(circle_farthest-side_at_85%_50%,rgba(0,184,219,.15)_0%,rgba(16,16,16,.15)_90%)] bg-black/20 bg-blend-overlay box-border">
 
             <!--  after:shadow-[inset_0_1px_5px_0_rgba(255,255,255,.2)] -->
             <img alt="Imagen proyecto" src="https://i.redd.it/q26o6vbbgjr81.gif"
@@ -139,7 +153,7 @@
         </div>
 
 
-        <div class="grid grid-cols-[.3fr_.7fr] relative w-[80%] h-[280px] justify-items-center gap-x-17 mb-5 rounded-md border-y-3 border-white/5
+        <div class="grid grid-cols-[.3fr_.7fr] relative w-[50%] h-[280px] justify-items-center gap-x-17 mb-5 rounded-md border-y-3 border-white/5
                     bg-[radial-gradient(circle_farthest-side_at_85%_50%,rgba(170,50,50,.21)_0%,rgba(16,16,70,.15)_90%)]
                     box-border bg-black/22 bg-blend-overlay shadow-[inset_-5px_5px_5px_0_rgba(25,25,25,.15),inset_5px_-5px_5px_0_rgba(25,25,25,.1505),inset_-5px_5px_5px_0_rgba(25,25,25,.1501),inset_5px_-5px_5px_0_rgba(25,25,25,.1501)]">
 
@@ -158,7 +172,7 @@
         </div>
 
 
-        <div class="grid grid-cols-[.3fr_.7fr] relative w-[80%] h-[280px] justify-items-center gap-x-17 mb-5 rounded-md border-y-3 border-x-3 border-white/5
+        <div class="grid grid-cols-[.3fr_.7fr] relative w-[50%] h-[280px] justify-items-center gap-x-17 mb-5 rounded-md border-y-3 border-x-3 border-white/5
                     bg-[radial-gradient(circle_farthest-side_at_85%_50%,oklch(0.66_0.21_37/15%)_0%,rgba(16,16,70,.15)_95%)]
                     box-border bg-black/20 bg-blend-overlay shadow-[inset_-5px_5px_5px_0_rgba(25,25,25,.15),inset_5px_-5px_5px_0_rgba(25,25,25,.1505),inset_-5px_5px_5px_0_rgba(25,25,25,.1501),inset_5px_-5px_5px_0_rgba(25,25,25,.1501)]">
             <!-- No me interesa:
@@ -180,12 +194,12 @@
 
 
         <!-- Prueba, probablemente se elimine sin coger nada. -->
-        <div class="flex flex-row w-screen justify-center items-center max-w-screen h-90 gap-x-20 bg-clip-text">
-            <div class="size-90 bg-black/10 flex border-y-2 border-y-white/20">
+        <div class="flex flex-row w-screen justify-center items-center max-w-screen h-90 gap-x-20">
+            <div class="size-90 bg-black/10 flex border-r-4 border-b-4 border-r-[#29568c]/15 border-b-[#29568c]/10">
             <img alt="Imagen proyecto" src="https://i.redd.it/q26o6vbbgjr81.gif"
                 class="object-fit rounded-sm size-70 self-center mx-auto my-auto"/>
             </div>
-
+            <!-- #0B1726 -->
             <div class="flex flex-col relative w-250 h-[280px] justify-items-center rounded-md border-y-3 border-x-2 border-white/5 border-l-[rgba(0,0,0,.2)] items-center
                         bg-[radial-gradient(circle_farthest-side_at_90%_50%,oklch(48.7%_0.265_303.9/20%)_0%,rgba(10,10,10,.15)_85%)]
                         box-border bg-black/20 bg-blend-overlay shadow-[inset_-5px_5px_5px_0_rgba(25,25,25,.15),inset_5px_-5px_5px_0_rgba(25,25,25,.1505),inset_-5px_5px_5px_0_rgba(25,25,25,.1501),inset_5px_-5px_5px_0_rgba(25,25,25,.1501)]">

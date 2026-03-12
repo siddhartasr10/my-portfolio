@@ -32,6 +32,7 @@ form > label {
     transition: color 450ms ease-out 100ms;
 }
 
+ /* INFO: la clase de css animated-card existe simplemente porque transition no funciona bien con tailwind y angular. */
 .animated-card {
     transition: width 300ms cubic-bezier(.4,0,1,2),
                 height 300ms cubic-bezier(.4,0,1,2),
