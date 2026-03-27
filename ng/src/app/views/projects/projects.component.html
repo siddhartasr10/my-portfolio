@@ -11,11 +11,10 @@
             after:transition-[transform_10s_ease-out_1000ms] transition-[left_3000000000ms_ease-out_1000ms]
             Además: after:translate-x-(--slider-end-transform) funciona pero el uso de clases de tailwind con variables por algun motivo
             hace que la transition del translate aun estando aplicada desde css y pudiendose ver en el dev tools no se aplique. por lo que al css tambien
-             (Creo que es el problema que tengo en el carrusel, el navegador no detecta un mismo atributo con un cambio de valor en la variable del translateX)
-        -->
+             (Creo que es el problema que tengo en el carrusel, el navegador no detecta un mismo atributo con un cambio de valor en la variable del translateX) -->
 
             <!-- Slider 'knob' element  (its after is a box that makes one of the pill div sides straight and changes with position -->
-            <div class="w-18 h-7.5 absolute top- left-0 flex flex-row items-center z-2 rounded-[2cm] bg-[#7DF9FF]
+            <div class="w-18 h-7.5 absolute top-0 left-0 flex flex-row items-center z-2 rounded-[2cm] bg-[#7DF9FF]
                 after:content-[''] after:w-3 after:h-[inherit] after:z-3 after:relative after:bg-[#7DF9FF]
                 after:block " [class.left-[74px]]="sliderState()" [class.w-[70px]!]="!sliderState()"> <!-- 70px en el estado inicial, sino ocupa demasiado el primer estado, por algun motivo necesito mas en el segundo (creo que es asimetrico shhh.)  -->
             </div>
@@ -58,21 +57,32 @@
                                     : 'w-[353px] h-[478px] z-1 blur-[2px] rounded-xl outline-5 scale-90 saturate-60 brightness-80'"
                  class="relative drop-shadow-[3px_6px_9px_rgba(26,26,52,0.25),6px_12px_25px_rgba(26,26,52,0.25),12px_24px_36px_rgba(26,26,52,0.25)]
                         backdrop-blur-[4px] backdrop-saturate-120 box-content bg-cover bg-no-repeat bg-center transform-gpu animated-card outline-orange-600/30" id="card-0">
-
                 <!--  bg-position-[30%_20%]-->
 
 
                 <!-- TEST: algo así sería -->
                 <!-- TODO: ngClass para que los font sizes encojan con la tarjeta cuando se desfocusea. -->
-                <div class="items-center w-full h-full box-border">
-                    <img src="/projects/lentejilla2.png" class="w-full box-border object-cover object-[50%_0%] rounded-t-xl animated-card h-full"/>
+                <div class="w-full h-full relative">
+                    <img src="/projects/vuela21_1.png" class="w-full h-full box-border object-cover object-[50%_30%] rounded-2xl animated-card top-[-1.5px] absolute"/>
+                    <!-- Pon el modal del login, si eso monta vuela21 para sacar una imagen con la proporción correcta (4:5), luego un popover con el vídeo en 16:9 -->
 
-                    <!-- TODO: PRUEBA EN VEZ DE UN DEG NARANJA UN VIGÑETTE O NARANJA OSCURO U OTRA COSA, AHI SI QUE PUEDE COGER LA IMAGEN POR ENCIMA CON H-FULL -->
-                    <div class="flex flex-col w-full h-4/10 z-4 absolute bottom-0 bg-[linear-gradient(to_bottom,rgba(50,50,50,.35)_0%,rgba(16,16,16,.51)_90%),linear-gradient(to_bottom,transparent_1%,oklch(70.5%_0.213_47.604_/40%)_30%,oklch(70.5%_0.213_47.604_/50%)_80%)] backdrop-blur-sm rounded-b-xl z-0 backdrop-saturate-150">
-                        <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size] duration-[0.3s] delay-0 tracking-wide z-30"
-                            [ngClass]="(this.carrouselIdx == 0) ? 'text-3xl font-semibold' : 'text-2xl font-thin'">
+                    <div class="flex flex-col w-full h-3/10 absolute bottom-0
+                                bg-[linear-gradient(to_bottom,rgba(50,50,50,.35)_0%,rgba(16,16,16,.51)_90%),linear-gradient(to_bottom,transparent_1%,oklch(70.5%_0.213_47.604_/40%)_30%,oklch(70.5%_0.213_47.604_/50%)_80%)]
+                                rounded-b-xl animated-text-section"
+
+                         [style.backdrop-filter]="(this.carrouselIdx == 0) ? 'saturate(250%) blur(8px)' : 'saturate(100%) blur(8px)'"
+                         [ngClass]="(this.carrouselIdx == 0) ? 'h-3/10!' : 'h-1/4!'" >
+                        <!-- INFO: Mira el css para la explicacion de este style...  -->
+
+
+                        <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size,font-weight,letter-spacing] duration-[0.3s] delay-0  z-30 mt-3.5"
+                            [ngClass]="(this.carrouselIdx == 0) ? 'text-3xl font-semibold tracking-wide' : 'text-2xl font-thin'">
                             Vuela21
                         </h1>
+
+                        <p class="text-white/70 text-center mt-5 font-inter box-border px-2 transition-[font-size,font-weight] duration-250"
+                           [ngClass]="(this.carrouselIdx == 0) ? 'text-lg' : 'text-sm font-thin'" >
+                            Aplicación de gestión de envíos para una empresa de transportes, realizada en las prácticas.</p>
                     </div>
                     <!-- <video></video> -->
                     <p></p>

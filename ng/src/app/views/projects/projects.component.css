@@ -42,3 +42,13 @@ form > label {
     /* sino la animacion de bottom ni va */
     bottom: 0px;
 }
+/* INFO: la clase de css animated-text-section existe simplemente porque transition no funciona bien con tailwind y angular.
+ * en este caso es por backdrop filter, en el otro era por transform,
+ * ya que cambio el valor de un saturate a otro y css no detecta eso por cambio de clases de angular
+ * lo detecta por cambio de clases básicas de css. el height es que sino ya entra en conflicto jajaj
+ */
+.animated-text-section {
+    transition: backdrop-filter 500ms ease-in-out,
+                height 150ms linear;
+
+}
