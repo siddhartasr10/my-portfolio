@@ -31,16 +31,35 @@ form > div::after {
 form > label {
     transition: color 450ms ease-out 100ms;
 }
+/* INFO IMPORTANTE:
+ * Todas aquellas transiciones entre propiedades que no cambian explícitamente su valor
+ * Se tienen que hacer por 'style' en vez de 'class'
+ * Por ejemplo
+ * CSS no detecta la diferencia entre una clase que tiene
+ * 'transform: translateX(23px)'
+ * Frente a una que tiene
+ * 'transform: translateX(0px)'
+ *
+ * en vez de usar class binding, se usa style binding.
+ * Lo mismo pasa para box-shadow o drop-shadow
+ *
+ * Basicamente el navegador intenta optimizar la transición entre clases
+ * y si ve la 'misma' propiedad en una clase añadida aunque no sea la misma
+ * la ignora.
+ */
 
  /* INFO: la clase de css animated-card existe simplemente porque transition no funciona bien con tailwind y angular. */
 .animated-card {
     transition: width 300ms cubic-bezier(.4,0,1,2),
                 height 300ms cubic-bezier(.4,0,1,2),
                 transform 800ms cubic-bezier(.4,0,1,1),
-                bottom 200ms cubic-bezier(.4,0,1,1);
+                bottom 200ms cubic-bezier(.4,0,1,1),
+                box-shadow 350ms ease-in,
+                filter 200ms ease-in;
 
     /* sino la animacion de bottom ni va */
     bottom: 0px;
+
 }
 /* INFO: la clase de css animated-text-section existe simplemente porque transition no funciona bien con tailwind y angular.
  * en este caso es por backdrop filter, en el otro era por transform,

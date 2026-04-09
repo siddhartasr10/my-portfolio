@@ -14,13 +14,27 @@ export class ProjectsComponent {
   carrouselIdx: number = 1;
   // Indice de la tarjeta del carrousel que esté hovereada. (hago esto porque añadir estilos mediante clases de tailwind con hover o mediante css vanilla no funciona. tailwind tiene ya bugeado al navegador.
   hoverIdx: number = -1;
-
-  transformStyle: WritableSignal<string> = signal("");
-
   wheelInputs: Set<String> = new Set();
 
+  cardTransformState: WritableSignal<string> = signal("");
+  focusedCardShadow: WritableSignal<string> = signal(`0px 14px 35px 12px rgba(26,26,52,.15),
+                                                      0px 22px 30px 7px rgba(26,26,52,.15),
+                                                      3px 22px 28px 4px rgba(26,26,52,.15),
+                                                      3px 23px 35px 4px rgba(26,26,52,.15),
+                                                      9px 35px 45px rgba(26,26,52,.15)`);
+
+  unfocusedCardShadow: WritableSignal<string> = signal(`3px 6px 9px rgba(26,26,52,0.25),
+                                                        6px 12px 25px rgba(26,26,52,0.25),
+                                                        12px 24px 36px rgba(26,26,52,0.25)`);
+
+  // focusedCardFilterState: WritableSignal<string> = signal(``); Las sombras van por separado así que...
+  unfocusedCardFilterState: WritableSignal<string> = signal(`blur(1.5px) brightness(0.8)`);
+  // scale no es un filter, va en el transform, al final se ha podido añadir como clase de tailwind.
   constructor(private hostRef: ElementRef) {
     // Controla la velocidad de movimiento del carrusel con el scroll, evita el lag.
+    /* Si hiciera esto (o en general procesara cualquier input tal cual llega)
+     * Se notaría bastante lag porque priorizaría eso a cualquier otro input.
+     */
     setInterval(() => {
       if (this.wheelInputs.has("up")) ++this.carrouselIdx;
       if (this.wheelInputs.has("down")) --this.carrouselIdx;
@@ -121,9 +135,9 @@ export class ProjectsComponent {
 
   updateTransform(): void {
     switch(this.carrouselIdx) {
-      case 0: return this.transformStyle.set("translateX(17.5rem)");
-      case 2: return this.transformStyle.set("translateX(-17.5rem)");
-      default: return this.transformStyle.set("translateX(0)");
+      case 0: return this.cardTransformState.set("translateX(17.5rem)");
+      case 2: return this.cardTransformState.set("translateX(-17.5rem)");
+      default: return this.cardTransformState.set("translateX(0)");
     }
   }
 
