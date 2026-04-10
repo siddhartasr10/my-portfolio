@@ -55,10 +55,7 @@
             <!-- (sombras que estaban en el ngClass y estoy transicionando hacia style.*:
                  shadow-[0_0_8px_0_hsla(32_100%_35%/.18),0_0_8px_0_hsla(32_100%_65%/.18)] inset-shadow-[0_0_14px_hsla(32_100%_50%_/.3)] -->
 
-            <!-- TODO: Continua luchando para conseguir las sombras aunque eso implique reescribir los filtros en una variable porque se sobreescriben estilos si no es con clases de tailwind -->
-            <!-- ESTE TODO ES EL IMPORTANTE AHORA MISMO 03/04/26 -->
-            <!-- ADEMÁS: la sombra inset no va  -->
-            <!--  EL TODO ANTERIOR ESTÁ COMPLETADO, TOQUETEA UN POCO MÁS LAS SOMBRAS Y PASA LA LÓGICA DE TODO LO QUE SE HA HECHO AQUÍ + el nuevo vignette de la img -->
+            <!-- TODO: haz la tarjeta card-1 y la card-2 -->
             <div [style.transform]="this.cardTransformState()" [style.bottom.rem]="(this.hoverIdx == 0) ? 1.5 : 0"
                  [style.box-shadow]="(this.carrouselIdx == 0) ? this.focusedCardShadow() : this.unfocusedCardShadow()"
                  [style.filter]="(carrouselIdx == 0) ? '' : unfocusedCardFilterState()"
@@ -71,10 +68,12 @@
                 <!-- Hacian falta cuando la tarjeta era transparente backdrop-blur-[4px] backdrop-saturate-120 -->
                 <!--  bg-position-[30%_20%]-->
 
-                <!-- TODO: ngClass para que los font sizes encojan con la tarjeta cuando se desfocusea. -->
                 <div class="w-full h-full relative">
                     <img src="/projects/vuela21_1.png" class="w-full h-full box-border object-cover rounded-2xl animated-card top-[-1.5px] absolute "/>
-                    <div class="w-full h-full rounded-2xl absolute inset-shadow-[0_0_14px_hsla(32_100%_50%/.35)] -top-[1.5px] z-5"> </div>
+                    <div class="w-full h-full rounded-2xl absolute -top-[1.5px] z-5 transition-shadow duration-150"
+                         [style.box-shadow]="(this.hoverIdx == 0) ? 'inset 0 0 34px hsla(32,100%,50%,.3)' : 'inset 0 0 14px hsla(32,100%,50%,.25)'"> </div>
+                    <!-- INFO: Si usas style.* la forma de definir el alpha tiene que ser la antigua, no sirve / 35% o / .35, style usa el renderer de angular y angular 19 no se lleva bien con el css color level 4-->
+
                     <!-- Pon el modal del login, si eso monta vuela21 para sacar una imagen con la proporción correcta (4:5), luego un popover con el vídeo en 16:9 -->
                     <div class="absolute w-full transition-all duration-200 rounded-2xl"
                          [style.height.%]="(this.carrouselIdx == 0) ? 70 : 76"
@@ -92,7 +91,6 @@
                          [style.backdrop-filter]="(this.carrouselIdx == 0) ? 'saturate(250%) blur(8px)' : 'saturate(100%) blur(8px)'" [ngClass]="(this.carrouselIdx == 0) ? 'h-3/10!' : 'h-1/4!'" >
                         <!-- INFO: Mira el css para la explicacion de este style...  -->
 
-
                         <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size,font-weight,letter-spacing] duration-[0.3s] delay-0  z-30 mt-3.5"
                             [ngClass]="(this.carrouselIdx == 0) ? 'text-3xl font-semibold tracking-wide' : 'text-2xl font-thin'">
                             Vuela21
@@ -109,7 +107,7 @@
             </div>
 
             <!-- el bottom tambien necesita style para que detecte la transicion, tailwind tiene ralladisimo al navegador mira el css para la explicacion -->
-            <!-- TODO: Convertir las clases bindeadas con propiedades complejas que no detecta el navegador a estilos bindeados que si detecta -->
+            <!-- INFO: En gran parte se trata de convertir las clases bindeadas con propiedades complejas que no detecta el navegador a estilos bindeados que si detecta -->
             <div [style.transform]="this.cardTransformState()" [style.bottom.rem]="(this.hoverIdx == 1) ? 1.5 : 0"
                  [style.box-shadow]="(this.carrouselIdx == 1) ? this.focusedCardShadow() : this.unfocusedCardShadow()"
                  [style.filter]="(carrouselIdx == 1) ? '' : unfocusedCardFilterState()"
@@ -120,10 +118,11 @@
 
                  id="card-1"
                  class="-mx-14 relative box-content transform-gpu animated-card outline-cyan-600/30">
-
+                <!-- hsla(213_100%_50%/.35) -->
                 <div class="w-full h-full relative">
                     <img src="/projects/vuela21_1.png" class="w-full h-full box-border object-cover rounded-2xl animated-card top-[-1.5px] absolute "/>
-                    <div class="w-full h-full rounded-2xl absolute inset-shadow-[0_0_14px_hsla(213_100%_50%/.35)] -top-[1.5px]"> </div>
+                    <div class="w-full h-full rounded-2xl absolute -top-[1.5px] z-5 transition-shadow duration-150"
+                         [style.box-shadow]="(this.hoverIdx == 1) ? 'inset 0 0 34px hsla(213,100%,50%,.3)' : 'inset 0 0 14px hsla(213,100%,50%,.25)'"> </div>
                     <!-- Pon el modal del login, si eso monta vuela21 para sacar una imagen con la proporción correcta (4:5), luego un popover con el vídeo en 16:9 -->
                     <div class="absolute w-full transition-all duration-200 rounded-2xl"
                          [style.height.%]="(this.carrouselIdx == 1) ? 70 : 76"
