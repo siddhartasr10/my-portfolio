@@ -41,146 +41,171 @@
     <!-- NOTA: la altura de la imagen seleccionada (la del medio) es mayor que las de los lados La anchura un poco tambien mayor pero muy poco -->
     <!-- INFO: Las animaciones de transition se llevan por la clase de css animated-card -->
     <!-- INFO: El aspect ratio de las tarjetas es casí un 4:5 perfecto. -->
+    <!-- TODO: Hacer el overlay con un vídeo de los proyectos. -->
     <!-- Carrusel -->
     <div (wheel)="wheelMoveCarrousel($event)" id="carrousel"
          class="w-[92%] h-[70vh] bg-radial-[circle_farthest-side_at_50%_55%] from-[#81A9DA]/50 to-[rgba(6,20,38,0.7)] flex flex-row items-center justify-center
                 transform-3d rounded-md shadow-[0_0_8px_0_hsla(213_100%_35%/.18),0_0_8px_0_hsla(213_100%_65%/.18)] inset-shadow-[0_0_14px_rgba(0,255,210,0.05)]">
-        <!-- <h2 class="text-2xl/6 font-extrabold font-roboto-flex my-6 text-center bg-linear-to-r from-blue-600 to-black bg-clip-text text-transparent tracking-wide invisible"> a </h2> -->
-            <img #leftArrow (click)="moveCarrousel(leftArrow)" class="absolute size-8 left-10 cursor-pointer z-100" src="/projects/left-arrow-svgrepo-white.png" alt="flecha para mover el carrousel a la izquierda" id="left"/>
-            <img #rightArrow (click)="moveCarrousel(rightArrow)" class="absolute size-8 right-10 cursor-pointer z-100" src="/projects/right-arrow-svgrepo-white.png" alt="flecha para mover el carrousel a la derecha" id="right"/>
-            <!-- IMPORTANTE CAMBIALO DESPUES: el color de fondo variara del proyecto por supuesto no van a ser todos del mismo color.-->
-            <!-- Para que las transiciones de transform funcionen tienen que hacerse por css normal, ya que el navegador no detecta un cambio de transform: translateX(valortal) a transform: translateX(valorcual)
-                 mediante las clases de tailwind. ya que tailwind cambia la variable de dentro del translateX y el navegador ve 'practicamente' el mismo valor. -->
-                <!-- 3px 6px 9px rgba(26,26,52,0.85),6px 12px 25px rgba(26,26,52,0.85),12px 24px 36px rgba(26,26,52,0.85) -->
-            <!-- (sombras que estaban en el ngClass y estoy transicionando hacia style.*:
-                 shadow-[0_0_8px_0_hsla(32_100%_35%/.18),0_0_8px_0_hsla(32_100%_65%/.18)] inset-shadow-[0_0_14px_hsla(32_100%_50%_/.3)] -->
+    <!-- <h2 class="text-2xl/6 font-extrabold font-roboto-flex my-6 text-center bg-linear-to-r from-blue-600 to-black bg-clip-text text-transparent tracking-wide invisible"> a </h2> -->
+        <img #leftArrow (click)="moveCarrousel(leftArrow)" class="absolute size-8 left-10 cursor-pointer z-100" src="/projects/left-arrow-svgrepo-white.png" alt="flecha para mover el carrousel a la izquierda" id="left"/>
+        <img #rightArrow (click)="moveCarrousel(rightArrow)" class="absolute size-8 right-10 cursor-pointer z-100" src="/projects/right-arrow-svgrepo-white.png" alt="flecha para mover el carrousel a la derecha" id="right"/>
+        <!-- IMPORTANTE CAMBIALO DESPUES: el color de fondo variara del proyecto por supuesto no van a ser todos del mismo color.-->
+        <!-- Para que las transiciones de transform funcionen tienen que hacerse por css normal, ya que el navegador no detecta un cambio de transform: translateX(valortal) a transform: translateX(valorcual)
+            mediante las clases de tailwind. ya que tailwind cambia la variable de dentro del translateX y el navegador ve 'practicamente' el mismo valor. -->
+            <!-- 3px 6px 9px rgba(26,26,52,0.85),6px 12px 25px rgba(26,26,52,0.85),12px 24px 36px rgba(26,26,52,0.85) -->
+        <!-- (sombras que estaban en el ngClass y estoy transicionando hacia style.*:
+            shadow-[0_0_8px_0_hsla(32_100%_35%/.18),0_0_8px_0_hsla(32_100%_65%/.18)] inset-shadow-[0_0_14px_hsla(32_100%_50%_/.3)] -->
 
-            <div [style.transform]="this.cardTransformState()" [style.bottom.rem]="(this.hoverIdx == 0) ? 1.5 : 0"
-                 [style.box-shadow]="(this.carrouselIdx == 0) ? this.focusedCardShadow() : this.unfocusedCardShadow()"
-                 [style.filter]="(carrouselIdx == 0) ? '' : unfocusedCardFilterState()"
-                 [ngClass]="(this.carrouselIdx == 0)
-                                    ? 'w-[457px] h-[578px] z-2 rounded-2xl outline-2'
-                                    : 'w-[353px] h-[478px] z-1 rounded-xl outline-5 scale-90'"
-                 (mouseenter)="this.registerHover($event)" (mouseleave)="this.unlistHover()" (click)="this.clickMoveCarrousel($event)"
-                 id="card-0"
-                 class="relative box-content animated-card outline-orange-600/30">
-                <!-- Hacian falta cuando la tarjeta era transparente backdrop-blur-[4px] backdrop-saturate-120 -->
-                <!--  bg-position-[30%_20%]-->
+        <div [style.transform]="this.cardTransformState()" [style.bottom.rem]="(this.hoverIdx == 0) ? 1.5 : 0"
+            [style.box-shadow]="(this.carrouselIdx == 0) ? this.focusedCardShadow() : this.unfocusedCardShadow()"
+            [style.filter]="(carrouselIdx == 0) ? '' : unfocusedCardFilterState()"
+            [ngClass]="(this.carrouselIdx == 0)
+                                ? 'w-[457px] h-[578px] z-2 rounded-2xl outline-2'
+                                : 'w-[353px] h-[478px] z-1 rounded-xl outline-5 scale-90'"
+            (mouseenter)="this.registerHover($event)" (mouseleave)="this.unlistHover()" (click)="this.clickMoveCarrousel($event)"
+            id="card-0"
+            class="relative box-content transform-gpu animated-card outline-orange-600/30">
+            <!-- Hacian falta cuando la tarjeta era transparente backdrop-blur-[4px] backdrop-saturate-120 -->
+            <!--  bg-position-[30%_20%]-->
 
-                <div class="w-full h-full relative">
-                    <img src="/projects/vuela21_1_colored.png" class="w-full h-full box-border object-cover rounded-2xl animated-card top-[-1.5px] absolute"/>
-                    <div class="w-full h-full rounded-2xl absolute -top-[1.5px] z-5 transition-shadow duration-150"
-                         [style.box-shadow]="(this.hoverIdx == 0) ? 'inset 0 0 34px hsla(32,100%,50%,.3)' : 'inset 0 0 14px hsla(32,100%,50%,.25)'"> </div>
-                    <!-- INFO: Si usas style.* la forma de definir el alpha tiene que ser la antigua, no sirve / 35% o / .35, style usa el renderer de angular y angular 19 no se lleva bien con el css color level 4-->
+            <div class="w-full h-full relative">
+                <img src="/projects/vuela21_1_colored.png" class="w-full h-full box-border object-cover rounded-2xl animated-card top-[-1.5px] absolute"/>
+                <div class="w-full h-full rounded-2xl absolute -top-[1.5px] z-5 transition-shadow duration-150"
+                    [style.box-shadow]="(this.hoverIdx == 0) ? 'inset 0 0 34px oklch(0.7442 0.1812 56.46 / 30%)' : 'inset 0 0 14px oklch(0.7442 0.1812 56.46 / 25%)'"> </div>
+                <!-- INFO: Si usas style.* la forma de definir el alpha tiene que ser la antigua, no sirve / 35% o / .35, style usa el renderer de angular y angular 19 no se lleva bien con el css color level 4-->
 
-                    <!-- Pon el modal del login, si eso monta vuela21 para sacar una imagen con la proporción correcta (4:5), luego un popover con el vídeo en 16:9 -->
-                    <div class="absolute w-full transition-all duration-200 rounded-2xl"
-                         [style.height.%]="(this.carrouselIdx == 0) ? 76 : 70"
-                         [style.background]="(this.carrouselIdx == 0)
-                                ? 'radial-gradient(circle at 50% 50%, rgba(26,26,26,.2) 0%, rgba(26,26,26,.2) 99%)'
-                                : 'radial-gradient(circle at 50% 50%, rgba(26,26,26,.35) 0%, rgba(26,26,26,.42) 50%, rgba(26,26,26,.3) 99%)'"
-                         [style.backdrop-filter]="(this.carrouselIdx == 0) ? '' : 'blur(1.5px)'">
-                        <!-- blur dividido entre la hero img y todo el contenedor (el texto blurrea menos basicamente.) -->
-                    </div>
-
-                    <div class="flex flex-col w-full h-3/10 absolute bottom-0
-                                bg-[linear-gradient(to_bottom,rgba(50,50,50,.35)_0%,rgba(16,16,16,.51)_90%),linear-gradient(to_bottom,transparent_1%,oklch(70.5%_0.213_47.604_/40%)_30%,oklch(70.5%_0.213_47.604_/50%)_80%)]
-                                rounded-b-xl animated-text-section"
-
-                         [style.backdrop-filter]="(this.carrouselIdx == 0) ? 'saturate(250%) blur(8px)' : 'saturate(100%) blur(8px)'" [ngClass]="(this.carrouselIdx == 0) ? 'h-5/20!' : 'h-3/10!'" >
-                        <!-- INFO: Mira el css para la explicacion de este style...  -->
-
-                        <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size,font-weight,letter-spacing] duration-[0.3s] delay-0  z-30 mt-3.5"
-                            [ngClass]="(this.carrouselIdx == 0) ? 'text-3xl font-semibold tracking-wide' : 'text-2xl font-thin'">
-                            Vuela21
-                        </h1>
-
-                        <p class="text-white/70 text-center mt-5 font-inter box-border px-2 transition-[font-size,font-weight] duration-250"
-                           [ngClass]="(this.carrouselIdx == 0) ? 'text-lg' : 'text-sm font-thin'" >
-                            Aplicación de gestión de envíos para una empresa de transportes, realizada en las prácticas.</p>
-                    </div>
+                <!-- Pon el modal del login, si eso monta vuela21 para sacar una imagen con la proporción correcta (4:5), luego un popover con el vídeo en 16:9 -->
+                <div class="absolute w-full transition-all duration-200 rounded-2xl"
+                    [style.height.%]="(this.carrouselIdx == 0) ? 76 : 70"
+                    [style.background]="(this.carrouselIdx == 0)
+                            ? 'radial-gradient(circle at 50% 50%, rgba(26,26,26,.2) 0%, rgba(26,26,26,.2) 99%)'
+                            : 'radial-gradient(circle at 50% 50%, rgba(26,26,26,.35) 0%, rgba(26,26,26,.42) 50%, rgba(26,26,26,.3) 99%)'"
+                    [style.backdrop-filter]="(this.carrouselIdx == 0) ? '' : 'blur(1.5px)'">
+                    <!-- blur dividido entre la hero img y todo el contenedor (el texto blurrea menos basicamente.) -->
                 </div>
 
-            </div>
+                <div class="flex flex-col w-full h-3/10 absolute bottom-0
+                            bg-[linear-gradient(to_bottom,rgba(50,50,50,.35)_0%,rgba(16,16,16,.51)_90%),linear-gradient(to_bottom,transparent_1%,oklch(70.5%_0.213_47.604_/40%)_30%,oklch(70.5%_0.213_47.604_/50%)_80%)]
+                            rounded-b-xl animated-text-section"
 
-            <!-- el bottom tambien necesita style para que detecte la transicion, tailwind tiene ralladisimo al navegador mira el css para la explicacion -->
-            <!-- INFO: En gran parte se trata de convertir las clases bindeadas con propiedades complejas que no detecta el navegador a estilos bindeados que si detecta -->
-            <div [style.transform]="this.cardTransformState()" [style.bottom.rem]="(this.hoverIdx == 1) ? 1.5 : 0"
-                 [style.box-shadow]="(this.carrouselIdx == 1) ? this.focusedCardShadow() : this.unfocusedCardShadow()"
-                 [style.filter]="(carrouselIdx == 1) ? '' : unfocusedCardFilterState()"
-                 [ngClass]="(this.carrouselIdx == 1)
-                                    ? 'w-[457px] h-[578px] z-2 rounded-2xl outline-2'
-                                    : 'w-[353px] h-[478px] z-1 rounded-xl outline-5 scale-90'"
-                 (mouseenter)="this.registerHover($event)" (mouseleave)="this.unlistHover()" (click)="this.clickMoveCarrousel($event)"
+                    [style.backdrop-filter]="(this.carrouselIdx == 0) ? 'saturate(250%) blur(8px)' : 'saturate(100%) blur(8px)'" [ngClass]="(this.carrouselIdx == 0) ? 'h-5/20!' : 'h-3/10!'" >
+                    <!-- INFO: Mira el css para la explicacion de este style...  -->
 
-                 id="card-1"
-                 class="-mx-14 relative box-content transform-gpu animated-card outline-[oklch(0.72_0.13_180_/20%)]">
-                <!-- hsla(213_100%_50%/.35) -->
-                <div class="w-full h-full relative">
-                    <!-- NOTE: Esta imagen no se pega por encima del borde  -->
-                    <img src="/projects/sportwatch_from_highgres_to_752x882_with_black_to_752x941.png" class="w-full h-full box-border object-cover object-[50%_0%] rounded-2xl animated-card absolute"/>
-                    <div class="w-full h-full rounded-2xl absolute -top-[1.5px] z-5 transition-shadow duration-150"
-                         [style.box-shadow]="(this.hoverIdx == 1) ? 'inset 0 0 34px oklch(0.77_0.13_180_/30%)' : 'inset 0 0 14px hsla(213,100%,50%,.25)'"> </div>
-                    <!-- Pon el modal del login, si eso monta vuela21 para sacar una imagen con la proporción correcta (4:5), luego un popover con el vídeo en 16:9 -->
-                    <div class="absolute w-full transition-all duration-200 rounded-2xl"
-                         [style.background]="(this.carrouselIdx == 1)
-                                ? 'radial-gradient(circle at 50% 50%, rgba(26,26,26,.2) 0%, rgba(26,26,26,.2) 99%)'
-                                : 'radial-gradient(circle at 50% 50%, rgba(26,26,26,.35) 0%, rgba(26,26,26,.42) 50%, rgba(26,26,26,.3) 99%)'"
-                         [style.height.%]="(this.carrouselIdx == 1) ? 76 : 70"
-                         [style.backdrop-filter]="(this.carrouselIdx == 1) ? 'saturate(1)' : 'blur(1.5px)'">
-                        <!-- blur dividido entre la hero img y todo el contenedor en el ts (el texto blurrea menos basicamente.) -->
-                    </div>
+                    <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size,font-weight,letter-spacing] duration-[0.3s] delay-0  z-30 mt-3.5"
+                        [ngClass]="(this.carrouselIdx == 0) ? 'text-3xl font-semibold tracking-wide' : 'text-2xl font-thin'">
+                        Vuela21
+                    </h1>
 
-                    <!-- TODO: prueba seriamente que la sección de texto sea completamente transparente, no parece quedarle mal, y ajusta la imagen a la tarjeta.  -->
-                    <div class="flex flex-col w-full absolute bottom-0
-                                bg-[linear-gradient(to_bottom,rgba(50,50,50,.35)_0%,rgba(16,16,16,.51)_90%),linear-gradient(to_bottom,transparent_1%,oklch(0.77_0.13_180_/30%)_30%,oklch(0.56_0.1_180_/_40%)_80%)]
-                                rounded-b-xl animated-text-section"
-
-                         [style.backdrop-filter]="(this.carrouselIdx == 1) ? 'saturate(250%) blur(8px)' : 'saturate(100%) blur(8px)'"
-                         [ngClass]="(this.carrouselIdx == 1) ? 'h-5/20' : 'h-3/10'" >
-                        <!-- INFO: Mira el css para la explicacion de este style...  -->
-
-                        <!--  Colores del degradado actual (el colorido, el vignette no y el transparent tampoco lo añado) del background de la sección de texto
-                             oklch(0.77_0.13_180_/30%)_30%,oklch(0.77_0.13_180_/40%)_80%
-                        -->
-
-                        <!-- Esto era una prueba pero el blur localizado bugea la polarizacion del gradiente <div class="w-full h-1/3 absolute top-0 bg-transparent backdrop-blur-s"></div> -->
-
-                        <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size,font-weight,letter-spacing] duration-[0.3s] delay-0  z-30 mt-3.5"
-                            [ngClass]="(this.carrouselIdx == 1) ? 'text-3xl font-semibold tracking-wide' : 'text-2xl font-thin'">
-                            Sportwatch
-                        </h1>
-
-                        <p class="text-white/70 text-center mt-5 font-inter box-border px-2 transition-[font-size,font-weight] duration-250"
-                           [ngClass]="(this.carrouselIdx == 1) ? 'text-lg' : 'text-sm font-thin'" >
-                            Aplicación de gestión de envíos para una empresa de transportes, realizada en las prácticas.</p>
-                    </div>
-                    <!-- <video></video> -->
-                    <p></p>
+                    <p class="text-white/70 text-center mt-5 font-inter box-border px-2 transition-[font-size,font-weight] duration-250"
+                    [ngClass]="(this.carrouselIdx == 0) ? 'text-lg' : 'text-sm font-thin'" >
+                        Aplicación de gestión de envíos para una empresa de transportes, realizada en las prácticas.</p>
                 </div>
             </div>
 
-            <!-- Como solo tienes ahora mismo vuela21 y sporwatch pon aquí una tarjeta: '?' para proyectos que se vienen. -->
-            <div [style.transform]="this.cardTransformState()" [style.bottom.rem]="(this.hoverIdx == 2) ? 1.5 : 0"
-                 (mouseenter)="this.registerHover($event)" (mouseleave)="this.unlistHover()" (click)="this.clickMoveCarrousel($event)"
-                 [ngClass]="(this.carrouselIdx == 2)
-                                    ? 'w-[457px] h-[578px] z-2 rounded-2xl outline-2 shadow-[0_0_8px_0_hsla(213_100%_100%/.18),0_0_8px_0_hsla(213_100%_100%/.18)] inset-shadow-[0_0_14px_hsla(213_100%_100%_/.3)]'
-                                    : 'w-[353px] h-[478px] z-1 blur-[2px] rounded-xl outline-5 scale-90 saturate-60 brightness-80'"
-                 id="card-2"
-                 class="relative drop-shadow-[3px_6px_9px_rgba(26,26,52,0.25),6px_12px_25px_rgba(26,26,52,0.25),12px_24px_36px_rgba(26,26,52,0.25)]
-                        backdrop-blur-[4px] backdrop-saturate-120 box-content transform-gpu animated-card
-                        outline-gray-600/30 bg-gray-500/30 bg-radial-[circle_farthest-side_at_50%_0%,oklch(100%_0.055_261.325/.2)_0%,rgba(0,0,0,.25)_98%]">
+        </div>
 
+        <!-- el bottom tambien necesita style para que detecte la transicion, tailwind tiene ralladisimo al navegador mira el css para la explicacion -->
+        <!-- INFO: En gran parte se trata de convertir las clases bindeadas con propiedades complejas que no detecta el navegador a estilos bindeados que si detecta -->
+        <div [style.transform]="this.cardTransformState()" [style.bottom.rem]="(this.hoverIdx == 1) ? 1.5 : 0"
+            [style.box-shadow]="(this.carrouselIdx == 1) ? this.focusedCardShadow() : this.unfocusedCardShadow()"
+            [style.filter]="(carrouselIdx == 1) ? '' : unfocusedCardFilterState()"
+            [ngClass]="(this.carrouselIdx == 1)
+                                ? 'w-[457px] h-[578px] z-2 rounded-2xl outline-2'
+                                : 'w-[353px] h-[478px] z-1 rounded-xl outline-5 scale-90'"
+            (mouseenter)="this.registerHover($event)" (mouseleave)="this.unlistHover()" (click)="this.clickMoveCarrousel($event)"
 
-                <!-- TEST: algo así sería -->
-                <!-- INFO: ngClass para que los font sizes encojan con la tarjeta cuando se desfocusea. -->
-                <div class="flex-col items-center w-full h-full box-border pt-4">
-                    <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size] duration-[0.3s] delay-0 mt-5 tracking-wide"
-                        [ngClass]="(this.carrouselIdx == 2) ? 'text-3xl font-semibold' : 'text-2xl font-thin'"> Lentejas </h1>
-                    <video></video>
-                    <p></p>
+            id="card-1"
+            class="-mx-14 relative box-content transform-gpu animated-card outline-[oklch(0.72_0.13_180_/30%)]">
+            <!-- hsla(213_100%_50%/.35) -->
+            <div class="w-full h-full relative">
+                <!-- NOTE: Esta imagen no se pega por encima del borde  -->
+                <img src="/projects/sportwatch_from_highgres_to_752x882_with_black_to_752x941.png" class="w-full h-full box-border object-cover object-[50%_0%] rounded-2xl animated-card absolute"/>
+                <div class="w-full h-full rounded-2xl absolute -top-[1.5px] z-5 transition-shadow duration-150"
+                    [style.box-shadow]="(this.hoverIdx == 1) ? 'inset 0 0 34px oklch(0.77 0.13 180 /25%)' : 'inset 0 0 14px oklch(0.5881 0.2261 258.83 / 25%)'"> </div>
+                <!-- Pon el modal del login, si eso monta vuela21 para sacar una imagen con la proporción correcta (4:5), luego un popover con el vídeo en 16:9 -->
+                <div class="absolute w-full transition-all duration-200 rounded-2xl"
+                    [style.background]="(this.carrouselIdx == 1)
+                            ? 'radial-gradient(circle at 50% 50%, rgba(26,26,26,.2) 0%, rgba(26,26,26,.2) 99%)'
+                            : 'radial-gradient(circle at 50% 50%, rgba(26,26,26,.35) 0%, rgba(26,26,26,.42) 50%, rgba(26,26,26,.3) 99%)'"
+                    [style.height.%]="(this.carrouselIdx == 1) ? 76 : 70"
+                    [style.backdrop-filter]="(this.carrouselIdx == 1) ? 'saturate(1)' : 'blur(1.5px)'">
+                    <!-- blur dividido entre la hero img y todo el contenedor en el ts (el texto blurrea menos basicamente.) -->
+                </div>
+
+                <div class="flex flex-col w-full absolute bottom-0
+                            bg-[linear-gradient(to_bottom,rgba(50,50,50,.35)_0%,rgba(16,16,16,.51)_90%),linear-gradient(to_bottom,transparent_1%,oklch(0.77_0.13_180_/30%)_30%,oklch(0.56_0.1_180_/_40%)_80%)]
+                            rounded-b-xl animated-text-section"
+
+                    [style.backdrop-filter]="(this.carrouselIdx == 1) ? 'saturate(250%) blur(8px)' : 'saturate(100%) blur(8px)'"
+                    [ngClass]="(this.carrouselIdx == 1) ? 'h-5/20' : 'h-3/10'" >
+                    <!-- INFO: Mira el css para la explicacion de este style...  -->
+
+                    <!-- Esto era una prueba pero el blur localizado bugea la polarizacion del gradiente
+                        <div class="w-full h-1/3 absolute top-0 bg-transparent backdrop-blur-s"></div> -->
+
+                    <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size,font-weight,letter-spacing] duration-[0.3s] delay-0  z-30 mt-3.5"
+                        [ngClass]="(this.carrouselIdx == 1) ? 'text-3xl font-semibold tracking-wide' : 'text-2xl font-thin'">
+                        Sportwatch
+                    </h1>
+
+                    <p class="text-white/70 text-center mt-5 font-inter box-border px-2 transition-[font-size,font-weight] duration-250"
+                    [ngClass]="(this.carrouselIdx == 1) ? 'text-lg' : 'text-sm font-thin'" >
+                        Aplicación de gestión de envíos para una empresa de transportes, realizada en las prácticas.</p>
                 </div>
             </div>
+        </div>
+
+        <!-- Como solo tienes ahora mismo vuela21 y sporwatch pon aquí una tarjeta: '?' para proyectos que se vienen. -->
+        <div [style.transform]="this.cardTransformState()" [style.bottom.rem]="(this.hoverIdx == 2) ? 1.5 : 0"
+            [style.box-shadow]="(this.carrouselIdx == 2) ? this.focusedCardShadow() : this.unfocusedCardShadow()"
+            [style.filter]="(carrouselIdx == 2) ? '' : unfocusedCardFilterState()"
+            (mouseenter)="this.registerHover($event)" (mouseleave)="this.unlistHover()" (click)="this.clickMoveCarrousel($event)"
+            [ngClass]="(this.carrouselIdx == 2)
+                                ? 'w-[457px] h-[578px] z-2 rounded-2xl'
+                                : 'w-[353px] h-[478px] z-1 rounded-xl outline-5 scale-90'"
+            id="card-2"
+            class="relative box-content transform-gpu animated-card outline-gray-600/30">
+
+
+            <!-- TEST: algo así sería -->
+            <!-- INFO: ngClass para que los font sizes encojan con la tarjeta cuando se desfocusea. -->
+            <div class="w-full h-full relative">
+                <!-- NOTE: Esta imagen no se pega por encima del borde  -->
+                <img src="/projects/sportwatch_from_highgres_to_752x882_with_black_to_752x941.png" class="w-full h-full box-border object-cover object-[50%_0%] rounded-2xl animated-card absolute"/>
+                <div class="w-full h-full rounded-2xl absolute -top-[1.5px] z-5 transition-shadow duration-150"
+                    [style.box-shadow]="(this.hoverIdx == 2) ? 'inset 0 0 34px oklch(0.77 0.13 180 /25%)' : 'inset 0 0 14px oklch(0.5881 0.2261 258.83 / 25%)'"> </div>
+                <!-- Pon el modal del login, si eso monta vuela21 para sacar una imagen con la proporción correcta (4:5), luego un popover con el vídeo en 16:9 -->
+                <div class="absolute w-full transition-all duration-200 rounded-2xl"
+                    [style.background]="(this.carrouselIdx == 2)
+                            ? 'radial-gradient(circle at 50% 50%, rgba(26,26,26,.2) 0%, rgba(26,26,26,.2) 99%)'
+                            : 'radial-gradient(circle at 50% 50%, rgba(26,26,26,.35) 0%, rgba(26,26,26,.42) 50%, rgba(26,26,26,.3) 99%)'"
+                    [style.height.%]="(this.carrouselIdx == 2) ? 76 : 70"
+                    [style.backdrop-filter]="(this.carrouselIdx == 2) ? 'saturate(1)' : 'blur(1.5px)'">
+                    <!-- blur dividido entre la hero img y todo el contenedor en el ts (el texto blurrea menos basicamente.) -->
+                </div>
+
+                <div class="flex flex-col w-full absolute bottom-0
+                            bg-[linear-gradient(to_bottom,rgba(50,50,50,.35)_0%,rgba(16,16,16,.51)_90%),linear-gradient(to_bottom,transparent_1%,oklch(0.77_0.13_180_/30%)_30%,oklch(0.56_0.1_180_/_40%)_80%)]
+                            rounded-b-xl animated-text-section"
+
+                    [style.backdrop-filter]="(this.carrouselIdx == 2) ? 'saturate(250%) blur(8px)' : 'saturate(100%) blur(8px)'"
+                    [ngClass]="(this.carrouselIdx == 2) ? 'h-5/20' : 'h-3/10'" >
+                    <!-- INFO: Mira el css para la explicacion de este style...  -->
+
+                    <!-- Esto era una prueba pero el blur localizado bugea la polarizacion del gradiente
+                        <div class="w-full h-1/3 absolute top-0 bg-transparent backdrop-blur-s"></div> -->
+
+                    <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size,font-weight,letter-spacing] duration-[0.3s] delay-0  z-30 mt-3.5"
+                        [ngClass]="(this.carrouselIdx == 2) ? 'text-3xl font-semibold tracking-wide' : 'text-2xl font-thin'">
+                        Sportwatch
+                    </h1>
+
+                    <p class="text-white/70 text-center mt-5 font-inter box-border px-2 transition-[font-size,font-weight] duration-250"
+                    [ngClass]="(this.carrouselIdx == 2) ? 'text-lg' : 'text-sm font-thin'" >
+                        Aplicación de gestión de envíos para una empresa de transportes, realizada en las prácticas.</p>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- A veces comento en español a veces en ingles me estoy volviendo loco -->
 
