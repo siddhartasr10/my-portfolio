@@ -1,8 +1,7 @@
-<div class="max-w-screen w-screen min-h-screen flex flex-col items-center bg-linear-to-b from-[#061426] to-[#0B1726]"> <!-- bg-[#1F1F1F] -->
+<div class="max-w-screen w-screen min-h-screen flex flex-col items-center bg-linear-to-b from-[oklch(0.17_0.07_254.86)] to-[oklch(0.16_0.05_254.67)]"> <!-- bg-[#1F1F1F] -->
+    <!-- Colores antiguos del bg del body: bg-linear-to-b from-[#061426] to-[#0B1726] -->
     <app-navbar class="flex flex-row items-center justify-center h-[10vh] w-screen"></app-navbar>
-    <!-- TODO: cambiar el degradado de la pagina por uno con oklch, mejor polarizacion del gradiente -->
     <div class="grid grid-cols-[0.75fr_0.25fr] w-screen my-10 self-start items-baseline">
-
         <!-- Toggle (las dimensiones las pongo para que no se estire en el contenedor si no estuviera en un grid no seria necesario)-->
         <form class="relative flex flex-row items-center justify-center outline-1 outline-[#7DF9FF] rounded-[2cm] z-0 text-xs col-start-2 place-self-center h-7.5 w-36.5 mt-1">
 
@@ -159,10 +158,10 @@
         <div [style.transform]="this.cardTransformState()" [style.bottom.rem]="(this.hoverIdx == 2) ? 1.5 : 0"
             [style.box-shadow]="(this.carrouselIdx == 2) ? this.focusedCardShadow() : this.unfocusedCardShadow()"
             [style.filter]="(carrouselIdx == 2) ? '' : unfocusedCardFilterState()"
-            (mouseenter)="this.registerHover($event)" (mouseleave)="this.unlistHover()" (click)="this.clickMoveCarrousel($event)"
             [ngClass]="(this.carrouselIdx == 2)
                                 ? 'w-[457px] h-[578px] z-2 rounded-2xl'
                                 : 'w-[353px] h-[478px] z-1 rounded-xl outline-5 scale-90'"
+            (mouseenter)="this.registerHover($event)" (mouseleave)="this.unlistHover()" (click)="this.clickMoveCarrousel($event)"
             id="card-2"
             class="relative box-content transform-gpu animated-card outline-gray-600/30">
 
