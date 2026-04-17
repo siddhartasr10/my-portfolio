@@ -181,7 +181,7 @@
                 <!-- Animated text section para este div lo uso aunque no sea texto porque me hace transición en los filtros y el tamaño, exactamente lo que me hace falta -->
                 <div class="w-full rounded-t-2xl absolute z-5 backdrop-blur-[3px]" [style.height.%]="(this.carrouselIdx == 2) ? 75 : 71"> </div>
                 <div class="w-full h-full rounded-2xl absolute z-5 transition-shadow duration-150"
-                    [style.box-shadow]="(this.hoverIdx == 2) ? 'inset 0 0 34px rgba(255,255,255,.8)' : 'inset 0 0 14px rgba(255,255,255,.25)'"> </div>
+                    [style.box-shadow]="(this.hoverIdx == 2) ? 'inset 0 0 34px rgba(255,255,255,.5)' : 'inset 0 0 14px rgba(255,255,255,.25)'"> </div>
                 <!-- Pon el modal del login, si eso monta vuela21 para sacar una imagen con la proporción correcta (4:5), luego un popover con el vídeo en 16:9 -->
                 <div class="absolute w-full transition-all duration-150 rounded-t-2xl"
                     [style.background]="(this.carrouselIdx == 2)
@@ -193,7 +193,7 @@
                 </div>
 
                 <div class="flex flex-col w-full absolute bottom-0
-                            bg-[linear-gradient(to_bottom,rgba(50,50,50,.35)_0%,rgba(16,16,16,.51)_90%),linear-gradient(to_bottom,transparent_1%,rgba(255,255,255,.2)_30%,rgba(20,20,20,.8)_80%)]
+                            bg-[linear-gradient(to_bottom,rgba(50,50,50,.35)_0%,rgba(16,16,16,.51)_90%),linear-gradient(to_bottom,rgba(5,5,5,.75)_10%,rgba(255,255,255,.15)_99%)]
                             rounded-b-xl animated-text-section"
 
                     [style.backdrop-filter]="(this.carrouselIdx == 2) ? 'saturate(250%) blur(8px)' : 'saturate(100%) blur(8px)'"
@@ -218,7 +218,7 @@
     <!-- A veces comento en español a veces en ingles me estoy volviendo loco -->
 
     <!-- Lista vertical (proyectos secundarios) -->
-    <div class="flex flex-col items-center text-white mt-30 ml-10 max-w-screen w-[70%] gap-y-8 justify-end">
+    <div class="flex flex-col items-center text-white mt-30 ml-10 max-w-screen w-screen gap-y-8 items-center">
         <!-- Grid with image and description columns -->
         <!-- NOTA: prueba a añadir borde inferior del mismo color que el fondo para dar efecto extrusión 3d -->
         <!-- Y añade sombras a los grids y quizas a la barra separadora (no es ta funcionando en este momento) -->
@@ -228,7 +228,7 @@
         <!-- TODO: prueba tarjetas mas grandes para una imagen mas grande. -->
         <!-- IMPORTANTE: El primer diseño es feo de cojones sorry. -->
         <!-- dependiendo del proyecto que ponga, un color u otro de fondo, el color de fondo se craftea con un degradado y un bg-black transparente + bg-blend mode de overlay. -->
-        <div class="grid grid-cols-[.3fr_.7fr] relative w-[50%] h-[280px] justify-items-center gap-x-17 mb-5 rounded-md border-b-9 border-r-9 border-b-[rgba(0,184,219,.01)] border-r-[rgba(0,184,219,.15)]
+        <div class="grid grid-cols-[3fr_7fr] relative w-[60%] h-[280px] justify-items-center gap-x-17 mb-5 rounded-md border-b-9 border-r-9 border-b-[rgba(0,184,219,.01)] border-r-[rgba(0,184,219,.15)]
                     bg-[radial-gradient(circle_farthest-side_at_85%_50%,rgba(0,184,219,.15)_0%,rgba(16,16,16,.15)_90%)] bg-black/20 bg-blend-overlay box-border">
 
             <!--  after:shadow-[inset_0_1px_5px_0_rgba(255,255,255,.2)] -->
@@ -246,7 +246,7 @@
         </div>
 
 
-        <div class="grid grid-cols-[.3fr_.7fr] relative w-[50%] h-[280px] justify-items-center gap-x-17 mb-5 rounded-md border-y-3 border-white/5
+        <div class="grid grid-cols-[.3fr_.7fr] relative w-[50%] h-[280px] justify-items-center gap-x-17 mb-5 rounded-md border-b-9 border-r-9 border-white/5
                     bg-[radial-gradient(circle_farthest-side_at_85%_50%,rgba(170,50,50,.21)_0%,rgba(16,16,70,.15)_90%)]
                     box-border bg-black/22 bg-blend-overlay shadow-[inset_-5px_5px_5px_0_rgba(25,25,25,.15),inset_5px_-5px_5px_0_rgba(25,25,25,.1505),inset_-5px_5px_5px_0_rgba(25,25,25,.1501),inset_5px_-5px_5px_0_rgba(25,25,25,.1501)]">
 
@@ -265,7 +265,7 @@
         </div>
 
 
-        <div class="grid grid-cols-[.3fr_.7fr] relative w-[50%] h-[280px] justify-items-center gap-x-17 mb-5 rounded-md border-y-3 border-x-3 border-white/5
+        <div class="grid grid-cols-[.3fr_.7fr] relative w-[50%] h-[280px] justify-items-center gap-x-17 mb-5 rounded-md border-b-9 border-r-9 border-white/5
                     bg-[radial-gradient(circle_farthest-side_at_85%_50%,oklch(0.66_0.21_37/15%)_0%,rgba(16,16,70,.15)_95%)]
                     box-border bg-black/20 bg-blend-overlay shadow-[inset_-5px_5px_5px_0_rgba(25,25,25,.15),inset_5px_-5px_5px_0_rgba(25,25,25,.1505),inset_-5px_5px_5px_0_rgba(25,25,25,.1501),inset_5px_-5px_5px_0_rgba(25,25,25,.1501)]">
             <!-- No me interesa:
