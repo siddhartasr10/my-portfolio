@@ -109,7 +109,16 @@
                         Aplicación de gestión de envíos para una empresa de transportes, realizada en las prácticas.</p>
                 </div>
             </div>
-
+            <!-- TODO: sigue en el overlay, quizas no sirve solo con hoveridx sino que podria hacer un tiempo de espera para que no aparezca tal cual se hoverea. -->
+            <!-- en vez de usar hoveridx, usa algo como longhoveridx y tu sabes chambeita -->
+            <!-- un fullscreen con doble click tambien estaría guapo -->
+            <div class="absolute w-[272px] h-[153px] -left-28 bottom-30 z-6 rounded-lg outline-3 outline-[rgba(182.03,235.35,254.93,.35)] flex justify-center items-center transition-[opacity] duration-300 ease-in-out"
+                 [style.background]="'radial-gradient(circle farthest-corner at 60% 75%,rgba(191.03,225.35,237.93,.35) 5%,rgb(8.55,40.34,49.56,.6) 90%)'"
+                 [style.opacity]="(this.hoverIdx != 0) ? '0' : '1'">
+                <!-- <div class="bg-black w-9/10 h-9/10 rounded-sm" > </div> -->
+                <video class="bg-black w-9/10 h-9/10 rounded-sm" src="/projects/grabacion_vuela21.mp4" autoplay="false" ></video>
+                <!--  rgb(119.82, 152.21, 163.94)-->
+            </div>
         </div>
 
         <!-- el bottom tambien necesita style para que detecte la transicion, tailwind tiene ralladisimo al navegador mira el css para la explicacion -->
@@ -176,15 +185,23 @@
 
             <!-- TEST: algo así sería -->
             <!-- INFO: ngClass para que los font sizes encojan con la tarjeta cuando se desfocusea. -->
-            <div class="w-full h-full relative">
-                <!-- NOTE: Esta imagen no se pega por encima del borde  -->
-                <img src="/projects/interrogation_unsplash_cropped.avif" class="w-full h-full box-border object-cover object-[50%_0%] rounded-2xl animated-card absolute"/>
-                <!-- Animated text section para este div lo uso aunque no sea texto porque me hace transición en los filtros y el tamaño, exactamente lo que me hace falta -->
-                <div class="w-full rounded-t-2xl absolute z-5 backdrop-blur-[3px]" [style.height.%]="(this.carrouselIdx == 2) ? 75 : 71"> </div>
+            <div class="w-full h-full relative flex">
+                <!-- NOTE: Esta imagen no se pega por encima del borde a diferencia de la de otras tarjetas, le queda mejor así -->
+                <!-- INFO: Esta es la tag normal estoy probando un svg para añadirle filters y que no me coja un cuadrado -->
+                <!-- Sigue editando el svg para que abraze a la forma o busca otro svg con forma de interrogación que esté mejor delimitado (como acabo teniendo que hacer siempre) y editalo. -->
+                <img src="/projects/descarga.svg" class="w-fit h-fit box-border object-cover object-[50%_0%] rounded-2xl animated-card absolute z-5"/>
+
+                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="815" height="1055" class="absolute top-0 left-20 z-20 w-120">
+                     <defs> <linearGradient id="myGradient" x1="0%" y1="0%" x2="0%" y2="100%"> <stop offset="0%" stop-color="rgb(255,255,255)" stop-opacity=".6"></stop> <stop offset="100%" stop-color="rgb(132,118,255)" stop-opacity=".6"></stop> </linearGradient> <linearGradient id="myGradient2" x1="0%" y1="0%" x2="0%" y2="100%"> <stop offset="0%" stop-color="rgb(66,59,125)" stop-opacity=".6"></stop> <stop offset="100%" stop-color="rgb(52,46,58)" stop-opacity=".6"></stop> </linearGradient> </defs>
+                     <path d="m0 0 3.102 1.148C11.409 4.414 19.21 8.67 27 13l1.87 1.024C33.896 16.822 37.824 20.09 42 24l2.156 1.96c4.705 4.457 8.64 9.228 12.407 14.478l1.339 1.865C61 46.736 61 46.736 61 49l3 1c1.103 1.82 1.103 1.82 2.121 4.2l1.14 2.643 1.177 2.844 1.213 2.904c11.326 27.58 13.13 58.352 2.083 86.432C67.57 158.905 61.93 167.825 55 176l-1.345 1.61c-7.744 9.262-15.691 17.914-24.85 25.808-2.383 2.088-4.594 4.314-6.805 6.582l-1.578 1.512C7.96 223.552.132 237.019-6 253c-3.028 7.525-7.101 11.739-14.125 15.813-4.75 1.961-9.046 2.315-14.16 2.32l-3.757.007-4.02-.015-2.06-.009a2189 2189 0 0 1-10.63-.079 913 913 0 0 0-8.297-.043 855 855 0 0 1-11.326-.119l-3.45.008c-7.511-.18-12.586-1.721-18.175-6.883-4.43-5.498-5.81-10.607-5.48-17.645 4.663-32.566 27.022-58.915 48.894-81.836 15.064-15.808 26.284-29.758 25.863-52.464-.363-7.746-3.07-14.904-8.453-20.559-10.156-8.33-23.05-9.529-35.698-8.752-6.74.811-13.41 3.322-18.126 8.256h-2l-1 3h-2l-.82 1.66c-9.953 19.741-9.953 19.741-19.097 23.03-6.442 1.69-11.4.846-17.77-.815l-2.952-.72a388 388 0 0 1-18.447-5.057c-3.273-.953-6.574-1.75-9.89-2.54l-3.251-.779a691 691 0 0 0-6.425-1.498c-8.942-2.14-14.448-4.96-19.43-13.035-2.878-7.042-1.465-15.755 1.082-22.683A185 185 0 0 1-188 65l.877-1.833C-182.686 54.034-177.458 45.87-171 38l2.113-2.578C-151.42 15.113-127.747 2.443-102-4l3.547-.898C-66.67-12.295-30.66-11.65 0 0" fill="url(#myGradient)" transform="translate(467 207)"></path>
+                     <path d="M444.758 540.11c12.183 10.546 19.842 23.476 21.125 39.761.815 17.678-5.064 31.674-16.82 44.754C440.633 632.737 428.664 638.2 417 639l-2.625.207c-14.702.577-28.626-3.953-39.75-13.582-11.225-10.795-17.592-23.272-17.917-38.96-.07-9.586.497-17.718 4.292-26.665l1.11-3.066c3.655-8.835 9.657-13.534 17.304-18.824a75 75 0 0 0 3.711-2.801c16.792-12.557 46.284-6.94 61.633 4.8" fill="url(#myGradient2)"></path>
+                     </svg>
+                -->
+                <img src="/projects/otromockupblurreado2.png" class="w-full h-full box-border object-cover object-[50%_0%] rounded-2xl animated-card absolute"/>
+                <div class="w-full rounded-t-2xl absolute z-5 transition-transform" [style.height.%]="(this.carrouselIdx == 2) ? 75 : 71"> </div>
                 <div class="w-full h-full rounded-2xl absolute z-5 transition-shadow duration-150"
                     [style.box-shadow]="(this.hoverIdx == 2) ? 'inset 0 0 34px rgba(255,255,255,.5)' : 'inset 0 0 14px rgba(255,255,255,.25)'"> </div>
-                <!-- Pon el modal del login, si eso monta vuela21 para sacar una imagen con la proporción correcta (4:5), luego un popover con el vídeo en 16:9 -->
-                <div class="absolute w-full transition-all duration-150 rounded-t-2xl"
+                <div class="absolute w-full transition-all duration-150 rounded-t-2xl z-5"
                     [style.background]="(this.carrouselIdx == 2)
                             ? 'radial-gradient(circle at 50% 50%, rgba(26,26,26,.2) 0%, rgba(26,26,26,.2) 99%)'
                             : 'radial-gradient(circle at 50% 50%, rgba(26,26,26,.35) 0%, rgba(26,26,26,.42) 50%, rgba(26,26,26,.3) 99%)'"
@@ -194,7 +211,6 @@
                 </div>
 
                 <div class="flex flex-col w-full absolute bottom-0 bg-[linear-gradient(to_top,rgba(50,50,50,.35)_0%,rgba(16,16,16,.51)_90%),linear-gradient(to_top,rgba(5,5,5,.75)_10%,rgba(255,255,255,.15)_99%),radial-gradient(circle_farthest-corner_at_100%_20%,rgba(255,255,255,.25)_1%,rgba(20,20,20,.2)_75%)]
-                            l
                             rounded-b-xl animated-text-section"
 
                     [style.backdrop-filter]="(this.carrouselIdx == 2) ? 'saturate(250%) blur(8px)' : 'saturate(100%) blur(8px)'"
@@ -206,7 +222,7 @@
 
                     <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size,font-weight,letter-spacing] duration-[0.3s] delay-0  z-30 mt-3.5"
                         [ngClass]="(this.carrouselIdx == 2) ? 'text-3xl font-bold tracking-wide' : 'text-2xl font-thin'">
-                        ?
+                        ????
                     </h1>
 
                     <p class="text-white/70 text-center mt-4 font-inter box-border px-2 transition-[font-size,font-weight] duration-250"
