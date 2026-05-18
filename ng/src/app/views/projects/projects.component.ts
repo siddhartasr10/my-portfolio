@@ -1,4 +1,4 @@
-import { Component, ElementRef, WritableSignal, signal  } from '@angular/core';
+import { Component, ElementRef, ViewChild, WritableSignal, signal, AfterViewInit  } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
 
@@ -30,14 +30,26 @@ export class ProjectsComponent {
   // focusedCardFilterState: WritableSignal<string> = signal(``); Las sombras van por separado así que...
   unfocusedCardFilterState: WritableSignal<string> = signal(`blur(1.5px) brightness(0.8)`);
   // scale no es un filter, va en el transform, al final se ha podido añadir como clase de tailwind.
-  constructor(private hostRef: ElementRef) {
+  @ViewChild('cardVideo0') cardVideo0!: ElementRef<HTMLVideoElement>;
+  @ViewChild('cardVideo1') cardVideo1!: ElementRef<HTMLVideoElement>;
+
+  carrouselVideos: Array<ElementRef<HTMLVideoElement>> = [];
+
+  readonly VIDEO_START_TIMEOUT = 2250;
+  readonly VIDEO_PAUSE_TIMEOUT = 750;
+
+  // hostRef is a variable to the <html>, I use it to control :root
+  constructor(private hostRef: ElementRef) {}
+
+  ngAfterViewInit(): void {
+    this.carrouselVideos = [this.cardVideo0, this.cardVideo1]
+
     // Controla la velocidad de movimiento del carrusel con el scroll, evita el lag.
     /* Si hiciera esto (o en general procesara cualquier input tal cual llega)
-     * Se notaría bastante lag porque priorizaría eso a cualquier otro input.
-     */
+     * Se notaría bastante lag porque priorizaría eso a cualquier otro input. */
     setInterval(() => {
-      if (this.wheelInputs.has("up")) ++this.carrouselIdx;
-      if (this.wheelInputs.has("down")) --this.carrouselIdx;
+      if (this.wheelInputs.has("up")) {this.pauseCardVideoOnTime(); ++this.carrouselIdx; this.playCardVideoOnTime();}
+      if (this.wheelInputs.has("down")) {this.pauseCardVideoOnTime(); --this.carrouselIdx; this.playCardVideoOnTime();}
       this.wheelInputs.delete("up");
       this.wheelInputs.delete("down");
 
@@ -70,7 +82,8 @@ export class ProjectsComponent {
   }
 
   // Move Carrousel with the arrows. Executes on click on the arrows.
-  moveCarrousel(img: HTMLImageElement): void {
+  onArrowClickMoveCarrousel(img: HTMLImageElement): void {
+    this.pauseCardVideoOnTime();
     // console.log("img.id: ", img.id)
     // Casos en los que overflowea:
     if (img.id === "left" && this.carrouselIdx == 0) {
@@ -92,10 +105,12 @@ export class ProjectsComponent {
       ? --this.carrouselIdx
       : ++this.carrouselIdx;
     this.updateTransform();
+
+    this.playCardVideoOnTime();
   }
 
   // Executes on wheel Move inside the carrousel.
-  wheelMoveCarrousel(ev: WheelEvent): void {
+  onWheelMoveCarrousel(ev: WheelEvent): void {
     ev.preventDefault();
 
     (ev.deltaY > 0)
@@ -121,16 +136,19 @@ export class ProjectsComponent {
   // This function only executes as click event inside the carrousel.
   // So if the code doesn't find the card's parent div it will search recursively.
   // the c counter is to avoid infinite loops
-  clickMoveCarrousel(ev: MouseEvent): void {
+  onClickMoveCarrousel(ev: MouseEvent): void {
+    this.pauseCardVideoOnTime();
     let target = ev.target as HTMLDivElement, targetIdNumber, c = 0;
 
     while (Number.isNaN(targetIdNumber = Number(target.id.at(-1))) || c > 15) {
       target = target.parentElement as HTMLDivElement;
-      // console.log("clickMoveCarrousel: ", target);
+      // console.log("onClickMoveCarrousel: ", target);
       c++;
     }
 
     this.carrouselIdx = targetIdNumber;
+
+    this.playCardVideoOnTime();
   }
 
   updateTransform(): void {
@@ -141,16 +159,61 @@ export class ProjectsComponent {
     }
   }
 
-  /* Methods for accounting hover on the cards, tailwind's :hover:bottom-6 doesn't work with transition */
+  /* Methods for accounting hover on the cards, tailwind's :hover:bottom-6 doesn't work with transition *
+   * I need this for other reasons not only for css. */
+  // OnMouseEnter
   registerHover(ev: MouseEvent): void {
     let card = ev.target as HTMLDivElement;
     // Id of the cards is card-x (0,1,2)
     this.hoverIdx = (!isNaN(Number(card.id.at(-1))))
       ? Number(card.id.at(-1))
       : -1;
+
+    this.playCardVideoOnTime();
   }
 
   unlistHover(): void {
+    this.pauseCardVideoOnTime();
     this.hoverIdx = -1;
+  }
+
+  onCardVideoClick(ev: MouseEvent): void {
+    ev.stopPropagation(); // Si no se activa onClickMoveCarrousel
+    let target = ev.target as HTMLVideoElement;
+    (target.paused) ? target.play() : target.pause();
+  }
+
+  // Executes on every cardIdx and hoverIdx movement (click, click on arrow, wheel move and mouseEnter)
+  // Needs to execute in cardIdx changes in case user changes card into the one hovered, so it starts the count
+  // Needs its analogous version to stop the video on MouseLeave (only way to change hoverIdx)
+  // mouseleave in this case occurs with unlistHover so do it there.
+
+  // IMPORTANT: before a movement happens in the carrousel, the pause timeout happens to keep track of old carrouselIdx
+  // after the movement happens, the play timeout happens.
+  // if pause only tracks hoveridx then changing cards while hovering the same one won't pause its video.
+  playCardVideoOnTime(): void {
+    let lastHoverIdx = this.hoverIdx;
+    // console.log(this.carrouselVideos);
+
+    // if there is a hovered card and has a video, select video and setTimeout to play the video,
+    // only if after the timeout the card continues being selected
+    if (this.carrouselVideos[this.hoverIdx]) {
+      // Necesita estar muteado o sino me salta al principio el error de la política de reproducción automática en google (no es muy relevante pero los vídeos tampoco tienen sonido) y lo pongo por ts porque por html puede no haberse inicializado todavía.
+      this.carrouselVideos[this.hoverIdx].nativeElement.muted = true;
+      setTimeout(() => (this.hoverIdx == lastHoverIdx && lastHoverIdx == this.carrouselIdx)
+        ? this.carrouselVideos[lastHoverIdx].nativeElement.play()
+        : null // (console.log("actual hoveridx: ", this.hoverIdx, "past hoveridx: ", lastHoverIdx)
+      , this.VIDEO_START_TIMEOUT)
+
+    }
+  }
+  // Para poder pausar necesito saber de que tarjeta vengo, por eso el pause se hace antes de cambiar el carrouselIdx.
+  pauseCardVideoOnTime(): void {
+    let lastHoverIdx = this.hoverIdx, lastCarrouselIdx = this.carrouselIdx;
+
+    setTimeout(() => (this.hoverIdx != lastHoverIdx || lastHoverIdx != this.carrouselIdx)
+      ? this.carrouselVideos[lastCarrouselIdx].nativeElement.pause()
+      : null
+      , this.VIDEO_PAUSE_TIMEOUT)
   }
 }
