@@ -66,7 +66,7 @@ export class ProjectsComponent {
   }
 
   sliderOnChange(ev: Event): void {
-    let target = ev.target as HTMLFormElement;
+    const target = ev.target as HTMLFormElement;
     if (target.id.at(-1) === "1") {
       this.hostRef.nativeElement.style.setProperty("--slider-end-transform", "3.62rem"); // 0.02 para hacer el slider 1px mas grande y que no se vean manchitas negras.
       // document.documentElement.style.setProperty("--slider-end-transform", "3.62rem");
@@ -163,7 +163,7 @@ export class ProjectsComponent {
    * I need this for other reasons not only for css. */
   // OnMouseEnter
   registerHover(ev: MouseEvent): void {
-    let card = ev.target as HTMLDivElement;
+    const card = ev.target as HTMLDivElement;
     // Id of the cards is card-x (0,1,2)
     this.hoverIdx = (!isNaN(Number(card.id.at(-1))))
       ? Number(card.id.at(-1))
@@ -179,7 +179,7 @@ export class ProjectsComponent {
 
   onCardVideoClick(ev: MouseEvent): void {
     ev.stopPropagation(); // Si no se activa onClickMoveCarrousel
-    let target = ev.target as HTMLVideoElement;
+    const target = ev.target as HTMLVideoElement;
     (target.paused) ? target.play() : target.pause();
   }
 
@@ -192,7 +192,7 @@ export class ProjectsComponent {
   // after the movement happens, the play timeout happens.
   // if pause only tracks hoveridx then changing cards while hovering the same one won't pause its video.
   playCardVideoOnTime(): void {
-    let lastHoverIdx = this.hoverIdx;
+    const lastHoverIdx = this.hoverIdx;
     // console.log(this.carrouselVideos);
 
     // if there is a hovered card and has a video, select video and setTimeout to play the video,
@@ -209,7 +209,7 @@ export class ProjectsComponent {
   }
   // Para poder pausar necesito saber de que tarjeta vengo, por eso el pause se hace antes de cambiar el carrouselIdx.
   pauseCardVideoOnTime(): void {
-    let lastHoverIdx = this.hoverIdx, lastCarrouselIdx = this.carrouselIdx;
+    const lastHoverIdx = this.hoverIdx, lastCarrouselIdx = this.carrouselIdx;
 
     setTimeout(() => (this.hoverIdx != lastHoverIdx || lastHoverIdx != this.carrouselIdx)
       ? this.carrouselVideos[lastCarrouselIdx].nativeElement.pause()
