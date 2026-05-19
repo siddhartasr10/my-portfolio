@@ -38,6 +38,8 @@ export class ProjectsComponent {
   readonly VIDEO_START_TIMEOUT = 2250;
   readonly VIDEO_PAUSE_TIMEOUT = 750;
 
+  isSingleClick: boolean = false;
+
   // hostRef is a variable to the <html>, I use it to control :root
   constructor(private hostRef: ElementRef) {}
 
@@ -178,9 +180,24 @@ export class ProjectsComponent {
   }
 
   onCardVideoClick(ev: MouseEvent): void {
-    ev.stopPropagation(); // Si no se activa onClickMoveCarrousel
     const target = ev.target as HTMLVideoElement;
-    (target.paused) ? target.play() : target.pause();
+    ev.stopPropagation(); // Si no se activa onClickMoveCarrousel
+    this.isSingleClick = true;
+
+    setTimeout(() => (!this.isSingleClick)
+      ? null
+      : (target.paused)
+        ? target.play()
+        : target.pause()
+      , 300);
+  }
+
+  onCardVideoDblClick(ev: MouseEvent): void {
+    const target = ev.target as HTMLVideoElement;
+    ev.stopPropagation();
+    this.isSingleClick = false;
+    target.requestFullscreen();
+
   }
 
   // Executes on every cardIdx and hoverIdx movement (click, click on arrow, wheel move and mouseEnter)

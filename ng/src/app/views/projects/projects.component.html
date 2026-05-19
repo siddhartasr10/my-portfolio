@@ -110,9 +110,9 @@
                         Aplicación de gestión de envíos para una empresa de transportes, realizada en las prácticas.</p>
                 </div>
             </div>
-            <!-- TODO: sigue en el overlay, quizas no sirve solo con hoveridx sino que podria hacer un tiempo de espera para que no aparezca tal cual se hoverea. -->
-            <!-- en vez de usar hoveridx, usa algo como longhoveridx y tu sabes chambeita -->
-            <!-- un fullscreen con doble click tambien estaría guapo -->
+            <!-- TODO: sigue en el overlay -->
+            <!-- un fullscreen con doble click tambien estaría guapo + añade el icono para que se sepa que puedes hacer fullscreen siquiera. -->
+            <!-- Y un svg de > (play) cuando esta pausado y de pause cuando esta playeando estaria guapo ( y el de pause a ser posible, cuando pases el raton por encima tanto uno como el otro ) -->
             <!-- Overlay de vídeo -->
             <div class="w-[272px] h-[153px] -left-28 bottom-30 absolute flex justify-center items-center z-6 rounded-lg outline-3 outline-[rgba(182.03,235.35,254.93,.35)] transition-[opacity] duration-300 ease-in-out"
                  [style.background]="'radial-gradient(circle farthest-corner at 60% 75%,rgba(191.03,225.35,237.93,.35) 5%,rgb(8.55,40.34,49.56,.6) 90%)'"
@@ -121,7 +121,7 @@
 
                 <!-- Webm con av1 es más eficiente que mp4 com h.264 -->
                 <video #cardVideo0 class="bg-black w-9/10 h-9/10 rounded-sm" src="/projects/grabacion_vuela21-online-video-cutter.com.av1.mp4" autoplay="false" loading="lazy"
-                       (click)="onCardVideoClick($event)">
+                       (click)="onCardVideoClick($event)" (dblclick)="onCardVideoDblClick($event)">
                     <!-- Necesita estar muteado o sino me salta al principio la política de reproducción automática en google (no es muy relevante pero los vídeos tampoco tienen sonido) -->
                 </video>
                 <!--  rgb(119.82, 152.21, 163.94)-->
@@ -183,7 +183,7 @@
                 <!-- <div class="bg-black w-9/10 h-9/10 rounded-sm" > </div> -->
                 <!-- Webm con av1 es más eficiente que mp4 com h.264 -->
                 <video #cardVideo1 class="bg-black w-9/10 h-9/10 rounded-sm" src="/projects/grabacion_vuela21-online-video-cutter.com.av1.mp4" autoplay="false" loading="lazy"
-                       (click)="onCardVideoClick($event)">
+                       (click)="onCardVideoClick($event)" (dblclick)="onCardVideoDblClick($event)">
                 </video>
                 <!--  rgb(119.82, 152.21, 163.94)-->
             </div>
