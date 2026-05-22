@@ -33,6 +33,9 @@ export class ProjectsComponent {
   @ViewChild('cardVideo0') cardVideo0!: ElementRef<HTMLVideoElement>;
   @ViewChild('cardVideo1') cardVideo1!: ElementRef<HTMLVideoElement>;
 
+  // Indice del vídeo de las tarjetas siendo hovereado.
+  videoHoverIdx: number = -1;
+
   carrouselVideos: Array<ElementRef<HTMLVideoElement>> = [];
 
   readonly VIDEO_START_TIMEOUT = 2250;
@@ -164,7 +167,7 @@ export class ProjectsComponent {
   /* Methods for accounting hover on the cards, tailwind's :hover:bottom-6 doesn't work with transition *
    * I need this for other reasons not only for css. */
   // OnMouseEnter
-  registerHover(ev: MouseEvent): void {
+  onCardHover(ev: MouseEvent): void {
     const card = ev.target as HTMLDivElement;
     // Id of the cards is card-x (0,1,2)
     this.hoverIdx = (!isNaN(Number(card.id.at(-1))))
@@ -179,7 +182,7 @@ export class ProjectsComponent {
     this.hoverIdx = -1;
   }
 
-  onCardVideoClick(ev: MouseEvent): void {
+  onVideoClick(ev: MouseEvent): void {
     const target = ev.target as HTMLVideoElement;
     ev.stopPropagation(); // Si no se activa onClickMoveCarrousel
     this.isSingleClick = true;
@@ -198,6 +201,17 @@ export class ProjectsComponent {
     this.isSingleClick = false;
     target.requestFullscreen();
 
+  }
+
+  onVideoHover(ev: MouseEvent): void {
+    const target = ev.target as HTMLVideoElement;
+    this.videoHoverIdx = (!isNaN(Number(target.id.at(-1))))
+      ? Number(target.id.at(-1))
+      : -1;
+  }
+
+  unlistVideoHover(): void {
+    this.videoHoverIdx = -1;
   }
 
   // Executes on every cardIdx and hoverIdx movement (click, click on arrow, wheel move and mouseEnter)
