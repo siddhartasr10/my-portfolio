@@ -1,10 +1,10 @@
 import { Component, ElementRef, ViewChild, WritableSignal, signal, AfterViewInit  } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
 
 @Component({
   selector: 'app-proyects',
-  imports: [ NavbarComponent, NgClass ],
+  imports: [ NavbarComponent, NgClass, NgIf],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.css'
 })

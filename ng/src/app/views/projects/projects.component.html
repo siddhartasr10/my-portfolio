@@ -123,8 +123,9 @@
                        id="video-0" [style.opacity]="(this.hoverIdx != 0) ? '0' : '1'"
                        (click)="onVideoClick($event)" (dblclick)="onCardVideoDblClick($event)"
                        (mouseenter)="onVideoHover($event)" (mouseleave)="unlistVideoHover()">
-                    <source src="/projects/grabacion_vuela21-online-video-cutter.com.av1.webm" type="video/webm">
-                    <source src="/projects/grabacion_vuela21.mp4" type="video/mp4">
+                    <!-- El if hace que el vídeo solo cargue realmente cuando se hace hover por primera vez, una vez cargado en la memoria da igual que se salga del hover. -->
+                    <source *ngIf="this.hoverIdx == 0" src="/projects/grabacion_vuela21-online-video-cutter.com.av1.webm" type="video/webm">
+                    <source *ngIf="this.hoverIdx == 0" src="/projects/grabacion_vuela21.mp4" type="video/mp4">
                     <!-- Necesita estar muteado o sino me salta al principio la política de reproducción automática en google (no es muy relevante pero los vídeos tampoco tienen sonido) -->
                 </video>
 
@@ -178,6 +179,8 @@
                         Sportwatch
                     </h1>
 
+                    <!-- <span class="my-0 mx-auto text-xs flex flex-row justify-evenly items-center"></span> -->
+
                     <p class="text-white/70 text-center mt-4 font-inter box-border px-2 transition-[font-size,font-weight] duration-250"
                     [ngClass]="(this.carrouselIdx == 1) ? 'text-lg' : 'text-sm font-thin'" >
                         Plataforma de streaming, orientada a proporcionar infraestructura a medios de deportes.
@@ -189,11 +192,12 @@
                  [style.opacity]="(this.hoverIdx != 1) ? '0' : '1'">
                 <!-- <div class="bg-black w-9/10 h-9/10 rounded-sm" > </div> -->
                 <!-- Webm con av1 es más eficiente que mp4 com h.264 -->
+
                 <video #cardVideo1 class="bg-black w-9/10 h-9/10 rounded-sm z-1 translate-z-0" autoplay="false" loading="lazy"
                        id="video-1" (click)="onVideoClick($event)" (dblclick)="onCardVideoDblClick($event)"
                        (mouseenter)="onVideoHover($event)" (mouseleave)="unlistVideoHover()">
-                    <source src="/projects/Presentacion-ezgif.com.av1.webm" type="video/webm">
-                    <source src="/projects/Presentacion-ezgif.com.mp4" type="video/mp4">
+                    <source *ngIf="this.hoverIdx == 1" src="/projects/Presentacion-ezgif.com.av1.webm" type="video/webm">
+                    <source *ngIf="this.hoverIdx == 1" src="/projects/Presentacion-ezgif.com.mp4" type="video/mp4">
                 </video>
                 <!--  rgb(119.82, 152.21, 163.94)-->
             </div>
