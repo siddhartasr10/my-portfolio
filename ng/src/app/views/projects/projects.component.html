@@ -111,7 +111,7 @@
                 </div>
             </div>
             <!-- TODO: sigue en el overlay -->
-            <!-- añade el icono para que se sepa que puedes hacer fullscreen siquiera. -->
+            <!-- añade el icono para que se sepa que puedes hacer fullscreen siquiera. UPDATE: creo que me gusta más sin los iconos. -->
             <!-- Y un svg de > (play) cuando esta pausado y de pause cuando esta playeando estaria guapo ( y el de pause a ser posible, cuando pases el raton por encima tanto uno como el otro ) -->
             <!-- INFO: translate-z-0 y los z-index del div, el video y el <p> están para que no me haga layout rendering panic y me salte un SIGILL crasheandome el pc (si hijo si) -->
             <!-- El translate-z hace que los elementos se guarden en diferentes registros de memoria. -->
@@ -150,7 +150,7 @@
             <!-- hsla(213_100%_50%/.35) -->
             <div class="w-full h-full relative">
                 <!-- NOTE: Esta imagen no se pega por encima del borde  -->
-                <img src="/projects/sportwatch_from_highgres_to_752x882_with_black_to_752x941.png" class="w-full h-full box-border object-cover object-[50%_0%] rounded-2xl animated-card absolute"/>
+                <img src="/projects/sportwatch_from_highres_to_752x882_with_black_to_752x941.png" class="w-full h-full box-border object-cover object-[50%_0%] rounded-2xl animated-card absolute"/>
                 <div class="w-full h-full rounded-2xl absolute z-5 transition-shadow duration-150"
                     [style.box-shadow]="(this.hoverIdx == 1) ? 'inset 0 0 34px oklch(0.77 0.13 180 /25%)' : 'inset 0 0 14px oklch(0.5881 0.2261 258.83 / 25%)'"> </div>
                 <!-- Pon el modal del login, si eso monta vuela21 para sacar una imagen con la proporción correcta (4:5), luego un popover con el vídeo en 16:9 -->
@@ -174,10 +174,11 @@
                     <!-- Esto era una prueba pero el blur localizado bugea la polarizacion del gradiente
                         <div class="w-full h-1/3 absolute top-0 bg-transparent backdrop-blur-s"></div> -->
 
-                    <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size,font-weight,letter-spacing] duration-[0.3s] delay-0  z-30 mt-3.5"
+                    <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size,font-weight,letter-spacing] duration-[0.3s] delay-0 z-30 mt-3.5"
                         [ngClass]="(this.carrouselIdx == 1) ? 'text-3xl font-bold tracking-wide' : 'text-2xl font-thin'">
                         Sportwatch
                     </h1>
+                    <span class="my-0 mx-auto h-0">🚌</span>
 
                     <p class="text-white/70 text-center mt-4 font-inter box-border px-2 transition-[font-size,font-weight] duration-250"
                     [ngClass]="(this.carrouselIdx == 1) ? 'text-lg' : 'text-sm font-thin'" >
@@ -190,12 +191,11 @@
                  [style.opacity]="(this.hoverIdx != 1) ? '0' : '1'">
                 <!-- <div class="bg-black w-9/10 h-9/10 rounded-sm" > </div> -->
                 <!-- Webm con av1 es más eficiente que mp4 com h.264 -->
-                <video #cardVideo1 class="bg-black w-9/10 h-9/10 rounded-sm" src="/projects/grabacion_vuela21-online-video-cutter.com.av1.mp4" autoplay="false" loading="lazy"
+                <video #cardVideo1 class="bg-black w-9/10 h-9/10 rounded-sm z-1 translate-z-0" src="/projects/grabacion_vuela21-online-video-cutter.com.av1.mp4" autoplay="false" loading="lazy"
                        id="video-1" (click)="onVideoClick($event)" (dblclick)="onCardVideoDblClick($event)"
                        (mouseenter)="onVideoHover($event)" (mouseleave)="unlistVideoHover()">
                 </video>
                 <!--  rgb(119.82, 152.21, 163.94)-->
-
             </div>
             <p class="ml-1 mt-2 w-fit h-8 text-gray-400 font-roboto-flex text-xs transition-[opacity] translate-z-0 z-10"
                [style.opacity]="(this.videoHoverIdx != 1) ? '0' : '1'"> Haz doble click para entrar en pantalla completa </p>
