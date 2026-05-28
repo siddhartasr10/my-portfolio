@@ -110,9 +110,6 @@
                         Aplicación de gestión de envíos para una empresa de transportes, realizada en las prácticas.</p>
                 </div>
             </div>
-            <!-- TODO: sigue en el overlay -->
-            <!-- añade el icono para que se sepa que puedes hacer fullscreen siquiera. UPDATE: creo que me gusta más sin los iconos. -->
-            <!-- Y un svg de > (play) cuando esta pausado y de pause cuando esta playeando estaria guapo ( y el de pause a ser posible, cuando pases el raton por encima tanto uno como el otro ) -->
             <!-- INFO: translate-z-0 y los z-index del div, el video y el <p> están para que no me haga layout rendering panic y me salte un SIGILL crasheandome el pc (si hijo si) -->
             <!-- El translate-z hace que los elementos se guarden en diferentes registros de memoria. -->
             <!-- Overlay de vídeo -->
@@ -122,10 +119,12 @@
                 <!-- <div class="bg-black w-9/10 h-9/10 rounded-sm" > </div> -->
 
                 <!-- Webm con av1 es más eficiente que mp4 com h.264 -->
-                <video #cardVideo0 class="bg-black w-9/10 h-9/10 rounded-sm z-1 translate-z-0" src="/projects/grabacion_vuela21-online-video-cutter.com.av1.mp4" autoplay="false" loading="lazy"
+                <video #cardVideo0 class="bg-black w-9/10 h-9/10 rounded-sm z-1 translate-z-0" autoplay="false" loading="lazy"
                        id="video-0" [style.opacity]="(this.hoverIdx != 0) ? '0' : '1'"
                        (click)="onVideoClick($event)" (dblclick)="onCardVideoDblClick($event)"
                        (mouseenter)="onVideoHover($event)" (mouseleave)="unlistVideoHover()">
+                    <source src="/projects/grabacion_vuela21-online-video-cutter.com.av1.webm" type="video/webm">
+                    <source src="/projects/grabacion_vuela21.mp4" type="video/mp4">
                     <!-- Necesita estar muteado o sino me salta al principio la política de reproducción automática en google (no es muy relevante pero los vídeos tampoco tienen sonido) -->
                 </video>
 
@@ -178,7 +177,6 @@
                         [ngClass]="(this.carrouselIdx == 1) ? 'text-3xl font-bold tracking-wide' : 'text-2xl font-thin'">
                         Sportwatch
                     </h1>
-                    <span class="my-0 mx-auto h-0">🚌</span>
 
                     <p class="text-white/70 text-center mt-4 font-inter box-border px-2 transition-[font-size,font-weight] duration-250"
                     [ngClass]="(this.carrouselIdx == 1) ? 'text-lg' : 'text-sm font-thin'" >
@@ -186,14 +184,16 @@
                     </p>
                 </div>
             </div>
-            <div class="w-[272px] h-[153px] -left-28 bottom-30 absolute flex justify-center items-center z-6 rounded-lg outline-3 outline-[rgba(182.03,235.35,254.93,.35)] transition-[opacity] duration-300 ease-in-out"
+            <div class="w-[272px] h-[153px] -left-28 bottom-30 absolute flex justify-center items-center z-6 rounded-lg outline-3 outline-[rgba(182.03,235.35,254.93,.35)] transition-[opacity] duration-300 ease-in-out translate-z-0"
                  [style.background]="'radial-gradient(circle farthest-corner at 60% 75%,rgba(191.03,225.35,237.93,.35) 5%,rgb(8.55,40.34,49.56,.6) 90%)'"
                  [style.opacity]="(this.hoverIdx != 1) ? '0' : '1'">
                 <!-- <div class="bg-black w-9/10 h-9/10 rounded-sm" > </div> -->
                 <!-- Webm con av1 es más eficiente que mp4 com h.264 -->
-                <video #cardVideo1 class="bg-black w-9/10 h-9/10 rounded-sm z-1 translate-z-0" src="/projects/grabacion_vuela21-online-video-cutter.com.av1.mp4" autoplay="false" loading="lazy"
+                <video #cardVideo1 class="bg-black w-9/10 h-9/10 rounded-sm z-1 translate-z-0" autoplay="false" loading="lazy"
                        id="video-1" (click)="onVideoClick($event)" (dblclick)="onCardVideoDblClick($event)"
                        (mouseenter)="onVideoHover($event)" (mouseleave)="unlistVideoHover()">
+                    <source src="/projects/Presentacion-ezgif.com.av1.webm" type="video/webm">
+                    <source src="/projects/Presentacion-ezgif.com.mp4" type="video/mp4">
                 </video>
                 <!--  rgb(119.82, 152.21, 163.94)-->
             </div>
