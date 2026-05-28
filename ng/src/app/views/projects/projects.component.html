@@ -48,9 +48,9 @@
                 transform-3d rounded-md shadow-[0_0_8px_0_hsla(213_100%_35%/.18),0_0_8px_0_hsla(213_100%_65%/.18)] inset-shadow-[0_0_14px_rgba(0,255,210,0.05)]">
     <!-- <h2 class="text-2xl/6 font-extrabold font-roboto-flex my-6 text-center bg-linear-to-r from-blue-600 to-black bg-clip-text text-transparent tracking-wide invisible"> a </h2> -->
         <img #leftArrow (click)="onArrowClickMoveCarrousel(leftArrow)" class="absolute size-8 left-10 cursor-pointer z-100 hover:drop-shadow-[0_0_9px_rgba(255,255,255,1),0_0_9px_rgba(255,255,255,1)]"
-             src="/projects/left-arrow-svgrepo-white.png" alt="flecha para mover el carrousel a la izquierda" id="left"/>
+             src="/projects/left-arrow-svgrepo-white.svg" alt="flecha para mover el carrousel a la izquierda" id="left"/>
         <img #rightArrow (click)="onArrowClickMoveCarrousel(rightArrow)" class="absolute size-8 right-10 cursor-pointer z-100 hover:drop-shadow-[0_0_9px_rgba(255,255,255,1),0_0_9px_rgba(255,255,255,1)]"
-             src="/projects/right-arrow-svgrepo-white.png"  alt="flecha para mover el carrousel a la derecha" id="right"/>
+             src="/projects/right-arrow-svgrepo-white.svg"  alt="flecha para mover el carrousel a la derecha" id="right"/>
         <!-- IMPORTANTE CAMBIALO DESPUES: el color de fondo variara del proyecto por supuesto no van a ser todos del mismo color.-->
         <!-- Para que las transiciones de transform funcionen tienen que hacerse por css normal, ya que el navegador no detecta un cambio de transform: translateX(valortal) a transform: translateX(valorcual)
             mediante las clases de tailwind. ya que tailwind cambia la variable de dentro del translateX y el navegador ve 'practicamente' el mismo valor. -->
