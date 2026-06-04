@@ -125,7 +125,7 @@
             <!-- Overlay de vídeo -->
             <div class="w-[272px] h-[153px] -left-28 bottom-30 absolute flex justify-center items-center z-6 rounded-lg outline-3 outline-[rgba(182.03,235.35,254.93,.35)] transition-[opacity] duration-300 ease-in-out translate-z-0"
                  [style.background]="'radial-gradient(circle farthest-corner at 60% 75%,rgba(191.03,225.35,237.93,.35) 5%,rgb(8.55,40.34,49.56,.6) 90%)'"
-                 [style.opacity]="(this.hoverIdx != 0) ? '0' : '1'">
+                 [style.opacity]="(this.hoverIdx == 0 && this.carrouselIdx == 0) ? '1' : '0'">
                 <!-- <div class="bg-black w-9/10 h-9/10 rounded-sm" > </div> -->
 
                 <!-- Webm con av1 es más eficiente que mp4 com h.264 -->
@@ -134,8 +134,8 @@
                        (click)="onVideoClick($event)" (dblclick)="onCardVideoDblClick($event)"
                        (mouseenter)="onVideoHover($event)" (mouseleave)="unlistVideoHover()">
                     <!-- El if hace que el vídeo solo cargue realmente cuando se hace hover por primera vez, una vez cargado en la memoria da igual que se salga del hover. -->
-                    <source *ngIf="this.hoverIdx == 0" src="/projects/grabacion_vuela21-online-video-cutter.com.av1.webm" type="video/webm">
-                    <source *ngIf="this.hoverIdx == 0" src="/projects/grabacion_vuela21.mp4" type="video/mp4">
+                    <source *ngIf="this.carrouselIdx == 0 && this.hoverIdx == 0" src="/projects/grabacion_vuela21-online-video-cutter.com.av1.webm" type="video/webm">
+                    <source *ngIf="this.carrouselIdx == 0 && this.hoverIdx == 0" src="/projects/grabacion_vuela21.mp4" type="video/mp4">
                     <!-- Necesita estar muteado o sino me salta al principio la política de reproducción automática en google (no es muy relevante pero los vídeos tampoco tienen sonido) -->
                 </video>
 
@@ -209,15 +209,15 @@
             </div>
             <div class="w-[272px] h-[153px] -left-28 bottom-30 absolute flex justify-center items-center z-6 rounded-lg outline-3 outline-[rgba(182.03,235.35,254.93,.35)] transition-[opacity] duration-300 ease-in-out translate-z-0"
                  [style.background]="'radial-gradient(circle farthest-corner at 60% 75%,rgba(191.03,225.35,237.93,.35) 5%,rgb(8.55,40.34,49.56,.6) 90%)'"
-                 [style.opacity]="(this.hoverIdx != 1) ? '0' : '1'">
+                 [style.opacity]="(this.hoverIdx == 1 && this.carrouselIdx == 1) ? '1' : '0'">
                 <!-- <div class="bg-black w-9/10 h-9/10 rounded-sm" > </div> -->
                 <!-- Webm con av1 es más eficiente que mp4 com h.264 -->
 
                 <video #cardVideo1 class="bg-black w-9/10 h-9/10 rounded-sm z-1 translate-z-0" autoplay="false" loading="lazy"
                        id="video-1" (click)="onVideoClick($event)" (dblclick)="onCardVideoDblClick($event)"
                        (mouseenter)="onVideoHover($event)" (mouseleave)="unlistVideoHover()">
-                    <source *ngIf="this.hoverIdx == 1" src="/projects/Presentacion-ezgif.com.av1.webm" type="video/webm">
-                    <source *ngIf="this.hoverIdx == 1" src="/projects/Presentacion-ezgif.com.mp4" type="video/mp4">
+                    <source *ngIf="this.carrouselIdx == 1 && this.hoverIdx == 1" src="/projects/Presentacion-ezgif.com.av1.webm" type="video/webm">
+                    <source *ngIf="this.carrouselIdx == 1 && this.hoverIdx == 1" src="/projects/Presentacion-ezgif.com.mp4" type="video/mp4">
                 </video>
                 <!--  rgb(119.82, 152.21, 163.94)-->
             </div>

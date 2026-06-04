@@ -242,7 +242,7 @@ export class ProjectsComponent {
   pauseCardVideoOnTime(): void {
     const lastHoverIdx = this.hoverIdx, lastCarrouselIdx = this.carrouselIdx;
 
-    setTimeout(() => ((this.hoverIdx != lastHoverIdx || lastHoverIdx != this.carrouselIdx) && lastCarrouselIdx != -1)
+    setTimeout(() => (this.hoverIdx != lastHoverIdx || lastHoverIdx != this.carrouselIdx)
       ? this.carrouselVideos[lastCarrouselIdx].nativeElement.pause()
       : null
       , this.VIDEO_PAUSE_TIMEOUT)
