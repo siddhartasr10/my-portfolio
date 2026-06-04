@@ -92,7 +92,7 @@
                     <!-- blur dividido entre la hero img y todo el contenedor (el texto blurrea menos basicamente.) -->
                 </div>
 
-                <!-- Sección de texto -->
+                <!-- Sección de texto (también va el color de fondo) -->
                 <div class="flex flex-col w-full absolute bottom-0
                             bg-[linear-gradient(to_bottom,rgba(50,50,50,.35)_0%,rgba(16,16,16,.51)_90%),linear-gradient(to_bottom,transparent_1%,oklch(70.5%_0.213_47.604_/40%)_30%,oklch(70.5%_0.213_47.604_/50%)_80%)]
                             rounded-b-xl animated-text-section"
@@ -100,12 +100,22 @@
                     [style.backdrop-filter]="(this.carrouselIdx == 0) ? 'saturate(250%) blur(8px)' : 'saturate(100%) blur(8px)'" [ngClass]="(this.carrouselIdx == 0) ? 'h-5/20' : 'h-3/10'" >
                     <!-- INFO: Mira el css para la explicacion de este style...  -->
 
-                    <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size,font-weight,letter-spacing] duration-[0.3s] delay-0  z-30 mt-3.5"
+                    <h1 class="text-white text-center w-full font-roboto-serif transition-[font-size,font-weight,letter-spacing] duration-[0.3s] delay-0 z-30 mt-3.5"
                         [ngClass]="(this.carrouselIdx == 0) ? 'text-3xl font-bold tracking-wide' : 'text-2xl font-thin'">
                         Vuela21
                     </h1>
 
-                    <p class="text-white/70 text-center mt-4 font-inter box-border px-2 transition-[font-size,font-weight] duration-250"
+                    <!-- Fila de iconos con las tecnologias -->
+                    <span class="flex flex-row mx-auto w-fit h-4.5 justify-center items-center gap-x-7.5 box-content my-0.5 mt-1 border-r-1 border-b-2 border-black/10 bg-[radial-gradient(circle_farthest-corner_at_50%_50%,rgba(5,5,5,.2)_0%,transparent_99.99%)] rounded-sm px-2">
+                        <img src="/projects/symfony.svg" class="size-5">
+                        <img src="/projects/angular.svg" class="size-5">
+                        <img src="/projects/php.svg" class="size-7">
+                        <img src="/projects/tailwind.svg" class="size-6">
+                        <img src="/projects/postgresql.svg" class="size-6">
+                    </span>
+
+                    <!-- era margin top 5 -->
+                    <p class="text-white/70 text-center mt-1.5 font-inter box-border px-2 transition-[font-size,font-weight] duration-250"
                     [ngClass]="(this.carrouselIdx == 0) ? 'text-lg' : 'text-sm font-thin'" >
                         Aplicación de gestión de envíos para una empresa de transportes, realizada en las prácticas.</p>
                 </div>
@@ -179,9 +189,19 @@
                         Sportwatch
                     </h1>
 
-                    <!-- <span class="my-0 mx-auto text-xs flex flex-row justify-evenly items-center"></span> -->
 
-                    <p class="text-white/70 text-center mt-4 font-inter box-border px-2 transition-[font-size,font-weight] duration-250"
+                    <!-- El mt es 1.5 en vez de 1 porque la 'p' de sportwatch cruza la baseline del texto y hace que se vea más apretado de lo que es en verdad. En vuela21 no queda bien el 1.5 -->
+                    <span class="flex flex-row mx-auto w-fit h-4.5 justify-center items-center gap-x-7.5 box-content my-0.5 mt-1.5 border-r-1 border-b-2 border-black/10 bg-[radial-gradient(circle_farthest-corner_at_50%_50%,rgba(5,5,5,.2)_0%,transparent_99.99%)] rounded-sm px-2">
+                        <img src="/projects/spring_boot.svg" class="size-5">
+                        <img src="/projects/angular.svg" class="size-5">
+                        <img src="/projects/java.svg" class="size-5">
+                        <img src="/projects/tailwind.svg" class="size-6">
+                        <img src="/projects/postgresql.svg" class="size-6">
+                        <img src="/projects/aws.svg" class="size-6">
+                    </span>
+
+
+                    <p class="text-white/70 text-center mt-1.5 font-inter box-border px-2 transition-[font-size,font-weight] duration-250"
                     [ngClass]="(this.carrouselIdx == 1) ? 'text-lg' : 'text-sm font-thin'" >
                         Plataforma de streaming, orientada a proporcionar infraestructura a medios de deportes.
                     </p>
