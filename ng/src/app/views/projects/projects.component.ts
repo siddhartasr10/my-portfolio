@@ -247,4 +247,20 @@ export class ProjectsComponent {
       : null
       , this.VIDEO_PAUSE_TIMEOUT)
   }
+
+  restartCardVideo(ev: Event): void {
+    const target = ev.target as HTMLVideoElement;
+    const id = (isNaN(Number(target.id.at(-1))))
+      ? -1
+      : Number(target.id.at(-1));
+
+    target.currentTime = 0;
+
+    if (id == -1) return;
+
+    setTimeout(() => (id == this.hoverIdx && id == this.carrouselIdx)
+      ? target.play()
+      : null, 1000);
+
+  }
 }
