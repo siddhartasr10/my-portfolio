@@ -40,7 +40,6 @@
     <!-- NOTA: la altura de la imagen seleccionada (la del medio) es mayor que las de los lados La anchura un poco tambien mayor pero muy poco -->
     <!-- INFO: Las animaciones de transition se llevan por la clase de css animated-card -->
     <!-- INFO: El aspect ratio de las tarjetas es casí un 4:5 perfecto. -->
-    <!-- TODO: Probar sombra blanca de hover en los vídeos a ver que tal. -->
     <!-- Carrusel -->
     <div (wheel)="onWheelMoveCarrousel($event)" id="carrousel"
          class="w-[92%] h-[70vh] bg-radial-[circle_farthest-side_at_50%_55%] from-[#81A9DA]/50 to-[rgba(6,20,38,0.7)] flex flex-row items-center justify-center
@@ -128,7 +127,7 @@
                 <!-- <div class="bg-black w-9/10 h-9/10 rounded-sm" > </div> -->
 
                 <!-- Webm con av1 es más eficiente que mp4 com h.264 -->
-                <video #cardVideo0 class="bg-black w-9/10 h-9/10 rounded-sm z-1 translate-z-0" autoplay="false" loading="lazy"
+                <video #cardVideo0 class="bg-black w-9/10 h-9/10 rounded-sm z-1 translate-z-0 hover:shadow-[0_0_5px_1px_rgba(255,255,255,.3)]" autoplay="false" loading="lazy"
                        id="video-0" [style.opacity]="(this.hoverIdx != 0) ? '0' : '1'"
                        (click)="onVideoClick($event)" (dblclick)="onCardVideoDblClick($event)" (ended)="restartCardVideo($event)"
                        (mouseenter)="onVideoHover($event)" (mouseleave)="unlistVideoHover()">
@@ -218,7 +217,7 @@
                 <!-- <div class="bg-black w-9/10 h-9/10 rounded-sm" > </div> -->
                 <!-- Webm con av1 es más eficiente que mp4 com h.264 -->
 
-                <video #cardVideo1 class="bg-black w-9/10 h-9/10 rounded-sm translate-z-0" autoplay="false" loading="lazy"
+                <video #cardVideo1 class="bg-black w-9/10 h-9/10 rounded-sm translate-z-0 hover:shadow-[0_0_5px_1px_rgba(255,255,255,.3)]" autoplay="false" loading="lazy"
                        id="video-1" (click)="onVideoClick($event)" (dblclick)="onCardVideoDblClick($event)" (ended)="restartCardVideo($event)"
                        (mouseenter)="onVideoHover($event)" (mouseleave)="unlistVideoHover()">
                     <source *ngIf="this.carrouselIdx == 1 && this.hoverIdx == 1" src="/projects/Presentacion-ezgif.com.av1.webm" type="video/webm">
