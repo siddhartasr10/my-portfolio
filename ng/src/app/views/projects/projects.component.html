@@ -121,7 +121,7 @@
                 </div>
 
                     <p class="absolute -bottom-10 ml-1 w-fit h-8 text-gray-400 font-roboto-flex text-xs transition-[opacity] translate-z-0 z-10"
-                       [style.opacity]="(this.videoHoverIdx != 0) ? '0' : '1'"> Haz doble click para entrar en pantalla completa </p>
+                       [style.opacity]="(this.videoHoverIdx == 0 && this.carrouselIdx == 0) ? '1' : '0'"> Haz doble click para entrar en pantalla completa </p>
             </div>
             <!-- INFO: translate-z-0 y los z-index del div, el video y el <p> están para que no me haga layout rendering panic y me salte un SIGILL crasheandome el pc (si hijo si) -->
             <!-- El translate-z hace que los elementos se guarden en diferentes registros de memoria. -->
@@ -133,7 +133,7 @@
 
                 <!-- Webm con av1 es más eficiente que mp4 com h.264 -->
                 <video #cardVideo0 class="bg-black w-9/10 h-9/10 rounded-sm z-1 translate-z-0 hover:shadow-[0_0_5px_1px_rgba(255,255,255,.3)]" autoplay="false" loading="lazy"
-                       id="video-0" [style.opacity]="(this.hoverIdx != 0) ? '0' : '1'"
+                       id="video-0"
                        (click)="onVideoClick($event)" (dblclick)="onCardVideoDblClick($event)" (ended)="restartCardVideo($event)"
                        (mouseenter)="onVideoHover($event)" (mouseleave)="unlistVideoHover()">
                     <!-- El if hace que el vídeo solo cargue realmente cuando se hace hover por primera vez, una vez cargado en la memoria da igual que se salga del hover. -->
@@ -215,7 +215,7 @@
                     </p>
 
                     <p class="absolute -bottom-10 ml-1 w-fit h-8 text-gray-400 font-roboto-flex text-xs transition-[opacity] translate-z-0 z-10"
-                       [style.opacity]="(this.videoHoverIdx != 1) ? '0' : '1'"> Haz doble click para entrar en pantalla completa </p>
+                       [style.opacity]="(this.videoHoverIdx == 1 && this.carrouselIdx == 1) ? '1' : '0'"> Haz doble click para entrar en pantalla completa </p>
                 </div>
             </div>
             <div class="w-[272px] h-[153px] -left-28 bottom-30 absolute flex justify-center items-center z-8 rounded-lg outline-3 outline-[rgba(182.03,235.35,254.93,.35)] transition-[opacity] duration-300 ease-in-out translate-z-0"
