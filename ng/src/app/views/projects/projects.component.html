@@ -65,11 +65,9 @@
             <!--  bg-position-[30%_20%]-->
 
             <div class="w-full h-full relative outline-orange-600/30 animated-card transform-gpu"
-                [ngClass]="(this.carrouselIdx == 0) ? 'rounded-2xl outline-3' : 'rounded-xl outline-5'"
+                [ngClass]="(this.carrouselIdx == 0) ? 'rounded-2xl outline-3' : 'rounded-xl outline-5 brightness-80 scale-90'"
                 [style.bottom.rem]="(this.hoverIdx == 0) ? 1.5 : 0"
-                [style.box-shadow]="(this.carrouselIdx == 0) ? this.focusedCardShadow() : this.unfocusedCardShadow()"
-                [style.filter]="(carrouselIdx == 0) ? '' : 'brightness(0.8) scale(0.9)'">
-
+                [style.box-shadow]="(this.carrouselIdx == 0) ? this.focusedCardShadow() : this.unfocusedCardShadow()">
                 <!-- Hero image -->
                 <img src="/projects/vuela21_1_colored.png" class="w-full h-full box-border object-cover rounded-2xl animated-card top-[-1.5px] absolute"/>
                 <!-- Sombra interna colorida de la imagen, no se si poner las sombras en el propio img o dejarlo aqui -->
@@ -156,9 +154,8 @@
             id="card-1" class="-mx-14 relative box-content transform-gpu animated-card">
             <!-- hsla(213_100%_50%/.35) -->
             <div class="w-full h-full relative outline-[oklch(0.72_0.13_180_/30%)] animated-card transform-gpu"
-                 [ngClass]="(this.carrouselIdx == 1) ? 'rounded-2xl outline-3' : 'rounded-xl outline-5'"
+                 [ngClass]="(this.carrouselIdx == 1) ? 'rounded-2xl outline-3' : 'rounded-xl outline-5 brightness-80 scale-90'"
                  [style.bottom.rem]="(this.hoverIdx == 1) ? 1.5 : 0"
-                 [style.filter]="(carrouselIdx == 1) ? '' : 'brightness(0.8) scale(0.9)'"
                  [style.box-shadow]="(this.carrouselIdx == 1) ? this.focusedCardShadow() : this.unfocusedCardShadow()">
 
                 <!-- NOTE: Esta imagen no se pega por encima del borde  -->
@@ -244,11 +241,9 @@
             <!-- TEST: algo así sería -->
             <!-- INFO: ngClass para que los font sizes encojan con la tarjeta cuando se desfocusea. -->
             <div class="w-full h-full relative flex transform-gpu animated-card outline-white/15"
-                [ngClass]="(this.carrouselIdx == 2) ? 'rounded-2xl outline-3' : 'rounded-xl outline-5'"
+                [ngClass]="(this.carrouselIdx == 2) ? 'rounded-2xl outline-3' : 'rounded-xl outline-5 brightness-80 scale-90'"
                 [style.bottom.rem]="(this.hoverIdx == 2) ? 1.5 : 0"
-                [style.box-shadow]="(this.carrouselIdx == 2) ? this.focusedCardShadow() : this.unfocusedCardShadow()"
-                [style.filter]="(carrouselIdx == 2) ? '' : 'brightness(0.8) scale(0.9)'">
-
+                [style.box-shadow]="(this.carrouselIdx == 2) ? this.focusedCardShadow() : this.unfocusedCardShadow()">
                 <!-- NOTE: Esta imagen no se pega por encima del borde a diferencia de la de otras tarjetas, le queda mejor así -->
                 <!-- INFO: Esta es la tag normal estoy probando un svg para añadirle filters y que no me coja un cuadrado -->
                 <!-- Sigue editando el svg para que abraze a la forma o busca otro svg con forma de interrogación que esté mejor delimitado (como acabo teniendo que hacer siempre) y editalo. -->
