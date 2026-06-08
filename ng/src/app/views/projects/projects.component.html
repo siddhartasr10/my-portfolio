@@ -56,7 +56,7 @@
         <!-- (sombras que estaban en el ngClass y estoy transicionando hacia style.*:
             shadow-[0_0_8px_0_hsla(32_100%_35%/.18),0_0_8px_0_hsla(32_100%_65%/.18)] inset-shadow-[0_0_14px_hsla(32_100%_50%_/.3)] -->
 
-        <!-- Tarjeta -->
+        <!-- Tarjeta (Capa compositing) -->
         <div [style.transform]="this.cardTransformState()"
             [ngClass]="(this.carrouselIdx == 0) ? 'w-[457px] h-[578px] z-2' : 'w-[353px] h-[478px] z-1'"
             (mouseenter)="this.onCardHover($event)" (mouseleave)="this.unlistHover()" (click)="this.onClickMoveCarrousel($event)"
@@ -64,6 +64,7 @@
             <!-- Hacian falta cuando la tarjeta era transparente backdrop-blur-[4px] backdrop-saturate-120 -->
             <!--  bg-position-[30%_20%]-->
 
+            <!-- Tarjeta (Capa efectos) cubre toda la tarjeta tambien -->
             <div class="w-full h-full relative outline-orange-600/30 animated-card transform-gpu"
                 [ngClass]="(this.carrouselIdx == 0) ? 'rounded-2xl outline-3' : 'rounded-xl outline-5 brightness-80 scale-90'"
                 [style.bottom.rem]="(this.hoverIdx == 0) ? 1.5 : 0"
@@ -113,11 +114,14 @@
                         <img src="/projects/postgresql.svg" class="size-6">
                     </span>
 
-                    <!-- era margin top 5 -->
+                    <!-- usaba margin top 5 -->
                     <p class="text-white/70 text-center mt-1.5 font-inter box-border px-2 transition-[font-size,font-weight] duration-250"
                     [ngClass]="(this.carrouselIdx == 0) ? 'text-lg' : 'text-sm font-thin'" >
                         Aplicación de gestión de envíos para una empresa de transportes, realizada en las prácticas.</p>
                 </div>
+
+                    <p class="absolute -bottom-10 ml-1 w-fit h-8 text-gray-400 font-roboto-flex text-xs transition-[opacity] translate-z-0 z-10"
+                       [style.opacity]="(this.videoHoverIdx != 0) ? '0' : '1'"> Haz doble click para entrar en pantalla completa </p>
             </div>
             <!-- INFO: translate-z-0 y los z-index del div, el video y el <p> están para que no me haga layout rendering panic y me salte un SIGILL crasheandome el pc (si hijo si) -->
             <!-- El translate-z hace que los elementos se guarden en diferentes registros de memoria. -->
@@ -141,8 +145,6 @@
                 <!--  rgb(119.82, 152.21, 163.94)-->
             </div>
 
-            <p class="ml-1 mt-2 w-fit h-8 text-gray-400 font-roboto-flex text-xs transition-[opacity] translate-z-0 z-10"
-               [style.opacity]="(this.videoHoverIdx != 0) ? '0' : '1'"> Haz doble click para entrar en pantalla completa </p>
         </div>
 
         <!-- el bottom tambien necesita style para que detecte la transicion, tailwind tiene ralladisimo al navegador mira el css para la explicacion -->
@@ -211,6 +213,9 @@
                     [ngClass]="(this.carrouselIdx == 1) ? 'text-lg' : 'text-sm font-thin'" >
                         Plataforma de streaming orientada a proporcionar infraestructura a medios de deportes.
                     </p>
+
+                    <p class="absolute -bottom-10 ml-1 w-fit h-8 text-gray-400 font-roboto-flex text-xs transition-[opacity] translate-z-0 z-10"
+                       [style.opacity]="(this.videoHoverIdx != 1) ? '0' : '1'"> Haz doble click para entrar en pantalla completa </p>
                 </div>
             </div>
             <div class="w-[272px] h-[153px] -left-28 bottom-30 absolute flex justify-center items-center z-8 rounded-lg outline-3 outline-[rgba(182.03,235.35,254.93,.35)] transition-[opacity] duration-300 ease-in-out translate-z-0"
@@ -227,8 +232,6 @@
                 </video>
                 <!--  rgb(119.82, 152.21, 163.94)-->
             </div>
-            <p class="ml-1 mt-2 w-fit h-8 text-gray-400 font-roboto-flex text-xs transition-[opacity] translate-z-0 z-10"
-               [style.opacity]="(this.videoHoverIdx != 1) ? '0' : '1'"> Haz doble click para entrar en pantalla completa </p>
         </div>
 
         <!-- Como solo tienes ahora mismo vuela21 y sporwatch pon aquí una tarjeta: '?' para proyectos que se vienen. -->
