@@ -67,7 +67,8 @@ form > label {
  * lo detecta por cambio de clases básicas de css. el height es que sino ya entra en conflicto jajaj
  */
 .animated-text-section {
-    transition: backdrop-filter 500ms ease-in-out,
+    transition: filter 200ms ease-in,
+                backdrop-filter 500ms ease-in-out,
                 height 150ms linear;
 
 }

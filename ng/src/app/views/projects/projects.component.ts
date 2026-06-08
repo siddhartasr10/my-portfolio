@@ -28,7 +28,10 @@ export class ProjectsComponent {
                                                         12px 24px 36px rgba(26,26,52,0.25)`);
 
   // focusedCardFilterState: WritableSignal<string> = signal(``); Las sombras van por separado así que...
-  unfocusedCardFilterState: WritableSignal<string> = signal(`blur(1.5px) brightness(0.8)`);
+
+  // El blur como propiedad dinamica que se aplica en toda la tarjeta, sumado a otros backdrop blurs que hay en los elementos contenidos da bug.
+  // Así que ese blur(1.5px) se suma en las capas separadas de el img section y el text section.
+  // unfocusedCardFilterState: WritableSignal<string> = signal(`brightness(0.8)`);
   // scale no es un filter, va en el transform, al final se ha podido añadir como clase de tailwind.
   @ViewChild('cardVideo0') cardVideo0!: ElementRef<HTMLVideoElement>;
   @ViewChild('cardVideo1') cardVideo1!: ElementRef<HTMLVideoElement>;

@@ -57,18 +57,19 @@
             shadow-[0_0_8px_0_hsla(32_100%_35%/.18),0_0_8px_0_hsla(32_100%_65%/.18)] inset-shadow-[0_0_14px_hsla(32_100%_50%_/.3)] -->
 
         <!-- Tarjeta -->
-        <div [style.transform]="this.cardTransformState()" [style.bottom.rem]="(this.hoverIdx == 0) ? 1.5 : 0"
-            [style.box-shadow]="(this.carrouselIdx == 0) ? this.focusedCardShadow() : this.unfocusedCardShadow()"
-            [style.filter]="(carrouselIdx == 0) ? '' : unfocusedCardFilterState()"
-            [ngClass]="(this.carrouselIdx == 0)
-                                ? 'w-[457px] h-[578px] z-2 rounded-2xl outline-3'
-                                : 'w-[353px] h-[478px] z-1 rounded-xl outline-5 scale-90'"
+        <div [style.transform]="this.cardTransformState()"
+            [ngClass]="(this.carrouselIdx == 0) ? 'w-[457px] h-[578px] z-2' : 'w-[353px] h-[478px] z-1'"
             (mouseenter)="this.onCardHover($event)" (mouseleave)="this.unlistHover()" (click)="this.onClickMoveCarrousel($event)"
-            id="card-0" class="relative box-content transform-gpu animated-card outline-orange-600/30">
+            id="card-0" class="relative box-content transform-gpu animated-card">
             <!-- Hacian falta cuando la tarjeta era transparente backdrop-blur-[4px] backdrop-saturate-120 -->
             <!--  bg-position-[30%_20%]-->
 
-            <div class="w-full h-full relative">
+            <div class="w-full h-full relative outline-orange-600/30 animated-card transform-gpu"
+                [ngClass]="(this.carrouselIdx == 0) ? 'rounded-2xl outline-3' : 'rounded-xl outline-5'"
+                [style.bottom.rem]="(this.hoverIdx == 0) ? 1.5 : 0"
+                [style.box-shadow]="(this.carrouselIdx == 0) ? this.focusedCardShadow() : this.unfocusedCardShadow()"
+                [style.filter]="(carrouselIdx == 0) ? '' : 'brightness(0.8) scale(0.9)'">
+
                 <!-- Hero image -->
                 <img src="/projects/vuela21_1_colored.png" class="w-full h-full box-border object-cover rounded-2xl animated-card top-[-1.5px] absolute"/>
                 <!-- Sombra interna colorida de la imagen, no se si poner las sombras en el propio img o dejarlo aqui -->
@@ -86,7 +87,8 @@
                     [style.background]="(this.carrouselIdx == 0)
                             ? 'radial-gradient(circle at 50% 50%, rgba(26,26,26,.2) 0%, rgba(26,26,26,.2) 99%)'
                             : 'radial-gradient(circle at 50% 50%, rgba(26,26,26,.35) 0%, rgba(26,26,26,.42) 50%, rgba(26,26,26,.3) 99%)'"
-                    [style.backdrop-filter]="(this.carrouselIdx == 0) ? '' : 'blur(1.5px)'">
+                    [style.backdrop-filter]="(this.carrouselIdx == 0) ? '' : 'blur(3px)'">
+                    <!-- el backdrop filter blur de aquí a lo mejor puede ser un blur del img y ya -->
                     <!-- blur dividido entre la hero img y todo el contenedor (el texto blurrea menos basicamente.) -->
                 </div>
 
@@ -95,6 +97,7 @@
                             bg-[linear-gradient(to_bottom,rgba(50,50,50,.35)_0%,rgba(16,16,16,.51)_90%),linear-gradient(to_bottom,transparent_1%,oklch(70.5%_0.213_47.604_/40%)_30%,oklch(70.5%_0.213_47.604_/50%)_80%)]
                             rounded-b-xl animated-text-section"
 
+                    [style.filter]="(this.carrouselIdx == 0) ? '' : 'blur(1.5px)'"
                     [style.backdrop-filter]="(this.carrouselIdx == 0) ? 'saturate(250%) blur(8px)' : 'saturate(100%) blur(8px)'" [ngClass]="(this.carrouselIdx == 0) ? 'h-5/20' : 'h-3/10'" >
                     <!-- INFO: Mira el css para la explicacion de este style...  -->
 
@@ -146,17 +149,18 @@
 
         <!-- el bottom tambien necesita style para que detecte la transicion, tailwind tiene ralladisimo al navegador mira el css para la explicacion -->
         <!-- INFO: En gran parte se trata de convertir las clases bindeadas con propiedades complejas que no detecta el navegador a estilos bindeados que si detecta -->
-        <div [style.transform]="this.cardTransformState()" [style.bottom.rem]="(this.hoverIdx == 1) ? 1.5 : 0"
-            [style.box-shadow]="(this.carrouselIdx == 1) ? this.focusedCardShadow() : this.unfocusedCardShadow()"
-            [style.filter]="(carrouselIdx == 1) ? '' : unfocusedCardFilterState()"
-            [ngClass]="(this.carrouselIdx == 1)
-                                ? 'w-[457px] h-[578px] z-2 rounded-2xl outline-3'
-                                : 'w-[353px] h-[478px] z-1 rounded-xl outline-5 scale-90'"
+        <div [style.transform]="this.cardTransformState()"
+            [ngClass]="(this.carrouselIdx == 1) ? 'w-[457px] h-[578px] z-2' : 'w-[353px] h-[478px] z-1'"
             (mouseenter)="this.onCardHover($event)" (mouseleave)="this.unlistHover()" (click)="this.onClickMoveCarrousel($event)"
 
-            id="card-1" class="-mx-14 relative box-content transform-gpu animated-card outline-[oklch(0.72_0.13_180_/30%)]">
+            id="card-1" class="-mx-14 relative box-content transform-gpu animated-card">
             <!-- hsla(213_100%_50%/.35) -->
-            <div class="w-full h-full relative">
+            <div class="w-full h-full relative outline-[oklch(0.72_0.13_180_/30%)] animated-card transform-gpu"
+                 [ngClass]="(this.carrouselIdx == 1) ? 'rounded-2xl outline-3' : 'rounded-xl outline-5'"
+                 [style.bottom.rem]="(this.hoverIdx == 1) ? 1.5 : 0"
+                 [style.filter]="(carrouselIdx == 1) ? '' : 'brightness(0.8) scale(0.9)'"
+                 [style.box-shadow]="(this.carrouselIdx == 1) ? this.focusedCardShadow() : this.unfocusedCardShadow()">
+
                 <!-- NOTE: Esta imagen no se pega por encima del borde  -->
                 <img src="/projects/sportwatch_from_highres_to_752x882_with_black_to_752x941.png" class="w-full h-full box-border object-cover object-[50%_0%] rounded-2xl animated-card absolute pointer-events-none"/>
                 <div class="w-full h-full rounded-2xl absolute z-5 transition-shadow duration-150 pointer-events-none"
@@ -167,7 +171,7 @@
                             ? 'radial-gradient(circle at 50% 50%, rgba(26,26,26,.2) 0%, rgba(26,26,26,.2) 99%)'
                             : 'radial-gradient(circle at 50% 50%, rgba(26,26,26,.35) 0%, rgba(26,26,26,.42) 50%, rgba(26,26,26,.3) 99%)'"
                     [style.height.%]="(this.carrouselIdx == 1) ? 76 : 70"
-                    [style.backdrop-filter]="(this.carrouselIdx == 1) ? 'saturate(1)' : 'blur(1.5px)'">
+                    [style.backdrop-filter]="(this.carrouselIdx == 1) ? 'saturate(1)' : 'blur(3px)'">
                     <!-- blur dividido entre la hero img y todo el contenedor en el ts (el texto blurrea menos basicamente.) -->
                 </div>
 
@@ -175,8 +179,9 @@
                             bg-[linear-gradient(to_bottom,rgba(50,50,50,.35)_0%,rgba(16,16,16,.51)_90%),linear-gradient(to_bottom,transparent_1%,oklch(0.77_0.13_180_/30%)_30%,oklch(0.56_0.1_180_/_40%)_80%)]
                             rounded-b-xl animated-text-section"
 
-                    [style.backdrop-filter]="(this.carrouselIdx == 1) ? 'saturate(250%) blur(8px)' : 'saturate(100%) blur(8px)'"
-                    [ngClass]="(this.carrouselIdx == 1) ? 'h-5/20' : 'h-3/10'" >
+                     [style.filter]="(this.carrouselIdx == 1) ? '' : 'blur(1.5px)'"
+                     [style.backdrop-filter]="(this.carrouselIdx == 1) ? 'saturate(250%) blur(8px)' : 'saturate(100%) blur(8px)'"
+                     [ngClass]="(this.carrouselIdx == 1) ? 'h-5/20' : 'h-3/10'" >
                     <!-- INFO: Mira el css para la explicacion de este style...  -->
 
                     <!-- Esto era una prueba pero el blur localizado bugea la polarizacion del gradiente
@@ -230,19 +235,20 @@
         </div>
 
         <!-- Como solo tienes ahora mismo vuela21 y sporwatch pon aquí una tarjeta: '?' para proyectos que se vienen. -->
-        <div [style.transform]="this.cardTransformState()" [style.bottom.rem]="(this.hoverIdx == 2) ? 1.5 : 0"
-            [style.box-shadow]="(this.carrouselIdx == 2) ? this.focusedCardShadow() : this.unfocusedCardShadow()"
-            [style.filter]="(carrouselIdx == 2) ? '' : unfocusedCardFilterState()"
-            [ngClass]="(this.carrouselIdx == 2)
-                                ? 'w-[457px] h-[578px] z-2 rounded-2xl outline-3'
-                                : 'w-[353px] h-[478px] z-1 rounded-xl outline-5 scale-90'"
+        <div [style.transform]="this.cardTransformState()"
+            [ngClass]="(this.carrouselIdx == 2) ? 'w-[457px] h-[578px] z-2' : 'w-[353px] h-[478px] z-1'"
             (mouseenter)="this.onCardHover($event)" (mouseleave)="this.unlistHover()" (click)="this.onClickMoveCarrousel($event)"
             id="card-2" class="relative box-content transform-gpu animated-card outline-white/15">
 
 
             <!-- TEST: algo así sería -->
             <!-- INFO: ngClass para que los font sizes encojan con la tarjeta cuando se desfocusea. -->
-            <div class="w-full h-full relative flex">
+            <div class="w-full h-full relative flex transform-gpu animated-card outline-white/15"
+                [ngClass]="(this.carrouselIdx == 2) ? 'rounded-2xl outline-3' : 'rounded-xl outline-5'"
+                [style.bottom.rem]="(this.hoverIdx == 2) ? 1.5 : 0"
+                [style.box-shadow]="(this.carrouselIdx == 2) ? this.focusedCardShadow() : this.unfocusedCardShadow()"
+                [style.filter]="(carrouselIdx == 2) ? '' : 'brightness(0.8) scale(0.9)'">
+
                 <!-- NOTE: Esta imagen no se pega por encima del borde a diferencia de la de otras tarjetas, le queda mejor así -->
                 <!-- INFO: Esta es la tag normal estoy probando un svg para añadirle filters y que no me coja un cuadrado -->
                 <!-- Sigue editando el svg para que abraze a la forma o busca otro svg con forma de interrogación que esté mejor delimitado (como acabo teniendo que hacer siempre) y editalo. -->
@@ -263,13 +269,14 @@
                             ? 'radial-gradient(circle at 50% 50%, rgba(26,26,26,.2) 0%, rgba(26,26,26,.2) 99%)'
                             : 'radial-gradient(circle at 50% 50%, rgba(26,26,26,.35) 0%, rgba(26,26,26,.42) 50%, rgba(26,26,26,.3) 99%)'"
                     [style.height.%]="(this.carrouselIdx == 2) ? 76 : 71"
-                    [style.backdrop-filter]="(this.carrouselIdx == 2) ? 'saturate(1)' : 'blur(1.5px)'">
+                    [style.backdrop-filter]="(this.carrouselIdx == 2) ? 'saturate(1)' : 'blur(3px)'">
                     <!-- blur dividido entre la hero img y todo el contenedor en el ts (el texto blurrea menos basicamente.) -->
                 </div>
 
                 <div class="flex flex-col w-full absolute bottom-0 bg-[linear-gradient(to_top,rgba(50,50,50,.35)_0%,rgba(16,16,16,.51)_90%),linear-gradient(to_top,rgba(5,5,5,.75)_10%,rgba(255,255,255,.15)_99%),radial-gradient(circle_farthest-corner_at_100%_20%,rgba(255,255,255,.25)_1%,rgba(20,20,20,.2)_75%)]
                             rounded-b-xl animated-text-section z-4"
 
+                    [style.filter]="(this.carrouselIdx == 2) ? '' : 'blur(1.5px)'"
                     [style.backdrop-filter]="(this.carrouselIdx == 2) ? 'saturate(250%) blur(8px)' : 'saturate(100%) blur(8px)'"
                     [ngClass]="(this.carrouselIdx == 2) ? 'h-1/4' : 'h-3/10'" >
                     <!-- INFO: Mira el css para la explicacion de este style...  -->
@@ -290,19 +297,21 @@
         </div>
     </div>
     <!-- A veces comento en español a veces en ingles me estoy volviendo loco -->
-
+    <!-- TODO: Arreglar version firefox, se ve to bugeado el carrusel el firefox cambia los blurs a pseudoelementos creo. -->
+    <!-- TODO: darle caña a esto, prueba si algunos elementos al reves queda bien y sino pues na -->
     <!-- Lista vertical (proyectos secundarios) -->
-    <div class="flex flex-col items-center text-white mt-30 ml-10 max-w-screen w-screen gap-y-8 items-center">
+    <div class="flex flex-col items-center text-white mt-30 ml-10 w-9/10 gap-y-8 items-center">
         <!-- Grid with image and description columns -->
         <!-- NOTA: prueba a añadir borde inferior del mismo color que el fondo para dar efecto extrusión 3d -->
         <!-- Y añade sombras a los grids y quizas a la barra separadora (no es ta funcionando en este momento) -->
+        <h1 class="self-start text-gray-500 font-roboto-serif text-xl font-bold tracking-wide ml-1"> Otros proyectos que hice durante el grado </h1>
 
         <!-- Otro grid para ver como se ven varios -->
         <!-- la vignette usa stone-700 o a lo mejor stone-800 y cyan-300/5 de fondo -->
         <!-- TODO: prueba tarjetas mas grandes para una imagen mas grande. -->
         <!-- IMPORTANTE: El primer diseño es feo de cojones sorry. -->
         <!-- dependiendo del proyecto que ponga, un color u otro de fondo, el color de fondo se craftea con un degradado y un bg-black transparente + bg-blend mode de overlay. -->
-        <div class="grid grid-cols-[3fr_7fr] relative w-[60%] h-[280px] justify-items-center gap-x-17 mb-5 rounded-md border-b-9 border-r-9 border-b-[rgba(0,184,219,.01)] border-r-[rgba(0,184,219,.15)]
+        <div class="grid grid-cols-[3fr_7fr] relative w-[60%] h-[280px] self-end justify-items-center gap-x-17 mb-5 rounded-md border-b-9 border-r-9 border-b-[rgba(0,184,219,.01)] border-r-[rgba(0,184,219,.15)]
                     bg-[radial-gradient(circle_farthest-side_at_85%_50%,rgba(0,184,219,.15)_0%,rgba(16,16,16,.15)_90%)] bg-black/20 bg-blend-overlay box-border">
 
             <!--  after:shadow-[inset_0_1px_5px_0_rgba(255,255,255,.2)] -->
@@ -320,7 +329,7 @@
         </div>
 
 
-        <div class="grid grid-cols-[.3fr_.7fr] relative w-[50%] h-[280px] justify-items-center gap-x-17 mb-5 rounded-md border-b-9 border-r-9 border-white/5
+        <div class="grid grid-cols-[3fr_7fr] relative w-[50%] h-[280px] self-start justify-items-center gap-x-17 mb-5 rounded-md border-b-9 border-r-9 border-white/5
                     bg-[radial-gradient(circle_farthest-side_at_85%_50%,rgba(170,50,50,.21)_0%,rgba(16,16,70,.15)_90%)]
                     box-border bg-black/22 bg-blend-overlay shadow-[inset_-5px_5px_5px_0_rgba(25,25,25,.15),inset_5px_-5px_5px_0_rgba(25,25,25,.1505),inset_-5px_5px_5px_0_rgba(25,25,25,.1501),inset_5px_-5px_5px_0_rgba(25,25,25,.1501)]">
 
@@ -339,7 +348,7 @@
         </div>
 
 
-        <div class="grid grid-cols-[.3fr_.7fr] relative w-[50%] h-[280px] justify-items-center gap-x-17 mb-5 rounded-md border-b-9 border-r-9 border-white/5
+        <div class="grid grid-cols-[.3fr_.7fr] relative w-[50%] h-[280px] self-start justify-items-center gap-x-17 mb-5 rounded-md border-b-9 border-r-9 border-white/5
                     bg-[radial-gradient(circle_farthest-side_at_85%_50%,oklch(0.66_0.21_37/15%)_0%,rgba(16,16,70,.15)_95%)]
                     box-border bg-black/20 bg-blend-overlay shadow-[inset_-5px_5px_5px_0_rgba(25,25,25,.15),inset_5px_-5px_5px_0_rgba(25,25,25,.1505),inset_-5px_5px_5px_0_rgba(25,25,25,.1501),inset_5px_-5px_5px_0_rgba(25,25,25,.1501)]">
             <!-- No me interesa:
