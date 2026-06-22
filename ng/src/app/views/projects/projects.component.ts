@@ -12,7 +12,7 @@ export class ProjectsComponent {
   sliderState: WritableSignal<number> = signal(0);
 
   carrouselIdx: number = 1;
-  // Indice de la tarjeta del carrousel que esté hovereada. (hago esto porque añadir estilos mediante clases de tailwind con hover o mediante css vanilla no funciona. tailwind tiene ya bugeado al navegador.
+  // Indice de la tarjeta del carrousel que esté hovereada. (añadir estilos mediante clases de tailwind con hover o mediante css vanilla no funciona para las transiciones, tailwind tiene ya bugeado al navegador.
   hoverIdx: number = -1;
   wheelInputs: Set<String> = new Set();
 
@@ -38,13 +38,15 @@ export class ProjectsComponent {
 
   // Indice del vídeo de las tarjetas siendo hovereado.
   videoHoverIdx: number = -1;
-
   carrouselVideos: Array<ElementRef<HTMLVideoElement>> = [];
 
   readonly VIDEO_START_TIMEOUT = 2250;
   readonly VIDEO_PAUSE_TIMEOUT = 750;
 
   isSingleClick: boolean = false;
+
+  // Indice del elemento de la lista vertical que se está hovereando
+  listHoverIdx: number = -1;
 
   // hostRef is a variable to the <html>, I use it to control :root
   constructor(private hostRef: ElementRef) {}
@@ -180,7 +182,7 @@ export class ProjectsComponent {
     this.playCardVideoOnTime();
   }
 
-  unlistHover(): void {
+  unlistCardHover(): void {
     this.pauseCardVideoOnTime();
     this.hoverIdx = -1;
   }
@@ -266,4 +268,21 @@ export class ProjectsComponent {
       : null, 1000);
 
   }
+
+  onListHover(ev: MouseEvent): void {
+    const target = ev.target as HTMLDivElement;
+
+    // Esto no debería pasar con estos elementos pero por si acaso.
+    this.listHoverIdx = (!isNaN(Number(target.id.at(-1))))
+      ? Number(target.id.at(-1))
+      : -1;
+
+    console.log("HOla? ", this.listHoverIdx);
+  }
+
+  unlistListHover(): void {
+    this.listHoverIdx = -1;
+    console.log("Adios", this.listHoverIdx);
+  }
+
 }

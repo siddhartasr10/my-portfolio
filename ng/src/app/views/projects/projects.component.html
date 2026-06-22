@@ -1,7 +1,7 @@
 <div class="max-w-screen w-screen min-h-screen flex flex-col items-center bg-linear-to-b from-[oklch(0.17_0.07_254.86)] to-[oklch(0.16_0.05_254.67)]"> <!-- bg-[#1F1F1F] -->
     <!-- Colores antiguos del bg del body: bg-linear-to-b from-[#061426] to-[#0B1726] -->
     <app-navbar class="flex flex-row items-center justify-center h-[10vh] w-screen" [style.contain]="'content'"></app-navbar>
-    <div class="grid grid-cols-[0.75fr_0.25fr] w-screen my-10 self-start items-baseline">
+    <div class="grid grid-cols-[0.75fr_0.25fr] w-screen my-10 self-start items-baseline" >
         <!-- Toggle (las dimensiones las pongo para que no se estire en el contenedor si no estuviera en un grid no seria necesario)-->
         <form class="relative flex flex-row items-center justify-center outline-1 outline-[#7DF9FF] rounded-[2cm] z-0 text-xs col-start-2 place-self-center h-7.5 w-36.5 mt-1">
 
@@ -59,7 +59,7 @@
         <!-- Tarjeta (Capa compositing) -->
         <div [style.transform]="this.cardTransformState()"
              [ngClass]="(this.carrouselIdx == 0) ? 'w-[457px] h-[578px] z-2' : 'w-[353px] h-[478px] z-1'"
-             (mouseenter)="this.onCardHover($event)" (mouseleave)="this.unlistHover()" (click)="this.onClickMoveCarrousel($event)"
+             (mouseenter)="this.onCardHover($event)" (mouseleave)="this.unlistCardHover()" (click)="this.onClickMoveCarrousel($event)"
              id="card-0" class="relative box-content transform-gpu animated-card">
             <!-- Hacian falta cuando la tarjeta era transparente backdrop-blur-[4px] backdrop-saturate-120 -->
             <!--  bg-position-[30%_20%]-->
@@ -151,7 +151,7 @@
         <!-- INFO: En gran parte se trata de convertir las clases bindeadas con propiedades complejas que no detecta el navegador a estilos bindeados que si detecta -->
         <div [style.transform]="this.cardTransformState()"
              [ngClass]="(this.carrouselIdx == 1) ? 'w-[457px] h-[578px] z-2' : 'w-[353px] h-[478px] z-1'"
-             (mouseenter)="this.onCardHover($event)" (mouseleave)="this.unlistHover()" (click)="this.onClickMoveCarrousel($event)"
+             (mouseenter)="this.onCardHover($event)" (mouseleave)="this.unlistCardHover()" (click)="this.onClickMoveCarrousel($event)"
              id="card-1" class="-mx-14 relative box-content transform-gpu animated-card">
             <!-- hsla(213_100%_50%/.35) -->
             <div class="w-full h-full relative outline-[oklch(0.72_0.13_180_/30%)] animated-card transform-gpu"
@@ -236,7 +236,7 @@
         <!-- Como solo tienes ahora mismo vuela21 y sporwatch pon aquí una tarjeta: '?' para proyectos que se vienen. -->
         <div [style.transform]="this.cardTransformState()"
              [ngClass]="(this.carrouselIdx == 2) ? 'w-[457px] h-[578px] z-2' : 'w-[353px] h-[478px] z-1'"
-             (mouseenter)="this.onCardHover($event)" (mouseleave)="this.unlistHover()" (click)="this.onClickMoveCarrousel($event)"
+             (mouseenter)="this.onCardHover($event)" (mouseleave)="this.unlistCardHover()" (click)="this.onClickMoveCarrousel($event)"
              id="card-2" class="relative box-content transform-gpu animated-card">
 
 
@@ -293,37 +293,65 @@
             </div>
         </div>
     </div>
+        <h1 class="self-start text-gray-500 font-roboto-serif text-xl font-bold tracking-wide mt-15 ml-20"> Otros proyectos que hice durante el grado </h1>
     <!-- A veces comento en español a veces en ingles me estoy volviendo loco -->
     <!-- TODO: Arreglar version firefox, se ve to bugeado el carrusel el firefox cambia los blurs a pseudoelementos creo. -->
     <!-- TODO: darle caña a esto, prueba si algunos elementos al reves queda bien y sino pues na -->
     <!-- Lista vertical (proyectos secundarios) -->
-    <div class="flex flex-col items-center text-white mt-30 ml-10 w-9/10 gap-y-8 items-center">
+    <div class="flex flex-col items-center text-white mt-30 mx-10 w-9/10 gap-y-8 items-center">
         <!-- Grid with image and description columns -->
         <!-- NOTA: prueba a añadir borde inferior del mismo color que el fondo para dar efecto extrusión 3d -->
         <!-- Y añade sombras a los grids y quizas a la barra separadora (no es ta funcionando en este momento) -->
-        <h1 class="self-start text-gray-500 font-roboto-serif text-xl font-bold tracking-wide ml-1"> Otros proyectos que hice durante el grado </h1>
 
         <!-- Otro grid para ver como se ven varios -->
         <!-- la vignette usa stone-700 o a lo mejor stone-800 y cyan-300/5 de fondo -->
         <!-- TODO: prueba tarjetas mas grandes para una imagen mas grande. -->
         <!-- IMPORTANTE: El primer diseño es feo de cojones sorry. -->
         <!-- dependiendo del proyecto que ponga, un color u otro de fondo, el color de fondo se craftea con un degradado y un bg-black transparente + bg-blend mode de overlay. -->
-        <div class="grid grid-cols-[3fr_7fr] relative w-[60%] h-[280px] self-end justify-items-center gap-x-17 mb-5 rounded-md border-b-9 border-r-9 border-b-[rgba(0,184,219,.01)] border-r-[rgba(0,184,219,.15)]
-                    bg-[radial-gradient(circle_farthest-side_at_85%_50%,rgba(0,184,219,.15)_0%,rgba(16,16,16,.15)_90%)] bg-black/20 bg-blend-overlay box-border">
 
-            <!--  after:shadow-[inset_0_1px_5px_0_rgba(255,255,255,.2)] -->
-            <img alt="Imagen proyecto" src="https://i.redd.it/q26o6vbbgjr81.gif"
-                 class="col-start-1 object-fit rounded-xl size-60 self-center"/>
-
-            <div class="col-start-2 flex flex-col items-start w-full mt-3">
-                <h2 class="font-roboto-serif text-xl"> Título </h2>
-                <!-- Row with the technologies used. (I'll try 20px sizes for the PNGs) -->
-                <div class="flex flex-row max-w-9/10 h-[40px] bg-white justify-center items-center">
-
-                </div>
-                <p class="font-inter"> Descripción </p>
+        <!-- IDEAS TODO: Efecto hover en la imagen para que rote en todos los ejes lentamente o que juegue con las rotaciones raras, la hace mas 3d, + box shadows que lo hacen mas 3d incluso -->
+        <!-- Además en el vídeo marco transparente negro en los bordes que oscurezca el fondo o marco blanco transparente, prueba, a lo mejor un gradiente para efecto glass y un hover al vídeo con box shadows de luz o inset shadows del luz -->
+        <!-- Elemento de la lista -->
+        <div id="element-0" class="flex flex-row w-full h-[300px] items-center" (mouseenter)="onListHover($event)" (mouseleave)="unlistListHover()">
+            <!-- INFO: la proporción real de este vídeo es 367/20 pero lo voy a simplificar a 16:9 -->
+            <!-- Esta capa será la que se compositará para la transparencia. -->
+            <!-- Overlay 1º Elemento (hover) -->
+            <div class="w-[528px] h-full mx-auto grid rounded-md box-border relative" *ngIf="this.listHoverIdx === 0">
+                <!-- Bordes transparentes con efecto chulo, el radial va en otro porque sino no se ve -->
+                <div class="w-full h-full absolute pointer-events-none border-33 border-[rgba(182.03,235.35,254.93,.15)] z-4 translate-z-0 rounded-md backdrop-blur-xs"></div>
+                <!-- Radial gradient por detras del video -->
+                <div class="w-full h-full absolute pointer-events-none z-5 bg-[radial-gradient(ellipse_farthest-corner_at_50%_80%,rgba(255,255,255,.1)_1%,rgba(0,0,0,.1)_75%)] translate-z-0"> </div>
+                <video class="w-[464px] h-[261px] place-self-center rounded-md hover:shadow-[inset_0_0_15px_1px_rgba(255,255,255,.3)] z-2 " (click)="onVideoClick($event)" (dblclick)="onCardVideoDblClick($event)">
+                    <!-- Metele ngif con hover a la lista vertical -->
+                    <source *ngIf="this.listHoverIdx === 0" src="/projects/conways-life-game-Max183-pattern.av1.webm" type="video/webm">
+                    <source *ngIf="this.listHoverIdx === 0" src="/projects/conways-life-game-Max183-pattern.mp4" type="video/mp4">
+                </video>
             </div>
+
+            <!-- Elemento lista vertical -->
+            <div class="grid grid-cols-[3fr_7fr] relative w-[60%] h-[280px] mx-auto justify-items-center gap-x-17 rounded-md border-b-9 border-r-9 border-b-[rgba(0,184,219,.01)] border-r-[rgba(0,184,219,.15)]
+                        bg-[radial-gradient(circle_farthest-side_at_85%_50%,rgba(0,184,219,.15)_0%,rgba(16,16,16,.15)_90%)] bg-black/20 bg-blend-overlay box-content hover:shadow-[-3px_3px_20px_0px_rgba(200,200,200,.25)]">
+
+                <!--  after:shadow-[inset_0_1px_5px_0_rgba(255,255,255,.2)] -->
+                <!-- Imagen proyecto (Contenedor porque requiere un hover hacia adentro para que la imagen no dependa de su propio hover y se deseleccione al moverse.-->
+                <div class="col-start-1 self-center size-62 grid group z-3">
+                    <img alt="Imagen proyecto" src="/projects/conways_life_game.png"
+                        class="object-fit self-center justify-self-center rounded-xl size-60 group-hover:animate-fullyRotateImg hover:shadow-[0_0_25px_0px_rgba(200,200,200,.25)] cursor-pointer"/>
+                </div>
+
+                <!-- Sección de texto -->
+                <div class="col-start-2 flex flex-col items-start w-full mt-3">
+                    <h2 class="font-roboto-serif text-xl"> Juego de la vida de Conway </h2>
+                    <!-- Row with the technologies used. (I'll try 20px sizes for the PNGs) -->
+                    <div class="flex flex-row max-w-9/10 h-[40px] bg-white justify-center items-center">
+
+                    </div>
+                    <p class="font-inter"> Descripción </p>
+                </div>
+            </div>
+
         </div>
+
 
 
         <div class="grid grid-cols-[3fr_7fr] relative w-[50%] h-[280px] self-start justify-items-center gap-x-17 mb-5 rounded-md border-b-9 border-r-9 border-white/5

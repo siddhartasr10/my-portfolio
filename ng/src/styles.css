@@ -18,6 +18,7 @@
     --breakpoint-2.5xl: 105.5rem; /* 1688px, -1 px de donde me da problema el grid en el about-me */
     /* --breakpoint-3xl:  */
 
+    /* Animaciones About-me */
     --animate-floating-fast: floating 1.5s ease-in-out infinite;
     --animate-floating-mid: floating 2.5s ease-in-out infinite;
     --animate-floating-slow: floating 3.5s ease-in-out infinite;
@@ -45,6 +46,23 @@
         }
         to {
             transform: translateY(-2000px);
+        }
+    }
+
+    /* Animaciones projects */
+    --animate-fullyRotateImg: fullyRotateImg 15s linear infinite;
+
+    @keyframes fullyRotateImg {
+        from {
+            transform: rotate3d(1, 1, -1, 40deg);
+        }
+
+        /* 50% { */
+        /*     transform: rotate3d(1, 1, -1, 300deg); */
+        /* } */
+
+        to {
+            transform: rotate3d(1, 1, -1, 400deg);
         }
     }
 }
