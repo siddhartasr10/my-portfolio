@@ -311,14 +311,22 @@
 
         <!-- IDEAS TODO: Efecto hover en la imagen para que rote en todos los ejes lentamente o que juegue con las rotaciones raras, la hace mas 3d, + box shadows que lo hacen mas 3d incluso -->
         <!-- Además en el vídeo marco transparente negro en los bordes que oscurezca el fondo o marco blanco transparente, prueba, a lo mejor un gradiente para efecto glass y un hover al vídeo con box shadows de luz o inset shadows del luz -->
+        <!-- El video al aparecer se mueve todo muy de golpe mete un left o un gap con transition, o el width que le he metido, pero cambia la transition. -->
+        <!-- El truco este no sirve con vídeos, lo que sirve es una capa por encima y . -->
+        <!-- INFO: https://css-tricks.com/blurred-borders-in-css/ -->
+
         <!-- Elemento de la lista -->
         <div id="element-0" class="flex flex-row w-full h-[300px] items-center" (mouseenter)="onListHover($event)" (mouseleave)="unlistListHover()">
             <!-- INFO: la proporción real de este vídeo es 367/20 pero lo voy a simplificar a 16:9 -->
             <!-- Esta capa será la que se compositará para la transparencia. -->
+            <!-- En vez de ngif seguramente opacity y width animada -->
             <!-- Overlay 1º Elemento (hover) -->
-            <div class="w-[528px] h-full mx-auto grid rounded-md box-border relative" *ngIf="this.listHoverIdx === 0">
+            <!-- *ngIf="this.listHoverIdx === 0" -->
+            <!-- TODO: trastoca la transición pa hacerla más suave  -->
+            <div class="h-full grid rounded-md box-border relative transition-all" [style.visibility]="(this.listHoverIdx === 0) ? 'visible' : 'hidden'"
+                 [class.mx-auto]="(this.listHoverIdx === 0) ? true : false" [style.width.px]="(this.listHoverIdx === 0) ? '528' : '0'">
                 <!-- Bordes transparentes con efecto chulo, el radial va en otro porque sino no se ve -->
-                <div class="w-full h-full absolute pointer-events-none border-33 border-[rgba(182.03,235.35,254.93,.15)] z-4 translate-z-0 rounded-md backdrop-blur-xs"></div>
+                <div class="w-full h-full absolute pointer-events-none border-33 border-[rgba(182.03,235.35,254.93,.15)] z-1 translate-z-0 rounded-md bg-cli"></div>
                 <!-- Radial gradient por detras del video -->
                 <div class="w-full h-full absolute pointer-events-none z-5 bg-[radial-gradient(ellipse_farthest-corner_at_50%_80%,rgba(255,255,255,.1)_1%,rgba(0,0,0,.1)_75%)] translate-z-0"> </div>
                 <video class="w-[464px] h-[261px] place-self-center rounded-md hover:shadow-[inset_0_0_15px_1px_rgba(255,255,255,.3)] z-2 " (click)="onVideoClick($event)" (dblclick)="onCardVideoDblClick($event)">
@@ -326,6 +334,7 @@
                     <source *ngIf="this.listHoverIdx === 0" src="/projects/conways-life-game-Max183-pattern.av1.webm" type="video/webm">
                     <source *ngIf="this.listHoverIdx === 0" src="/projects/conways-life-game-Max183-pattern.mp4" type="video/mp4">
                 </video>
+                <div class=""></div>
             </div>
 
             <!-- Elemento lista vertical -->
