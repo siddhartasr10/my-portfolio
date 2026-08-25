@@ -58,10 +58,14 @@ export class AboutMeComponent {
     let objGuiaDiv = this.objGuia.nativeElement as HTMLDivElement,
     motGuiaDiv = this.motGuia.nativeElement as HTMLDivElement;
 
-    if (localStorage.getItem("objPos") && localStorage.getItem("motPos")) {
-      objGuiaDiv.style.display = "none", motGuiaDiv.style.display = "none";
-      return;
-    }
+    // Logica para evitar generar las posiciones de los elementos varias veces.
+    // La desactivo por si alguien entra con el zoom puesto o un viewport cambiado
+    // para que al recargar la página se pongan bien las dimensiones.
+
+    // if (localStorage.getItem("objPos") && localStorage.getItem("motPos")) {
+    //   objGuiaDiv.style.display = "none", motGuiaDiv.style.display = "none";
+    //   return;
+    // }
 
     // Estas variables son el left y el top y se usan como ngStyle.
     this.objPos.set(this.coordToPos(this.getCoords(this.objGuia)));
@@ -87,7 +91,7 @@ export class AboutMeComponent {
       ? el = ele.nativeElement as HTMLElement
       : el = ele;
 
-    return {x: el.getBoundingClientRect().x, y: el.getBoundingClientRect().y };
+    return {x: el.getBoundingClientRect().x + window.scrollX, y: el.getBoundingClientRect().y + window.scrollY };
   }
 
   coordToPos(obj: Coords) : {left: string, top: string} {
