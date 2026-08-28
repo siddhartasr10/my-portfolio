@@ -6,6 +6,12 @@
     --big-shadows: 0;
 }
 
+.mozilla {
+    visibility: hidden;
+    display: none;
+    opacity: 0;
+}
+
 /* Only valid way to detect firefox browser by css,
  * deprecated for using it for its original purpose btw (which god knows what it was)
  */
@@ -16,5 +22,18 @@
         background: radial-gradient(in oklch ellipse 140% 170% at 50% 110%, rgba(55,200,255,.1) 0%, rgba(0,0,150,.1) 45%, rgba(0,0,10,.1) 67%);
         border-top-color: rgba(190, 219, 255,.1);
         border-bottom-color: rgba(83, 234, 253,.15);
+    }
+
+    /* I could check firefox browser by js browser globals and then use ngIf but I think a variable
+     * and an initialization check of that variable is more memory than a <p>
+     */
+    .mozilla {
+        visibility: visible !important;
+        display: block !important;
+        opacity: 1 !important;
+
+        position: absolute;
+        left: 10px;
+        bottom: 0;
     }
 }
