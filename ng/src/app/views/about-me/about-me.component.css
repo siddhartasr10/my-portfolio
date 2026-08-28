@@ -5,3 +5,16 @@
     --medium-shadows: 0;
     --big-shadows: 0;
 }
+
+/* Only valid way to detect firefox browser by css,
+ * deprecated for using it for its original purpose btw (which god knows what it was)
+ */
+@-moz-document url-prefix() {
+    /* Transparent section replicated without blend mode as soft-light doesn't work the same in firefox */
+    .moz-transparent-section {
+        mix-blend-mode: unset;
+        background: radial-gradient(in oklch ellipse 140% 170% at 50% 110%, rgba(55,200,255,.1) 0%, rgba(0,0,150,.1) 45%, rgba(0,0,10,.1) 67%);
+        border-top-color: rgba(190, 219, 255,.1);
+        border-bottom-color: rgba(83, 234, 253,.15);
+    }
+}
