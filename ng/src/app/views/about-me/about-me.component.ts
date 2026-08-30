@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, AfterViewInit , ViewChild, WritableSignal, signal } from '@angular/core';
-import { NgStyle } from '@angular/common';
+import { NgStyle, NgIf } from '@angular/common';
 
 import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
 
@@ -7,11 +7,10 @@ type Coords = {
     x: number,
     y: number,
   }
-  // TODO: Haz una version que se vea en firefox por lo menos y no solo en blink.
 
 @Component({
   selector: 'app-about-me',
-  imports: [NavbarComponent, NgStyle],
+  imports: [NavbarComponent, NgStyle, NgIf],
   templateUrl: './about-me.component.html',
   styleUrl: './about-me.component.css'
 })
@@ -21,9 +20,11 @@ export class AboutMeComponent {
   @ViewChild("objetivosGuia") objGuia!: ElementRef;
   @ViewChild("motivacionGuia") motGuia!: ElementRef;
 
-  objPos : WritableSignal<{left?: string, top?: string}> = signal({});
-  motPos : WritableSignal<{left?: string, top?: string}> = signal({});
+  objPos: WritableSignal<{left?: string, top?: string}> = signal({});
+  motPos: WritableSignal<{left?: string, top?: string}> = signal({});
 
+  // If the client uses a Gecko based browser.
+  usesGecko: boolean = false;
 
   multipleBoxShadow(n: number): string {
     let rand = `${(Math.random() * 2000).toFixed(2)}px ${Math.random() * 2000}px #FFF`;
@@ -39,6 +40,12 @@ export class AboutMeComponent {
     root.style.setProperty("--small-shadows", this.shadows[0]);
     root.style.setProperty("--medium-shadows", this.shadows[1]);
     root.style.setProperty("--big-shadows", this.shadows[2]);
+
+    // Quick check of safari or mozilla browser
+    // IMPORTANT: if -moz-orient or window.safari get deprecated change this.
+    let trueWindow = window as (Window & typeof globalThis & {safari?: object});
+    this.usesGecko = (trueWindow.safari || CSS.supports("-moz-orient", "inline")) ? true : false;
+
     // console.log("f.e small shadows is: ", root.style.getPropertyValue("--small-shadows"));
 
 

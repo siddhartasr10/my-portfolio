@@ -6,34 +6,22 @@
     --big-shadows: 0;
 }
 
-.mozilla {
-    visibility: hidden;
-    display: none;
-    opacity: 0;
-}
-
 /* Only valid way to detect firefox browser by css,
  * deprecated for using it for its original purpose btw (which god knows what it was)
  */
-@-moz-document url-prefix() {
-    /* Transparent section replicated without blend mode as soft-light doesn't work the same in firefox */
-    .moz-transparent-section {
-        mix-blend-mode: unset;
-        background: radial-gradient(in oklch ellipse 140% 170% at 50% 110%, rgba(55,200,255,.1) 0%, rgba(0,0,150,.1) 45%, rgba(0,0,10,.1) 67%);
-        border-top-color: rgba(190, 219, 255,.1);
-        border-bottom-color: rgba(83, 234, 253,.15);
-    }
+/* @-moz-document url-prefix() {} */
 
-    /* I could check firefox browser by js browser globals and then use ngIf but I think a variable
-     * and an initialization check of that variable is more memory than a <p>
-     */
-    .mozilla {
-        visibility: visible !important;
-        display: block !important;
-        opacity: 1 !important;
+/* Transparent section replicated without blend mode as soft-light doesn't work the same in firefox */
+.moz-transparent-section {
+    mix-blend-mode: unset;
+    background: radial-gradient(in oklch ellipse 140% 170% at 50% 110%, rgba(55,200,255,.1) 0%, rgba(0,0,150,.1) 45%, rgba(0,0,10,.1) 67%);
+    border-top-color: rgba(190, 219, 255,.1);
+    border-bottom-color: rgba(83, 234, 253,.15);
+}
 
-        position: absolute;
-        left: 10px;
-        bottom: 0;
-    }
+.webkit-transparent-section {
+    mix-blend-mode: soft-light;
+    background: radial-gradient(ellipse farthest-corner at -280% 200%, rgba(155, 255, 255, .75) 0%, rgba(50, 200, 255, .35) 75%, rgba(0, 0, 100, .8) 99%);
+    border-top-color: var(--color-blue-200);
+    border-bottom-color: var(--color-cyan-300);
 }
