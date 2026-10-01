@@ -134,7 +134,7 @@
                 <!-- Webm con av1 es más eficiente que mp4 com h.264 -->
                 <video #cardVideo0 class="bg-black w-9/10 h-9/10 rounded-sm z-1 translate-z-0 hover:shadow-[0_0_5px_1px_rgba(255,255,255,.3)]" autoplay="false" loading="lazy"
                        id="video-0"
-                       (click)="onVideoClick($event)" (dblclick)="onCardVideoDblClick($event)" (ended)="restartCardVideo($event)"
+                       (click)="onVideoClick($event)" (dblclick)="onVideoDblClick($event)" (ended)="restartCardVideo($event)"
                        (mouseenter)="onVideoHover($event)" (mouseleave)="unlistVideoHover()">
                     <!-- El if hace que el vídeo solo cargue realmente cuando se hace hover por primera vez, una vez cargado en la memoria da igual que se salga del hover. -->
                     <source *ngIf="this.carrouselIdx == 0 && this.hoverIdx == 0" src="/projects/grabacion_vuela21-online-video-cutter.com.av1.webm" type="video/webm">
@@ -224,7 +224,7 @@
                 <!-- Webm con av1 es más eficiente que mp4 com h.264 -->
 
                 <video #cardVideo1 class="bg-black w-9/10 h-9/10 rounded-sm translate-z-0 hover:shadow-[0_0_5px_1px_rgba(255,255,255,.3)]" autoplay="false" loading="lazy"
-                       id="video-1" (click)="onVideoClick($event)" (dblclick)="onCardVideoDblClick($event)" (ended)="restartCardVideo($event)"
+                       id="video-1" (click)="onVideoClick($event)" (dblclick)="onVideoDblClick($event)" (ended)="restartCardVideo($event)"
                        (mouseenter)="onVideoHover($event)" (mouseleave)="unlistVideoHover()">
                     <source *ngIf="this.carrouselIdx == 1 && this.hoverIdx == 1" src="/projects/Presentacion-ezgif.com.av1.webm" type="video/webm">
                     <source *ngIf="this.carrouselIdx == 1 && this.hoverIdx == 1" src="/projects/Presentacion-ezgif.com.mp4" type="video/mp4">
@@ -300,12 +300,10 @@
     <!-- Lista vertical (proyectos secundarios) -->
     <div class="flex flex-col items-center text-white mt-30 mx-10 w-9/10 gap-y-8 items-center">
         <!-- Grid with image and description columns -->
-        <!-- NOTA: prueba a añadir borde inferior del mismo color que el fondo para dar efecto extrusión 3d -->
         <!-- Y añade sombras a los grids y quizas a la barra separadora (no es ta funcionando en este momento) -->
 
         <!-- Otro grid para ver como se ven varios -->
         <!-- la vignette usa stone-700 o a lo mejor stone-800 y cyan-300/5 de fondo -->
-        <!-- TODO: prueba tarjetas mas grandes para una imagen mas grande. -->
         <!-- IMPORTANTE: El primer diseño es feo de cojones sorry. -->
         <!-- dependiendo del proyecto que ponga, un color u otro de fondo, el color de fondo se craftea con un degradado y un bg-black transparente + bg-blend mode de overlay. -->
 
@@ -315,21 +313,46 @@
         <!-- El truco este no sirve con vídeos, lo que sirve es una capa por encima y . -->
         <!-- INFO: https://css-tricks.com/blurred-borders-in-css/ -->
 
+
+        <!-- NOTE: delays of the vertical element are carefully chosen to make the expansion smooth -->
         <!-- Elemento de la lista -->
-        <div id="element-0" class="flex flex-row w-full h-[300px] items-center" (mouseenter)="onListHover($event)" (mouseleave)="unlistListHover()">
+        <div id="element-0" class="grid w-full h-[300px] items-center group
+                 transition-[column-gap,grid-template-columns] delay-[.2s,.3s] duration-[300ms,300ms] ease-[ease-in-out,ease-in-out] "
+             (mouseenter)="onListHover($event)" (mouseleave)="unlistListHover()"
+             [style.grid-template-columns]="(this.listHoverIdx === 0 || this.listActiveVideoIdxs.has(0)) ? '.35fr .65fr' : '.05fr .9fr'"
+             [style.column-gap]="(this.listHoverIdx === 0 || this.listActiveVideoIdxs.has(0)) ? '7.5rem' : '0'">
             <!-- INFO: la proporción real de este vídeo es 367/20 pero lo voy a simplificar a 16:9 -->
+            <!-- Y por supuesto mete scroll animation con view(block) -->
             <!-- Esta capa será la que se compositará para la transparencia. -->
-            <!-- En vez de ngif seguramente opacity y width animada -->
+
             <!-- Overlay 1º Elemento (hover) -->
-            <!-- *ngIf="this.listHoverIdx === 0" -->
-            <!-- TODO: trastoca la transición pa hacerla más suave  -->
-            <div class="h-full grid rounded-md box-border relative transition-all" [style.visibility]="(this.listHoverIdx === 0) ? 'visible' : 'hidden'"
-                 [class.mx-auto]="(this.listHoverIdx === 0) ? true : false" [style.width.px]="(this.listHoverIdx === 0) ? '528' : '0'">
-                <!-- Bordes transparentes con efecto chulo, el radial va en otro porque sino no se ve -->
-                <div class="w-full h-full absolute pointer-events-none border-33 border-[rgba(182.03,235.35,254.93,.15)] z-1 translate-z-0 rounded-md bg-cli"></div>
+            <!-- Lo de abajo es lo importante -->
+            <div class="w-full max-w-[528px] h-full grid grid-rows-1 place-self-center rounded-md box-border relative ease-[ease-out] transition-[opacity] delay-[0s] duration-[400ms]"
+                 [style.opacity]="(this.listHoverIdx === 0 || this.listActiveVideoIdxs.has(0)) ? '1' : '0'">
+                <!-- Al final era darle mas espacio en la columna y ponerle un max-w pa que la capa borde el container se coordinaran [style.width.px]="(this.listHoverIdx === 0) ? '528' : '0'" -->
+                <!-- Bordes con efecto chulo, el radial va en otro porque sino no se ve -->
+                <div class="w-full max-w-[528px] h-full absolute pointer-events-none transition-[border-width] ease-[ease-out]
+                            border-[rgba(0,20,49)] z-1 translate-z-0 rounded-md"
+                     [style.border-width.px]="(this.listHoverIdx === 0 || this.listActiveVideoIdxs.has(0)) ? '33' : '0'"
+                     [style.transition-duration]="(this.listHoverIdx === 0) ? '500ms' : '150ms'"
+                     [style.transition-delay]="(this.listHoverIdx === 0) ? '.6' : '.2s'">
+                </div>
+                <!-- Las animaciones están hechas para tardar en ponerse y quitarse rápidamente -->
                 <!-- Radial gradient por detras del video -->
-                <div class="w-full h-full absolute pointer-events-none z-5 bg-[radial-gradient(ellipse_farthest-corner_at_50%_80%,rgba(255,255,255,.1)_1%,rgba(0,0,0,.1)_75%)] translate-z-0"> </div>
-                <video class="w-[464px] h-[261px] place-self-center rounded-md hover:shadow-[inset_0_0_15px_1px_rgba(255,255,255,.3)] z-2 " (click)="onVideoClick($event)" (dblclick)="onCardVideoDblClick($event)">
+                <div class="w-full h-full absolute pointer-events-none z-5 translate-z-0 transition-[opacity] ease-[ease-out]
+                           bg-[radial-gradient(ellipse_farthest-corner_at_50%_80%,rgba(255,255,255,.1)_1%,rgba(0,0,0,.1)_75%)]"
+
+                     [style.opacity]="(this.listHoverIdx === 0 || this.listActiveVideoIdxs.has(0)) ? '1' : '0'"
+                     [style.transition-duration]="(this.listHoverIdx === 0) ? '800ms' : '300ms'"
+                     [style.transition-delay]="(this.listHoverIdx === 0) ? '1s' : '.4s'">
+                </div>
+
+                <video #listVideo0 id="list-video-0" class="w-[464px] h-[261px] place-self-center z-2 rounded-md
+                                       transition-[box-shadow] ease-[ease-out] group-hover:shadow-[0_0_5px_2px_rgba(255,255,255,.3)]"
+
+                       (click)="onVideoClick($event)" (dblclick)="onVideoDblClick($event)" (click)="onListVideoClick($event)"
+                       [style.transition-duration]="(this.listActiveVideoIdxs.has(0)) ? '250ms' : (this.listHoverIdx === 0) ? '400ms' : '0ms'"
+                       [style.transition-delay]="(this.listActiveVideoIdxs.has(0)) ? '80ms' : (this.listHoverIdx === 0) ? '600ms' : '0ms'">
                     <!-- Metele ngif con hover a la lista vertical -->
                     <source *ngIf="this.listHoverIdx === 0" src="/projects/conways-life-game-Max183-pattern.av1.webm" type="video/webm">
                     <source *ngIf="this.listHoverIdx === 0" src="/projects/conways-life-game-Max183-pattern.mp4" type="video/mp4">
@@ -338,7 +361,7 @@
             </div>
 
             <!-- Elemento lista vertical -->
-            <div class="grid grid-cols-[3fr_7fr] relative w-[60%] h-[280px] mx-auto justify-items-center gap-x-17 rounded-md border-b-9 border-r-9 border-b-[rgba(0,184,219,.01)] border-r-[rgba(0,184,219,.15)]
+            <div class="grid grid-cols-[3fr_7fr] relative w-[1036px] h-[280px] mx-auto justify-items-center gap-x-17 rounded-md border-b-9 border-r-9 border-b-[rgba(0,184,219,.01)] border-r-[rgba(0,184,219,.15)]
                         bg-[radial-gradient(circle_farthest-side_at_85%_50%,rgba(0,184,219,.15)_0%,rgba(16,16,16,.15)_90%)] bg-black/20 bg-blend-overlay box-content hover:shadow-[-3px_3px_20px_0px_rgba(200,200,200,.25)]">
 
                 <!--  after:shadow-[inset_0_1px_5px_0_rgba(255,255,255,.2)] -->
@@ -353,7 +376,7 @@
                     <h2 class="font-roboto-serif text-xl"> Juego de la vida de Conway </h2>
                     <!-- Row with the technologies used. (I'll try 20px sizes for the PNGs) -->
                     <div class="flex flex-row max-w-9/10 h-[40px] bg-white justify-center items-center">
-
+                        az
                     </div>
                     <p class="font-inter"> Descripción </p>
                 </div>
@@ -387,7 +410,6 @@
                     box-border bg-black/20 bg-blend-overlay shadow-[inset_-5px_5px_5px_0_rgba(25,25,25,.15),inset_5px_-5px_5px_0_rgba(25,25,25,.1505),inset_-5px_5px_5px_0_rgba(25,25,25,.1501),inset_5px_-5px_5px_0_rgba(25,25,25,.1501)]">
             <!-- No me interesa:
                  after:shadow-[inset_0_1px_5px_0_rgba(255,255,255,.2)]  after:content-[''] after:absolute after:-bottom-3.5 after:h-[2px] after:w-full after:shadow-[0px_2px_4px_0_rgba(25,255,255,.34)] -->
-
             <img alt="Imagen proyecto" src="https://i.redd.it/q26o6vbbgjr81.gif"
                  class="col-start-1 object-fit rounded-sm size-60 self-center"/>
 

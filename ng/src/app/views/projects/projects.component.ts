@@ -47,12 +47,18 @@ export class ProjectsComponent {
 
   // Indice del elemento de la lista vertical que se está hovereando
   listHoverIdx: number = -1;
+  listActiveVideoIdxs: Set<number> = new Set();
+
+  listVideos: Array<ElementRef<HTMLVideoElement>> = [];
+  @ViewChild('listVideo0') listVideo0!: ElementRef<HTMLVideoElement>;
+  // @ViewChild('listVideo1') listVideo1!: ElementRef<HTMLVideoElement>;
 
   // hostRef is a variable to the <html>, I use it to control :root
   constructor(private hostRef: ElementRef) {}
 
   ngAfterViewInit(): void {
     this.carrouselVideos = [this.cardVideo0, this.cardVideo1]
+    this.listVideos = [this.listVideo0]
 
     // Controla la velocidad de movimiento del carrusel con el scroll, evita el lag.
     /* Si hiciera esto (o en general procesara cualquier input tal cual llega)
@@ -200,14 +206,14 @@ export class ProjectsComponent {
       , 300);
   }
 
-  onCardVideoDblClick(ev: MouseEvent): void {
+  onVideoDblClick(ev: MouseEvent): void {
     const target = ev.target as HTMLVideoElement;
     ev.stopPropagation();
     this.isSingleClick = false;
     target.requestFullscreen();
 
   }
-
+  // Accounts hover on the card's videos.
   onVideoHover(ev: MouseEvent): void {
     const target = ev.target as HTMLVideoElement;
     this.videoHoverIdx = (!isNaN(Number(target.id.at(-1))))
@@ -217,6 +223,35 @@ export class ProjectsComponent {
 
   unlistVideoHover(): void {
     this.videoHoverIdx = -1;
+  }
+  
+  onListVideoClick(ev: MouseEvent): void {
+    const target = ev.target as HTMLVideoElement;
+    this.isSingleClick = true;
+    const id = (!isNaN(Number(target.id.at(-1))))
+      ? Number(target.id.at(-1))
+      : -1;
+
+    // I do this diferently than card videos bc i don't want autoplay and autopause,
+    // I just pause a video in the list if other gets played (clicked)
+    // and keep it on a index list so i can keep elements styled while videos are playing.
+    setTimeout(() => {
+      if (this.isSingleClick) {
+        if (target.paused) {
+          this.listActiveVideoIdxs.delete(id);
+        }
+        else {
+          // Check if there's any video playing apart from the one just played and if there is pause it.
+          // and clear the number from the active list.
+          this.listActiveVideoIdxs.forEach((val) => (val !== id && this.listVideos[val]) 
+            ? this.listVideos[val].nativeElement.pause() : null);
+          this.listActiveVideoIdxs.clear();
+          this.listActiveVideoIdxs.add(id);
+        }
+      }
+    } 
+      , 400);
+    
   }
 
   // Executes on every cardIdx and hoverIdx movement (click, click on arrow, wheel move and mouseEnter)

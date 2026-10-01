@@ -54,7 +54,7 @@
 
     @keyframes fullyRotateImg {
         from {
-            transform: rotate3d(1, 1, -1, 40deg);
+            transform: rotate3d(1, 1, -1, 20deg);
         }
 
         /* 50% { */
@@ -62,7 +62,7 @@
         /* } */
 
         to {
-            transform: rotate3d(1, 1, -1, 400deg);
+            transform: rotate3d(1, 1, -1, 380deg);
         }
     }
 }
