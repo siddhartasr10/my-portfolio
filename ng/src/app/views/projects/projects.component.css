@@ -1,5 +1,12 @@
 :host {
     --slider-end-transform: 3.62rem;
+    display: block;
+    height: 100vh;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    scroll-snap-type: y proximity;
 }
 
 /*

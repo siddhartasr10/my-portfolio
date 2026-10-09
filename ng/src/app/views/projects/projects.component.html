@@ -1,4 +1,4 @@
-<div class="max-w-screen w-screen min-h-screen flex flex-col items-center bg-linear-to-b from-[oklch(0.17_0.07_254.86)] to-[oklch(0.16_0.05_254.67)]"> <!-- bg-[#1F1F1F] -->
+<div class="max-w-screen w-screen min-h-screen flex flex-col items-center bg-linear-to-b from-[oklch(0.17_0.07_254.86)] to-[oklch(0.16_0.05_254.67)] snap-y snap-mandatory"> <!-- bg-[#1F1F1F] -->
     <!-- Colores antiguos del bg del body: bg-linear-to-b from-[#061426] to-[#0B1726] -->
     <app-navbar class="flex flex-row items-center justify-center h-[10vh] w-screen" [style.contain]="'content'"></app-navbar>
     <div class="grid grid-cols-[0.75fr_0.25fr] w-screen my-10 self-start items-baseline" >
@@ -42,7 +42,7 @@
     <!-- INFO: El aspect ratio de las tarjetas es casí un 4:5 perfecto. -->
     <!-- Carrusel -->
     <div (wheel)="onWheelMoveCarrousel($event)" id="carrousel"
-         class="w-[92%] h-[70vh] bg-radial-[circle_farthest-side_at_50%_55%] from-[#81A9DA]/50 to-[rgba(6,20,38,0.7)] flex flex-row items-center justify-center
+         class="w-[92%] h-[70vh] bg-radial-[circle_farthest-side_at_50%_55%] from-[#81A9DA]/50 to-[rgba(6,20,38,0.7)] flex flex-row items-center justify-center snap-always snap-end
                 transform-3d rounded-md shadow-[0_0_8px_0_hsla(213_100%_35%/.18),0_0_8px_0_hsla(213_100%_65%/.18)] inset-shadow-[0_0_14px_rgba(0,255,210,0.05)]">
     <!-- <h2 class="text-2xl/6 font-extrabold font-roboto-flex my-6 text-center bg-linear-to-r from-blue-600 to-black bg-clip-text text-transparent tracking-wide invisible"> a </h2> -->
         <img #leftArrow (click)="onArrowClickMoveCarrousel(leftArrow)" class="absolute size-8 left-10 cursor-pointer z-100 hover:drop-shadow-[0_0_9px_rgba(255,255,255,1),0_0_9px_rgba(255,255,255,1)]"
@@ -293,12 +293,12 @@
             </div>
         </div>
     </div>
-        <h1 class="self-start text-gray-500 font-roboto-serif text-xl font-bold tracking-wide mt-15 ml-20"> Otros proyectos que hice durante el grado </h1>
     <!-- A veces comento en español a veces en ingles me estoy volviendo loco -->
     <!-- TODO: Arreglar version firefox, se ve to bugeado el carrusel el firefox cambia los blurs a pseudoelementos creo. -->
     <!-- TODO: darle caña a esto, prueba si algunos elementos al reves queda bien y sino pues na -->
     <!-- Lista vertical (proyectos secundarios) -->
-    <div class="flex flex-col items-center text-white mt-30 mx-10 w-9/10 gap-y-8 items-center">
+    <div class="relative flex flex-col items-center text-white mt-30 mx-10 w-9/10 h-[500px] gap-y-8 items-center overflow-auto snap-center snap-always snap-mandatory snap-y">
+        <h1 class="relative self-start sticky text-gray-500 font-roboto-serif text-3xl font-bold mb-5 top-0 z-10"> Algunos <b style="color:white">experimentos</b> </h1>
         <!-- Grid with image and description columns -->
         <!-- Y añade sombras a los grids y quizas a la barra separadora (no es ta funcionando en este momento) -->
 
@@ -316,7 +316,7 @@
 
         <!-- NOTE: delays of the vertical element are carefully chosen to make the expansion smooth -->
         <!-- Elemento de la lista -->
-        <div id="element-0" class="grid w-full h-[300px] items-center group
+        <div id="element-0" class="grid w-full h-[300px] items-center group snap-always snap-center
                  transition-[column-gap,grid-template-columns] delay-[.2s,.3s] duration-[300ms,300ms] ease-[ease-in-out,ease-in-out] "
              (mouseenter)="onListHover($event)" (mouseleave)="unlistListHover()"
              [style.grid-template-columns]="(this.listHoverIdx === 0 || this.listActiveVideoIdxs.has(0)) ? '.35fr .65fr' : '.05fr .9fr'"
@@ -331,11 +331,11 @@
                  [style.opacity]="(this.listHoverIdx === 0 || this.listActiveVideoIdxs.has(0)) ? '1' : '0'">
                 <!-- Al final era darle mas espacio en la columna y ponerle un max-w pa que la capa borde el container se coordinaran [style.width.px]="(this.listHoverIdx === 0) ? '528' : '0'" -->
                 <!-- Bordes con efecto chulo, el radial va en otro porque sino no se ve -->
-                <div class="w-full max-w-[528px] h-full absolute pointer-events-none transition-[border-width] ease-[ease-out]
+                <div class="w-full max-w-[528px] h-full absolute pointer-events-none transition-[border-width] ease-[ease-in]
                             border-[rgba(0,20,49)] z-1 translate-z-0 rounded-md"
                      [style.border-width.px]="(this.listHoverIdx === 0 || this.listActiveVideoIdxs.has(0)) ? '33' : '0'"
-                     [style.transition-duration]="(this.listHoverIdx === 0) ? '500ms' : '150ms'"
-                     [style.transition-delay]="(this.listHoverIdx === 0) ? '.6' : '.2s'">
+                     [style.transition-duration]="(this.listHoverIdx === 0) ? '550ms' : '150ms'"
+                     [style.transition-delay]="(this.listHoverIdx === 0) ? '.5s' : '.2s'">
                 </div>
                 <!-- Las animaciones están hechas para tardar en ponerse y quitarse rápidamente -->
                 <!-- Radial gradient por detras del video -->
@@ -348,11 +348,11 @@
                 </div>
 
                 <video #listVideo0 id="list-video-0" class="w-[464px] h-[261px] place-self-center z-2 rounded-md
-                                       transition-[box-shadow] ease-[ease-out] group-hover:shadow-[0_0_5px_2px_rgba(255,255,255,.3)]"
+                                       transition-[box-shadow] ease-[ease-in] group-hover:shadow-[0_0_5px_2px_rgba(255,255,255,.3)]"
 
                        (click)="onVideoClick($event)" (dblclick)="onVideoDblClick($event)" (click)="onListVideoClick($event)"
                        [style.transition-duration]="(this.listActiveVideoIdxs.has(0)) ? '250ms' : (this.listHoverIdx === 0) ? '400ms' : '0ms'"
-                       [style.transition-delay]="(this.listActiveVideoIdxs.has(0)) ? '80ms' : (this.listHoverIdx === 0) ? '600ms' : '0ms'">
+                       [style.transition-delay]="(this.listActiveVideoIdxs.has(0)) ? '80ms' : (this.listHoverIdx === 0) ? '700ms' : '0ms'">
                     <!-- Metele ngif con hover a la lista vertical -->
                     <source *ngIf="this.listHoverIdx === 0" src="/projects/conways-life-game-Max183-pattern.av1.webm" type="video/webm">
                     <source *ngIf="this.listHoverIdx === 0" src="/projects/conways-life-game-Max183-pattern.mp4" type="video/mp4">
@@ -387,7 +387,7 @@
 
 
         <div class="grid grid-cols-[3fr_7fr] relative w-[50%] h-[280px] self-start justify-items-center gap-x-17 mb-5 rounded-md border-b-9 border-r-9 border-white/5
-                    bg-[radial-gradient(circle_farthest-side_at_85%_50%,rgba(170,50,50,.21)_0%,rgba(16,16,70,.15)_90%)]
+                    bg-[radial-gradient(circle_farthest-side_at_85%_50%,rgba(170,50,50,.21)_0%,rgba(16,16,70,.15)_90%)] snap-always snap-center
                     box-border bg-black/22 bg-blend-overlay shadow-[inset_-5px_5px_5px_0_rgba(25,25,25,.15),inset_5px_-5px_5px_0_rgba(25,25,25,.1505),inset_-5px_5px_5px_0_rgba(25,25,25,.1501),inset_5px_-5px_5px_0_rgba(25,25,25,.1501)]">
 
             <!--  after:shadow-[inset_0_1px_5px_0_rgba(255,255,255,.2)] -->
