@@ -48,6 +48,7 @@ export class ProjectsComponent {
   // Indice del elemento de la lista vertical que se está hovereando
   listHoverIdx: number = -1;
   listActiveVideoIdxs: Set<number> = new Set();
+  listVideoProgress = 0;
 
   listVideos: Array<ElementRef<HTMLVideoElement>> = [];
   @ViewChild('listVideo0') listVideo0!: ElementRef<HTMLVideoElement>;
@@ -305,19 +306,56 @@ export class ProjectsComponent {
   }
 
   onListHover(ev: MouseEvent): void {
-    const target = ev.target as HTMLDivElement;
-
-    // Esto no debería pasar con estos elementos pero por si acaso.
-    this.listHoverIdx = (!isNaN(Number(target.id.at(-1))))
-      ? Number(target.id.at(-1))
-      : -1;
-
-    console.log("HOla? ", this.listHoverIdx);
+    // currentTarget mantiene el índice del artículo aunque el cursor entre
+    // por un hijo sin id (por ejemplo, la imagen o el botón de reproducción).
+    const currentTarget = ev.currentTarget as HTMLElement | null;
+    const match = currentTarget?.id.match(/^element-(\d+)$/);
+    this.listHoverIdx = match ? Number(match[1]) : -1;
   }
 
   unlistListHover(): void {
     this.listHoverIdx = -1;
-    console.log("Adios", this.listHoverIdx);
+  }
+
+  onListVideoElementClick(ev: MouseEvent): void {
+    this.onVideoClick(ev);
+    this.onListVideoClick(ev);
+  }
+
+  toggleListVideo(ev: MouseEvent, video: HTMLVideoElement): void {
+    ev.stopPropagation();
+
+    if (video.paused) {
+      video.muted = true;
+      void video.play().catch(() => {
+        // Si el navegador bloquea la reproducción, el póster permanece visible.
+      });
+      return;
+    }
+
+    video.pause();
+  }
+
+  onListVideoPlay(index: number): void {
+    this.listActiveVideoIdxs.forEach((activeIndex) => {
+      if (activeIndex !== index) {
+        this.listVideos[activeIndex]?.nativeElement.pause();
+      }
+    });
+
+    this.listActiveVideoIdxs.clear();
+    this.listActiveVideoIdxs.add(index);
+  }
+
+  onListVideoPause(index: number): void {
+    this.listActiveVideoIdxs.delete(index);
+  }
+
+  onListVideoTimeUpdate(ev: Event): void {
+    const video = ev.currentTarget as HTMLVideoElement;
+    this.listVideoProgress = Number.isFinite(video.duration) && video.duration > 0
+      ? (video.currentTime / video.duration) * 100
+      : 0;
   }
 
 }

@@ -11,6 +11,7 @@
     --font-inter: 'Inter Variable', sans-serif;
     --font-roboto-serif: 'Roboto Serif Variable', serif;
     --font-roboto-flex: 'Roboto Flex Variable', sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 
     --color-orange-350: #FF7247;
     --color-purple-650: #8462FF;

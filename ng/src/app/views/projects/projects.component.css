@@ -38,6 +38,7 @@ form > div::after {
 form > label {
     transition: color 450ms ease-out 100ms;
 }
+
 /* INFO IMPORTANTE:
  * Todas aquellas transiciones entre propiedades que no cambian explícitamente su valor
  * Se tienen que hacer por 'style' en vez de 'class'
@@ -69,7 +70,7 @@ form > label {
 
 }
 /* INFO: la clase de css animated-text-section existe simplemente porque transition no funciona bien con tailwind y angular.
- * en este caso es por backdrop filter, en el otro era por transform,
+* en este caso es por backdrop filter, en el otro era por transform,
  * ya que cambio el valor de un saturate a otro y css no detecta eso por cambio de clases de angular
  * lo detecta por cambio de clases básicas de css. el height es que sino ya entra en conflicto jajaj
  */
@@ -78,4 +79,526 @@ form > label {
                 backdrop-filter 500ms ease-in-out,
                 height 150ms linear;
 
+}
+
+
+.experiment-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.5rem minmax(0, 1.9fr) minmax(15rem, .95fr) minmax(13rem, .9fr);
+    align-items: center;
+    gap: clamp(1.1rem, 2.25vw, 2.6rem);
+    width: 100%;
+    height: clamp(340px, 23.75vw, 410px);
+    min-width: 0;
+    padding: .5rem 0;
+    isolation: isolate;
+}
+
+.experiment-index {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: .7rem;
+    height: 82%;
+    color: #6f8ba9;
+    font-weight: 500;
+    font-size: .72rem;
+    line-height: 1em;
+    letter-spacing: .06em;
+    position: sticky;
+    top: 150px;
+    left: 0px;
+    align-self: start;
+    z-index: 10;
+
+}
+
+.experiment-index__item {
+    display: block;
+    transition: color 220ms ease, transform 220ms ease;
+}
+
+.experiment-index__item--current {
+    color: #e9f5ff;
+    transform: translateX(1px);
+}
+
+.experiment-index__dot {
+    display: block;
+    width: 4px;
+    height: 4px;
+    margin-left: 4px;
+    border-radius: 50%;
+    background: #587693;
+    box-shadow: 0 0 0 1px rgb(120 170 213 / 12%);
+}
+
+.experiment-stage {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-width: 0;
+    aspect-ratio: 16 / 9;
+    align-self: center;
+    perspective: 1000px;
+    grid-column: 2;
+}
+
+.experiment-stage__glow {
+    position: absolute;
+    inset: 12% -3% -5%;
+    z-index: -1;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at 55% 55%, rgb(20 104 154 / 21%), transparent 68%);
+    filter: blur(20px);
+    opacity: .8;
+    pointer-events: none;
+    transition: opacity 400ms ease;
+}
+
+.experiment-screen {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border: 1px solid rgb(78 151 190 / 44%);
+    border-radius: 5px;
+    background: #030a11;
+    box-shadow: 0 0 0 1px rgb(8 31 49 / 86%), inset 0 0 26px rgb(18 92 130 / 9%), 0 14px 40px rgb(0 0 0 / 17%);
+    transform: translateZ(0);
+    transition: border-color 280ms ease, box-shadow 350ms ease;
+}
+
+.experiment-screen__poster,
+.experiment-screen__video,
+.experiment-screen__grid {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.experiment-screen__poster {
+    z-index: 0;
+    object-fit: cover;
+    opacity: .82;
+    filter: brightness(.68) contrast(1.12);
+    transition: opacity 350ms ease, filter 350ms ease;
+}
+
+.experiment-screen__video {
+    z-index: 1;
+    object-fit: cover;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 380ms ease;
+}
+
+.experiment-row.is-video-active .experiment-screen__video {
+    opacity: .98;
+    pointer-events: auto;
+}
+
+.experiment-row.is-video-active .experiment-screen__poster {
+    opacity: .2;
+}
+
+.experiment-screen__grid {
+    z-index: 2;
+    background-image: linear-gradient(rgb(117 169 198 / 12%) 1px, transparent 1px),
+                      linear-gradient(90deg, rgb(117 169 198 / 12%) 1px, transparent 1px),
+                      linear-gradient(180deg, rgb(0 7 14 / 10%), rgb(0 7 14 / 33%));
+    background-size: 12px 12px, 12px 12px, 100% 100%;
+    opacity: .8;
+    pointer-events: none;
+}
+
+.experiment-screen__topbar {
+    position: absolute;
+    z-index: 3;
+    inset: 14px 15px auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    pointer-events: none;
+}
+
+.experiment-player-button {
+    padding: .25rem .1rem;
+    color: #f0f7ff;
+    font-weight: 600;
+    font-size: .67rem;
+    line-height: 1.3em;
+    letter-spacing: .08em;
+    text-shadow: 0 1px 10px rgb(0 0 0 / 70%);
+    pointer-events: auto;
+    cursor: pointer;
+    transition: color 180ms ease, text-shadow 180ms ease;
+}
+
+.experiment-player-button:hover,
+.experiment-player-button:focus-visible {
+    color: #fff;
+    text-shadow: 0 0 12px rgb(210 239 255 / 75%);
+    outline: none;
+}
+
+.experiment-screen__timeline {
+    position: absolute;
+    z-index: 4;
+    right: 20px;
+    bottom: 17px;
+    left: 20px;
+    height: 2px;
+    background: rgb(159 191 215 / 35%);
+    pointer-events: none;
+}
+
+.experiment-screen__timeline > span {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: #e9f7ff;
+    transition: width 120ms linear;
+}
+
+.experiment-screen__timeline > i {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    border: 1px solid rgb(255 255 255 / 70%);
+    border-radius: 50%;
+    background: #f5fbff;
+    box-shadow: 0 0 6px rgb(220 244 255 / 65%);
+    transform: translate(-50%, -50%);
+}
+
+.experiment-row.is-video-active .experiment-screen {
+    border-color: rgb(109 195 231 / 68%);
+    box-shadow: 0 0 20px rgb(31 119 166 / 13%), inset 0 0 25px rgb(18 92 130 / 12%);
+}
+
+.experiment-info {
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+    padding: .25rem 0;
+}
+
+.experiment-info__eyebrow {
+    display: grid;
+    grid-template-columns: auto minmax(28px, 1fr) auto;
+    align-items: center;
+    gap: .8rem;
+    width: 100%;
+    margin-bottom: clamp(1.1rem, 1.8vw, 2rem);
+    color: #9bb7d3;
+    font-weight: 500;
+    font-size: clamp(.55rem, .65vw, .7rem);
+    line-height: 1.4em;
+    white-space: nowrap;
+}
+
+.experiment-info__number {
+    font-size: .93rem;
+    letter-spacing: .07em;
+}
+
+.experiment-info__rule {
+    display: block;
+    height: 1px;
+    min-width: 18px;
+    background: linear-gradient(90deg, rgb(143 177 208 / 65%), rgb(143 177 208 / 22%));
+}
+
+.experiment-info__title {
+    margin: 0;
+    color: #f3f6fb;
+    font-size: clamp(1.45rem, 1.9vw, 2.05rem);
+    font-weight: 700;
+    line-height: 1.06;
+    letter-spacing: -.035em; text-wrap: balance;
+}
+
+.experiment-info__description {
+    max-width: 32ch;
+    margin: clamp(1.1rem, 1.9vw, 1.7rem) 0 0;
+    color: #a5b9ce;
+    font-size: clamp(.77rem, .78vw, .9rem);
+    line-height: 1.65;
+}
+
+.experiment-info__technologies {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .65rem;
+    margin: clamp(1.2rem, 2vw, 1.8rem) 0 0;
+    color: #7897b7;
+    font-weight: 500;
+    line-height: 1.5em;
+    font-size: .65rem;
+    letter-spacing: .025em;
+}
+
+.experiment-info__technologies i {
+    color: #506d89;
+    font-style: normal;
+}
+
+.experiment-info__link {
+    display: inline-flex;
+    align-items: center;
+    gap: .95rem;
+    margin-top: clamp(1.35rem, 2.2vw, 2rem);
+    padding: .25rem 0;
+    color: #d6e6f6;
+    font-weight: 600;
+    font-size: .68rem;
+    line-height: 1.4em;
+    letter-spacing: .05em;
+    cursor: pointer;
+    transition: color 180ms ease, transform 180ms ease;
+}
+
+.experiment-info__link:hover,
+.experiment-info__link:focus-visible {
+    color: #fff;
+    transform: translateX(3px);
+    outline: none;
+}
+
+.experiment-info__arrow {
+    display: inline-block;
+    color: #c8dcef;
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 1em;
+    transition: transform 180ms ease;
+}
+
+.experiment-info__link:hover .experiment-info__arrow {
+    transform: translate(2px, -2px);
+}
+
+.experiment-preview {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    min-width: 0;
+    aspect-ratio: 1 / 1.08;
+    isolation: isolate;
+}
+
+.experiment-preview__halo {
+    position: absolute;
+    z-index: -2;
+    inset: 25px 0px 5px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgb(35 81 100 / 83%), transparent 80%);
+    filter: blur(19px);
+}
+
+.experiment-preview__orbit {
+    position: absolute;
+    width: 116%;
+    height: 42%;
+
+    border-radius: 50%;
+    pointer-events: none;
+    transform: rotate(-29deg) translateY(1%);
+
+    border-color: rgb(125 183 222 / 52%);
+    border-style: solid;
+}
+
+.experiment-preview__left-orbit {
+    z-index: 1;
+    border-width: 0px 0px 1px 1px;
+    /* 102px -58px 20px -80px rgb(0 21 40 / 99%); */
+}
+
+.experiment-preview__right-orbit {
+    z-index: 0;
+    border-width: 0px 1px 0px 0px;
+}
+.experiment-preview__right-orbit::after {
+    content: "";
+    position: absolute;
+    transform: rotate(29deg);
+
+    top: 20.5%;
+    right: 4.2%;
+
+    width: 10%;
+    height: 1.75px;
+   
+    background: linear-gradient(to right in oklch, rgb(0 21 40) 0%, rgb(0 21 40) 55%, rgba(0 21 40 / .75) 80%, rgba(0 21 40 / .25) 95%);
+    /* background-color: rgb(0 21 40); */
+    /* background-color: yellow; */
+    /* visibility: hidden; */
+    z-index: 2;
+}
+
+
+.experiment-preview__image-frame {
+    position: relative;
+    width: 86%;
+    aspect-ratio: 1 / 1;
+    border: 1px solid rgb(143 187 221 / 23%);
+    background: #020609;
+    box-shadow: 0 22px 34px rgb(0 0 0 / 40%), 0 0 26px rgb(63 139 195 / 10%);
+    transform: perspective(900px) rotateX(3deg) rotateY(-10deg) rotateZ(-27deg) skewX(0deg) skewY(-1deg);
+    transition: transform 450ms cubic-bezier(.2, .7, .2, 1), box-shadow 350ms ease;
+    border-radius: 2px;
+}
+
+.experiment-preview__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) brightness(.88) contrast(1.12);
+    user-select: none;
+}
+
+/* is-video-active also detects if its hovered. */
+.experiment-row.is-video-active .experiment-preview__image-frame {
+    box-shadow: 0 26px 45px rgb(0 0 0 / 48%), 0 0 30px rgb(63 139 195 / 16%);
+    transform: perspective(900px) rotateX(3deg) rotateZ(-20deg) skewY(-1deg) translateY(-3px);
+}
+
+
+@media (max-width: 1250px) {
+    .experiment-row {
+        grid-template-columns: 1.25rem minmax(0, 1.45fr) minmax(14rem, 1fr);
+        gap: clamp(1rem, 2vw, 1.8rem);
+    }
+
+    .experiment-preview {
+        display: none;
+    }
+
+    .experiment-info__eyebrow {
+        gap: .55rem;
+    }
+}
+
+@media (max-width: 760px) {
+    .experiment-row {
+        grid-template-columns: 1.1rem minmax(0, 1fr);
+        align-content: center;
+        align-items: start;
+        gap: 1.2rem;
+        height: auto;
+        min-height: 0;
+        padding: .75rem 0 1.5rem;
+    }
+
+    .experiment-index {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+        gap: .55rem;
+        height: 100%;
+        padding-top: .6rem;
+        font-size: .62rem;
+    }
+
+    .experiment-stage,
+    .experiment-info {
+        grid-column: 2;
+    }
+
+    .experiment-stage {
+        grid-row: 1;
+        grid-column-start: 2;
+        width: 100%;
+    }
+
+    .experiment-info {
+        grid-row: 2;
+        padding: .35rem 0 .75rem;
+    }
+
+    .experiment-info__eyebrow {
+        margin-bottom: 1rem;
+        font-size: .58rem;
+    }
+
+    .experiment-info__title {
+        font-size: clamp(1.5rem, 5.5vw, 2rem);
+    }
+
+    .experiment-info__title br {
+        display: none;
+    }
+
+    .experiment-info__description {
+        max-width: 55ch;
+        margin-top: 1rem;
+        font-size: .84rem;
+    }
+
+    .experiment-info__technologies {
+        margin-top: 1rem;
+    }
+
+    .experiment-info__link {
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 440px) {
+    .experiment-row {
+        grid-template-columns: minmax(0, 1fr);
+        gap: .9rem;
+    }
+
+    .experiment-index {
+        display: none;
+    }
+
+    .experiment-stage,
+    .experiment-info {
+        grid-column: 1;
+    }
+
+    .experiment-info__eyebrow {
+        grid-template-columns: auto minmax(18px, 1fr) auto;
+        gap: .45rem;
+        font-size: .52rem;
+    }
+
+    .experiment-screen__topbar {
+        inset: 9px 10px auto;
+    }
+
+    .experiment-screen__stats {
+        font-size: .48rem;
+    }
+
+    .experiment-screen__timeline {
+        right: 12px;
+        bottom: 10px;
+        left: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .experiment-row *,
+    .experiment-row *::before,
+    .experiment-row *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        transition-delay: 0ms !important;
+    }
 }
