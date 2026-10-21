@@ -295,26 +295,26 @@
             </div>
         </div>
     </div>
+    <!-- Idea, para que el espacio negativo quede un poco  -->
+    <!-- <div> </div> -->
     <!-- A veces comento en español a veces en ingles me estoy volviendo loco -->
     <!-- TODO: Arreglar version firefox, se ve to bugeado el carrusel el firefox cambia los blurs a pseudoelementos creo. -->
     <!-- TODO: darle caña a esto, prueba si algunos elementos al reves queda bien y sino pues na -->
     <!-- Lista vertical (proyectos secundarios) -->
+    <!-- <h1 class="relative self-start sticky text-[#405973] text-shadow-lg font-roboto-serif text-4xl font-bold top-0 z-10"> Algunos <br> <b class="text-white text-6xl">experimentos</b> </h1> -->
     <!-- snap-center snap-always snap-mandatory snap-y -->
-    <div class="relative flex flex-col items-center text-white mt-30 mx-10 w-9/10 h-[680px] overflow-auto snap-start snap-mandatory snap-y">
+    <div class="relative flex flex-col items-center text-white mt-61 mx-10 w-9/10 h-[680px] overflow-auto snap-start snap-always snap-mandatory snap-y">
+        <!-- NOTA: se usan margenes negativos para paliar el espacio de los elementos sticky, el margen entre el primer elemento y el titulo depende de la altura del elemento
+             que en los elementos siguientes al primero se vean bien depende de que haya suficiente espacio debajo de ellos para
+             que el snap scroll los muestre en el centro y que haya algo de margen top para que no se vea el anteiror.
+        -->
+
+
+        <!-- TODO: recuerda cambiar esto this.listActiveVideoIdxs.has(0) por mira que id es si 0 1 o 2 o x-->
+        <!-- TODO: continua esto y eventualmente añade algun efecto de iluminacion o algo al scrollear. maybe un box-shadow con view() o algo con scroll()-->
+        <!-- TODO: Cambia de alguna manera el el scrollable para que no sea tan confuso scrollear hacia abajo -->
+        <!-- recuerda hacer el índice como en el wireframe. -->
         <h1 class="relative self-start sticky text-[#405973] text-shadow-lg font-roboto-serif text-4xl font-bold top-0 z-10"> Algunos <br> <b class="text-white text-6xl">experimentos</b> </h1>
-        <!-- Grid with image and description columns -->
-        <!-- Y añade sombras a los grids y quizas a la barra separadora (no es ta funcionando en este momento) -->
-
-        <!-- Otro grid para ver como se ven varios -->
-        <!-- la vignette usa stone-700 o a lo mejor stone-800 y cyan-300/5 de fondo -->
-        <!-- IMPORTANTE: El primer diseño es feo de cojones sorry. -->
-        <!-- dependiendo del proyecto que ponga, un color u otro de fondo, el color de fondo se craftea con un degradado y un bg-black transparente + bg-blend mode de overlay. -->
-
-        <!-- IDEAS TODO: Efecto hover en la imagen para que rote en todos los ejes lentamente o que juegue con las rotaciones raras, la hace mas 3d, + box shadows que lo hacen mas 3d incluso -->
-        <!-- Además en el vídeo marco transparente negro en los bordes que oscurezca el fondo o marco blanco transparente, prueba, a lo mejor un gradiente para efecto glass y un hover al vídeo con box shadows de luz o inset shadows del luz -->
-        <!-- El video al aparecer se mueve todo muy de golpe mete un left o un gap con transition, o el width que le he metido, pero cambia la transition. -->
-        <!-- El truco este no sirve con vídeos, lo que sirve es una capa por encima y . -->
-        <!-- INFO: https://css-tricks.com/blurred-borders-in-css/ -->
 
         <nav class="experiment-index font-mono -mt-28" aria-label="Índice visual de experimentos" aria-hidden="true">
             <span class="experiment-index__item experiment-index__item--current">01</span>
@@ -327,11 +327,13 @@
             <span class="experiment-index__dot"></span>
             <span class="experiment-index__item">05</span>
         </nav>
-        <!-- NOTE: delays of the vertical element are carefully chosen to make the expansion smooth -->
-        <!-- Primer experimento: diseño inspirado en la referencia visual. -->
+
+        <!-- TODO:  -->
+
+        <!-- Primer elemento: grid con columnas -->
         <div id="element-0" class="experiment-row snap-always snap-center mb-35"
             (mouseenter)="onListHover($event)" (mouseleave)="unlistListHover()"
-            [class.is-video-active]="this.listHoverIdx === 0 || this.listActiveVideoIdxs.has(0)" [class.is-playing]="this.listActiveVideoIdxs.has(0)">
+            [class.is-video-active]="this.listHoverIdx === 0 || (this.listActiveVideoIdxs.has(0) && this.listActiveVideoIdxs.values().next().value === 0)" [class.is-playing]="this.listActiveVideoIdxs.has(0) && this.listActiveVideoIdxs.values().next().value === 0">
 
             <!-- Índice visual de la colección. -->
             
@@ -366,12 +368,12 @@
                             class="experiment-player-button font-mono"
                             (click)="toggleListVideo($event, listVideo0)"
                             [attr.aria-label]="this.listActiveVideoIdxs.has(0) ? 'Pausar el vídeo del experimento' : 'Reproducir el vídeo del experimento'">
-                            <span>{{ this.listActiveVideoIdxs.has(0) ? 'PAUSE Ⅱ' : 'PLAY ▶' }}</span>
+                            <span>{{ (this.listActiveVideoIdxs.has(0) && this.listActiveVideoIdxs.values().next().value === 0) ? 'PAUSE Ⅱ' : 'PLAY ▶' }}</span>
                         </button>
                     </div>
                     <div class="experiment-screen__timeline" aria-hidden="true">
-                        <span [style.width.%]="this.listVideoProgress"></span>
-                        <i [style.left.%]="this.listVideoProgress"></i>
+                        <span [style.width.%]="this.listVideoProgresses[0]"></span>
+                        <i [style.left.%]="this.listVideoProgresses[0]"></i>
                     </div>
                 </div>
             </div>
@@ -417,9 +419,9 @@
             </div>
         </div>
 
-        <div id="element-0" class="experiment-row snap-always snap-center mt-15 mb-50"
+        <div id="element-1" class="experiment-row snap-always snap-center mt-15 mb-50"
             (mouseenter)="onListHover($event)" (mouseleave)="unlistListHover()"
-            [class.is-video-active]="this.listHoverIdx === 0 || this.listActiveVideoIdxs.has(0)" [class.is-playing]="this.listActiveVideoIdxs.has(0)">
+            [class.is-video-active]="this.listHoverIdx === 1 || this.listActiveVideoIdxs.has(0)" [class.is-playing]="this.listActiveVideoIdxs.has(0)">
 
             <!-- Índice visual de la colección. -->
             <!-- <nav class="experiment-index font-mono" aria-label="Índice visual de experimentos" aria-hidden="true">
@@ -444,8 +446,8 @@
                         src="/projects/conways_life_game.png"
                         alt="Vista previa del juego de la vida de Conway">
 
-                    <video #listVideo0 class="experiment-screen__video"
-                        id="list-video-0"
+                    <video #listVideo1 class="experiment-screen__video"
+                        id="list-video-1"
                         poster="/projects/conways_life_game.png"
                         playsinline
                         muted
@@ -463,14 +465,14 @@
                         <button
                             type="button"
                             class="experiment-player-button font-mono"
-                            (click)="toggleListVideo($event, listVideo0)"
+                            (click)="toggleListVideo($event, listVideo1)"
                             [attr.aria-label]="this.listActiveVideoIdxs.has(0) ? 'Pausar el vídeo del experimento' : 'Reproducir el vídeo del experimento'">
-                            <span>{{ this.listActiveVideoIdxs.has(0) ? 'PAUSE Ⅱ' : 'PLAY ▶' }}</span>
+                            <span>{{ (this.listActiveVideoIdxs.has(0) && this.listActiveVideoIdxs.values().next().value === 1) ? 'PAUSE Ⅱ' : 'PLAY ▶' }}</span>
                         </button>
                     </div>
                     <div class="experiment-screen__timeline" aria-hidden="true">
-                        <span [style.width.%]="this.listVideoProgress"></span>
-                        <i [style.left.%]="this.listVideoProgress"></i>
+                        <span [style.width.%]="this.listVideoProgresses[1]"></span>
+                        <i [style.left.%]="this.listVideoProgresses[1]"></i>
                     </div>
                 </div>
             </div>

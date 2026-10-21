@@ -48,7 +48,7 @@ export class ProjectsComponent {
   // Indice del elemento de la lista vertical que se está hovereando
   listHoverIdx: number = -1;
   listActiveVideoIdxs: Set<number> = new Set();
-  listVideoProgress = 0;
+  listVideoProgresses = [0, 0];
 
   listVideos: Array<ElementRef<HTMLVideoElement>> = [];
   @ViewChild('listVideo0') listVideo0!: ElementRef<HTMLVideoElement>;
@@ -309,8 +309,8 @@ export class ProjectsComponent {
     // currentTarget mantiene el índice del artículo aunque el cursor entre
     // por un hijo sin id (por ejemplo, la imagen o el botón de reproducción).
     const currentTarget = ev.currentTarget as HTMLElement | null;
-    const match = currentTarget?.id.match(/^element-(\d+)$/);
-    this.listHoverIdx = match ? Number(match[1]) : -1;
+    const id = currentTarget?.id.at(-1)
+    this.listHoverIdx = id ? Number(id) : -1;
   }
 
   unlistListHover(): void {
@@ -353,7 +353,9 @@ export class ProjectsComponent {
 
   onListVideoTimeUpdate(ev: Event): void {
     const video = ev.currentTarget as HTMLVideoElement;
-    this.listVideoProgress = Number.isFinite(video.duration) && video.duration > 0
+    const id = Number(video.id.at(-1)!);
+
+    this.listVideoProgresses[id] = Number.isFinite(video.duration) && video.duration > 0
       ? (video.currentTime / video.duration) * 100
       : 0;
   }
