@@ -56,6 +56,17 @@ form > label {
  * la ignora.
  */
 
+.focused-card__shadows {
+    box-shadow: 14px 35px 12px rgba(26,26,52,.15), 0px 22px 30px 7px rgba(26,26,52,.15),
+                3px 22px 28px 4px rgba(26,26,52,.15), 3px 23px 35px 4px rgba(26,26,52,.15),
+                9px 35px 45px rgba(26,26,52,.15);
+}
+
+.unfocused-card__shadows {
+    box-shadow: 3px 6px 9px rgba(26,26,52,0.25), 6px 12px 25px rgba(26,26,52,0.25),
+                12px 24px 36px rgba(26,26,52,0.25);
+}
+
  /* INFO: la clase de css animated-card existe simplemente porque transition no funciona bien con tailwind y angular. */
 .animated-card {
     transition: width 300ms cubic-bezier(.4,0,1,2),
@@ -109,7 +120,7 @@ form > label {
     letter-spacing: .06em;
     position: sticky;
     top: 150px;
-    left: 0px;
+    left: 2px;
     align-self: start;
     z-index: 10;
 
@@ -122,7 +133,8 @@ form > label {
 
 .experiment-index__item--current {
     color: #e9f5ff;
-    transform: translateX(1px);
+    transform: scale(1.15);
+    transition: transform 250ms linear;
 }
 
 .experiment-index__dot {

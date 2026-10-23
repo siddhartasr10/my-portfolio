@@ -1,4 +1,4 @@
-<div class="max-w-screen w-screen min-h-screen flex flex-col items-center bg-linear-to-b from-[oklch(0.17_0.07_254.86)] to-[oklch(0.16_0.05_254.67)] snap-y snap-mandatory"> <!-- bg-[#1F1F1F] -->
+<div #documentRoot class="max-w-screen w-screen min-h-screen flex flex-col items-center bg-linear-to-b from-[oklch(0.17_0.07_254.86)] to-[oklch(0.16_0.05_254.67)] snap-y snap-mandatory"> <!-- bg-[#1F1F1F] -->
     <!-- Colores antiguos del bg del body: bg-linear-to-b from-[#061426] to-[#0B1726] -->
     <app-navbar class="flex flex-row items-center justify-center h-[10vh] w-screen" [style.contain]="'content'"></app-navbar>
     <div class="grid grid-cols-[0.75fr_0.25fr] w-screen my-10 self-start items-baseline" >
@@ -66,14 +66,13 @@
 
             <!-- Tarjeta (Capa efectos) cubre toda la tarjeta tambien -->
             <div class="w-full h-full relative outline-orange-600/30 animated-card transform-gpu"
-                [ngClass]="(this.carrouselIdx == 0) ? 'rounded-2xl outline-3' : 'rounded-xl outline-5 brightness-80 scale-90'"
-                [style.bottom.rem]="(this.hoverIdx == 0) ? 1.5 : 0"
-                [style.box-shadow]="(this.carrouselIdx == 0) ? this.focusedCardShadow() : this.unfocusedCardShadow()">
+                [ngClass]="(this.carrouselIdx == 0) ? 'rounded-2xl outline-3 focused-card__shadows' : 'rounded-xl outline-5 brightness-80 scale-90 unfocused-card__shadows'"
+                [style.bottom.rem]="(this.carrouselHoverIdx == 0) ? 1.5 : 0">
                 <!-- Hero image -->
                 <img src="/projects/vuela21_1_colored.png" class="w-full h-full box-border object-cover rounded-2xl animated-card top-[-1.5px] absolute"/>
                 <!-- Sombra interna colorida de la imagen, no se si poner las sombras en el propio img o dejarlo aqui -->
                 <div class="w-full h-full rounded-2xl absolute -top-[1.5px] z-5 transition-shadow duration-150 pointer-events-none"
-                    [style.box-shadow]="(this.hoverIdx == 0) ? 'inset 0 0 34px oklch(0.7442 0.1812 56.46 / 30%)' : 'inset 0 0 14px oklch(0.7442 0.1812 56.46 / 25%)'"> </div>
+                    [style.box-shadow]="(this.carrouselHoverIdx == 0) ? 'inset 0 0 34px oklch(0.7442 0.1812 56.46 / 30%)' : 'inset 0 0 14px oklch(0.7442 0.1812 56.46 / 25%)'"> </div>
                 <!-- INFO: Si usas style.* la forma de definir el alpha tiene que ser la antigua, no sirve / 35% o / .35, style usa el renderer de angular y angular 19 no se lleva bien con el css color level 4-->
 
                 <!-- Pon el modal del login, si eso monta vuela21 para sacar una imagen con la proporción correcta (4:5), luego un popover con el vídeo en 16:9 -->
@@ -128,18 +127,18 @@
             <!-- Overlay de vídeo -->
             <div class="w-[272px] h-[153px] -left-28 bottom-30 absolute flex justify-center items-center z-8 rounded-lg outline-3 outline-[rgba(182.03,235.35,254.93,.35)] transition-[opacity] duration-300 ease-in-out translate-z-0"
                  [style.background]="'radial-gradient(circle farthest-corner at 60% 75%,rgba(191.03,225.35,237.93,.35) 5%,rgb(8.55,40.34,49.56,.6) 90%)'"
-                 [style.opacity]="(this.hoverIdx == 0 && this.carrouselIdx == 0) ? '1' : '0'">
+                 [style.opacity]="(this.carrouselHoverIdx == 0 && this.carrouselIdx == 0) ? '1' : '0'">
                 <!-- <div class="bg-black w-9/10 h-9/10 rounded-sm" > </div> -->
 
                 <!-- Webm con av1 es más eficiente que mp4 com h.264 -->
-                <video #cardVideo0 class="bg-black w-9/10 h-9/10 rounded-sm z-1 translate-z-0 hover:shadow-[0_0_5px_1px_rgba(255,255,255,.3)]" autoplay="false" loading="lazy"
-                       playsinline
+                <video #cardVideo0 class="bg-black w-9/10 h-9/10 rounded-sm z-1 translate-z-0 hover:shadow-[0_0_5px_1px_rgba(255,255,255,.3)]"
+                       autoplay="false" loading="lazy" playsinline muted
                        id="video-0"
                        (click)="onVideoClick($event)" (dblclick)="onVideoDblClick($event)" (ended)="restartCardVideo($event)"
                        (mouseenter)="onVideoHover($event)" (mouseleave)="unlistVideoHover()">
                     <!-- El if hace que el vídeo solo cargue realmente cuando se hace hover por primera vez, una vez cargado en la memoria da igual que se salga del hover. -->
-                    <source *ngIf="this.carrouselIdx == 0 && this.hoverIdx == 0" src="/projects/grabacion_vuela21-online-video-cutter.com.av1.webm" type="video/webm">
-                    <source *ngIf="this.carrouselIdx == 0 && this.hoverIdx == 0" src="/projects/grabacion_vuela21.mp4" type="video/mp4">
+                    <source *ngIf="this.carrouselIdx == 0 && this.carrouselHoverIdx == 0" src="/projects/grabacion_vuela21-online-video-cutter.com.av1.webm" type="video/webm">
+                    <source *ngIf="this.carrouselIdx == 0 && this.carrouselHoverIdx == 0" src="/projects/grabacion_vuela21.mp4" type="video/mp4">
                     <!-- Necesita estar muteado o sino me salta al principio la política de reproducción automática en google (no es muy relevante pero los vídeos tampoco tienen sonido) -->
                 </video>
 
@@ -156,14 +155,13 @@
              id="card-1" class="-mx-14 relative box-content transform-gpu animated-card">
             <!-- hsla(213_100%_50%/.35) -->
             <div class="w-full h-full relative outline-[oklch(0.72_0.13_180_/30%)] animated-card transform-gpu"
-                 [ngClass]="(this.carrouselIdx == 1) ? 'rounded-2xl outline-3' : 'rounded-xl outline-5 brightness-80 scale-90'"
-                 [style.bottom.rem]="(this.hoverIdx == 1) ? 1.5 : 0"
-                 [style.box-shadow]="(this.carrouselIdx == 1) ? this.focusedCardShadow() : this.unfocusedCardShadow()">
+                 [ngClass]="(this.carrouselIdx == 1) ? 'rounded-2xl outline-3 focused-card__shadows' : 'rounded-xl outline-5 brightness-80 scale-90 unfocused-card__shadows'"
+                 [style.bottom.rem]="(this.carrouselHoverIdx == 1) ? 1.5 : 0">
 
                 <!-- NOTE: Esta imagen no se pega por encima del borde  -->
                 <img src="/projects/sportwatch_from_highres_to_752x882_with_black_to_752x941.png" class="w-full h-full box-border object-cover object-[50%_0%] rounded-2xl animated-card absolute pointer-events-none"/>
                 <div class="w-full h-full rounded-2xl absolute z-5 transition-shadow duration-150 pointer-events-none"
-                    [style.box-shadow]="(this.hoverIdx == 1) ? 'inset 0 0 34px oklch(0.77 0.13 180 /25%)' : 'inset 0 0 14px oklch(0.5881 0.2261 258.83 / 25%)'"> </div>
+                    [style.box-shadow]="(this.carrouselHoverIdx == 1) ? 'inset 0 0 34px oklch(0.77 0.13 180 /25%)' : 'inset 0 0 14px oklch(0.5881 0.2261 258.83 / 25%)'"> </div>
                 <!-- Pon el modal del login, si eso monta vuela21 para sacar una imagen con la proporción correcta (4:5), luego un popover con el vídeo en 16:9 -->
                 <div class="absolute w-full transition-all duration-200 rounded-t-2xl pointer-events-none"
                     [style.background]="(this.carrouselIdx == 1)
@@ -220,16 +218,17 @@
             </div>
             <div class="w-[272px] h-[153px] -left-28 bottom-30 absolute flex justify-center items-center z-8 rounded-lg outline-3 outline-[rgba(182.03,235.35,254.93,.35)] transition-[opacity] duration-300 ease-in-out translate-z-0"
                  [style.background]="'radial-gradient(circle farthest-corner at 60% 75%,rgba(191.03,225.35,237.93,.35) 5%,rgb(8.55,40.34,49.56,.6) 90%)'"
-                 [style.opacity]="(this.hoverIdx == 1 && this.carrouselIdx == 1) ? '1' : '0'">
+                 [style.opacity]="(this.carrouselHoverIdx == 1 && this.carrouselIdx == 1) ? '1' : '0'">
                 <!-- <div class="bg-black w-9/10 h-9/10 rounded-sm" > </div> -->
                 <!-- Webm con av1 es más eficiente que mp4 com h.264 -->
 
-                <video #cardVideo1 class="bg-black w-9/10 h-9/10 rounded-sm translate-z-0 hover:shadow-[0_0_5px_1px_rgba(255,255,255,.3)]" autoplay="false" loading="lazy"
-                       playsinline
-                       id="video-1" (click)="onVideoClick($event)" (dblclick)="onVideoDblClick($event)" (ended)="restartCardVideo($event)"
+                <video #cardVideo1 class="bg-black w-9/10 h-9/10 rounded-sm translate-z-0 hover:shadow-[0_0_5px_1px_rgba(255,255,255,.3)]"
+                       autoplay="false" loading="lazy" playsinline
+                       id="video-1"
+                       (click)="onVideoClick($event)" (dblclick)="onVideoDblClick($event)" (ended)="restartCardVideo($event)"
                        (mouseenter)="onVideoHover($event)" (mouseleave)="unlistVideoHover()">
-                    <source *ngIf="this.carrouselIdx == 1 && this.hoverIdx == 1" src="/projects/Presentacion-ezgif.com.av1.webm" type="video/webm">
-                    <source *ngIf="this.carrouselIdx == 1 && this.hoverIdx == 1" src="/projects/Presentacion-ezgif.com.mp4" type="video/mp4">
+                    <source *ngIf="this.carrouselIdx == 1 && this.carrouselHoverIdx == 1" src="/projects/Presentacion-ezgif.com.av1.webm" type="video/webm">
+                    <source *ngIf="this.carrouselIdx == 1 && this.carrouselHoverIdx == 1" src="/projects/Presentacion-ezgif.com.mp4" type="video/mp4">
                 </video>
                 <!--  rgb(119.82, 152.21, 163.94)-->
             </div>
@@ -245,9 +244,8 @@
             <!-- TEST: algo así sería -->
             <!-- INFO: ngClass para que los font sizes encojan con la tarjeta cuando se desfocusea. -->
             <div class="w-full h-full relative flex transform-gpu animated-card outline-white/15"
-                [ngClass]="(this.carrouselIdx == 2) ? 'rounded-2xl outline-3' : 'rounded-xl outline-5 brightness-80 scale-90'"
-                [style.bottom.rem]="(this.hoverIdx == 2) ? 1.5 : 0"
-                [style.box-shadow]="(this.carrouselIdx == 2) ? this.focusedCardShadow() : this.unfocusedCardShadow()">
+                [ngClass]="(this.carrouselIdx == 2) ? 'rounded-2xl outline-3 focused-card__shadows' : 'rounded-xl outline-5 brightness-80 scale-90 unfocused-card__shadows'"
+                [style.bottom.rem]="(this.carrouselHoverIdx == 2) ? 1.5 : 0">
                 <!-- NOTE: Esta imagen no se pega por encima del borde a diferencia de la de otras tarjetas, le queda mejor así -->
                 <!-- INFO: Esta es la tag normal estoy probando un svg para añadirle filters y que no me coja un cuadrado -->
                 <!-- Sigue editando el svg para que abraze a la forma o busca otro svg con forma de interrogación que esté mejor delimitado (como acabo teniendo que hacer siempre) y editalo. -->
@@ -262,7 +260,7 @@
                 <img src="/projects/otromockupblurreado2.png" class="w-full h-full box-border object-cover object-[50%_0%] rounded-2xl animated-card absolute"/>
                 <div class="w-full rounded-t-2xl absolute z-5 transition-transform pointer-events-none" [style.height.%]="(this.carrouselIdx == 2) ? 75 : 71"> </div>
                 <div class="w-full h-full rounded-2xl absolute z-5 transition-shadow duration-150 pointer-events-none"
-                    [style.box-shadow]="(this.hoverIdx == 2) ? 'inset 0 0 34px rgba(255,255,255,.5)' : 'inset 0 0 14px rgba(255,255,255,.25)'"> </div>
+                    [style.box-shadow]="(this.carrouselHoverIdx == 2) ? 'inset 0 0 34px rgba(255,255,255,.5)' : 'inset 0 0 14px rgba(255,255,255,.25)'"> </div>
                 <div class="absolute w-full transition-all duration-150 rounded-t-2xl z-5 pointer-events-none"
                     [style.background]="(this.carrouselIdx == 2)
                             ? 'radial-gradient(circle at 50% 50%, rgba(26,26,26,.2) 0%, rgba(26,26,26,.2) 99%)'
@@ -298,37 +296,36 @@
     <!-- Idea, para que el espacio negativo quede un poco  -->
     <!-- <div> </div> -->
     <!-- A veces comento en español a veces en ingles me estoy volviendo loco -->
-    <!-- TODO: Arreglar version firefox, se ve to bugeado el carrusel el firefox cambia los blurs a pseudoelementos creo. -->
-    <!-- TODO: darle caña a esto, prueba si algunos elementos al reves queda bien y sino pues na -->
     <!-- Lista vertical (proyectos secundarios) -->
     <!-- <h1 class="relative self-start sticky text-[#405973] text-shadow-lg font-roboto-serif text-4xl font-bold top-0 z-10"> Algunos <br> <b class="text-white text-6xl">experimentos</b> </h1> -->
     <!-- snap-center snap-always snap-mandatory snap-y -->
-    <div class="relative flex flex-col items-center text-white mt-61 mx-10 w-9/10 h-[680px] overflow-auto snap-start snap-always snap-mandatory snap-y">
+    <div class="relative flex flex-col items-center text-white mt-61 mx-10 w-9/10 h-[680px] overflow-auto snap-start snap-always snap-mandatory snap-y"
+         (wheel)="onListWheelMove($event)">
         <!-- NOTA: se usan margenes negativos para paliar el espacio de los elementos sticky, el margen entre el primer elemento y el titulo depende de la altura del elemento
              que en los elementos siguientes al primero se vean bien depende de que haya suficiente espacio debajo de ellos para
-             que el snap scroll los muestre en el centro y que haya algo de margen top para que no se vea el anteiror.
-        -->
+             que el snap scroll los muestre en el centro y que haya algo de margen top para que no se vea el anteiror. -->
 
 
-        <!-- TODO: recuerda cambiar esto this.listActiveVideoIdxs.has(0) por mira que id es si 0 1 o 2 o x-->
+        <!--  -->
+        <!-- TODO: Haz el índice funcional. -->
         <!-- TODO: continua esto y eventualmente añade algun efecto de iluminacion o algo al scrollear. maybe un box-shadow con view() o algo con scroll()-->
         <!-- TODO: Cambia de alguna manera el el scrollable para que no sea tan confuso scrollear hacia abajo -->
+        <!--  INTENTO FALLIDO: -->
+        <!-- <div class="absolute right-0 top-0 w-10/12 h-2/20 bg-black z-12" (wheel)="  onOverscrollPadding($event)"> </div> -->
         <!-- recuerda hacer el índice como en el wireframe. -->
         <h1 class="relative self-start sticky text-[#405973] text-shadow-lg font-roboto-serif text-4xl font-bold top-0 z-10"> Algunos <br> <b class="text-white text-6xl">experimentos</b> </h1>
 
         <nav class="experiment-index font-mono -mt-28" aria-label="Índice visual de experimentos" aria-hidden="true">
-            <span class="experiment-index__item experiment-index__item--current">01</span>
+            <span class="experiment-index__item" [class]="(this.listIdx === 1) ? 'experiment-index__item--current' : ''">01</span>
+            <span class="experiment-index__dot" ></span>
+            <span class="experiment-index__item" [class]="(this.listIdx === 2) ? 'experiment-index__item--current' : ''" >02</span>
             <span class="experiment-index__dot"></span>
-            <span class="experiment-index__item">02</span>
+            <span class="experiment-index__item" [class]="(this.listIdx === 3) ? 'experiment-index__item--current' : ''" >03</span>
             <span class="experiment-index__dot"></span>
-            <span class="experiment-index__item">03</span>
+            <span class="experiment-index__item" [class]="(this.listIdx === 4) ? 'experiment-index__item--current' : ''" >04</span>
             <span class="experiment-index__dot"></span>
-            <span class="experiment-index__item">04</span>
-            <span class="experiment-index__dot"></span>
-            <span class="experiment-index__item">05</span>
+            <span class="experiment-index__item" [class]="(this.listIdx === 5) ? 'experiment-index__item--current' : ''" >05</span>
         </nav>
-
-        <!-- TODO:  -->
 
         <!-- Primer elemento: grid con columnas -->
         <div id="element-0" class="experiment-row snap-always snap-center mb-35"
@@ -347,16 +344,9 @@
                         src="/projects/conways_life_game.png"
                         alt="Vista previa del juego de la vida de Conway">
 
-                    <video #listVideo0 class="experiment-screen__video"
-                        id="list-video-0"
-                        poster="/projects/conways_life_game.png"
-                        playsinline
-                        muted
-                        (click)="onListVideoElementClick($event)"
-                        (dblclick)="onVideoDblClick($event)"
-                        (play)="onListVideoPlay(0)"
-                        (pause)="onListVideoPause(0)"
-                        (timeupdate)="onListVideoTimeUpdate($event)">
+                    <video #listVideo0 class="experiment-screen__video" id="list-video-0" poster="/projects/conways_life_game.png" playsinline muted
+                        (click)="onListVideoElementClick($event)" (dblclick)="onVideoDblClick($event)" (play)="onListVideoPlay(0)"
+                        (pause)="onListVideoPause(0)" (timeupdate)="onListVideoTimeUpdate($event)">
                         <source src="/projects/conways-life-game-Max183-pattern.av1.webm" type="video/webm">
                         <source src="/projects/conways-life-game-Max183-pattern.mp4" type="video/mp4">
                     </video>
@@ -427,13 +417,13 @@
             <!-- <nav class="experiment-index font-mono" aria-label="Índice visual de experimentos" aria-hidden="true">
                  <span class="experiment-index__item experiment-index__item--current">01</span>
                  <span class="experiment-index__dot"></span>
-                 <span class="experiment-index__item">02</span>
+                 <span class="experiment-index__item" [class]="(this.listIdx === 1) ? 'experiment-index__item--current' : ''" >02</span>
                  <span class="experiment-index__dot"></span>
-                 <span class="experiment-index__item">03</span>
+                 <span class="experiment-index__item" [class]="(this.listIdx === 1) ? 'experiment-index__item--current' : ''" >03</span>
                  <span class="experiment-index__dot"></span>
-                 <span class="experiment-index__item">04</span>
+                 <span class="experiment-index__item" [class]="(this.listIdx === 1) ? 'experiment-index__item--current' : ''" >04</span>
                  <span class="experiment-index__dot"></span>
-                 <span class="experiment-index__item">05</span>
+                 <span class="experiment-index__item" [class]="(this.listIdx === 1) ? 'experiment-index__item--current' : ''" >05</span>
                  </nav> -->
 
             <!-- Reproductor principal: la imagen sigue visible como póster y el vídeo
@@ -447,15 +437,10 @@
                         alt="Vista previa del juego de la vida de Conway">
 
                     <video #listVideo1 class="experiment-screen__video"
+                        poster="/projects/conways_life_game.png" playsinline muted
                         id="list-video-1"
-                        poster="/projects/conways_life_game.png"
-                        playsinline
-                        muted
-                        (click)="onListVideoElementClick($event)"
-                        (dblclick)="onVideoDblClick($event)"
-                        (play)="onListVideoPlay(0)"
-                        (pause)="onListVideoPause(0)"
-                        (timeupdate)="onListVideoTimeUpdate($event)">
+                        (click)="onListVideoElementClick($event)" (dblclick)="onVideoDblClick($event)"
+                        (play)="onListVideoPlay(0)" (pause)="onListVideoPause(0)" (timeupdate)="onListVideoTimeUpdate($event)">
                         <source src="/projects/conways-life-game-Max183-pattern.av1.webm" type="video/webm">
                         <source src="/projects/conways-life-game-Max183-pattern.mp4" type="video/mp4">
                     </video>
