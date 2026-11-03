@@ -286,14 +286,11 @@ export class ProjectsComponent {
     this.listHoverIdx = -1;
   }
 
-  onListVideoElementClick(ev: MouseEvent): void {
-    this.onVideoClick(ev);
-    this.onListVideoClick(ev);
-  }
-
-  // Internal, the html uses func on top.
-  private onListVideoClick(ev: MouseEvent): void {
+  // This gets done this way as onVideoClick is used for carrousel cards too,
+  // so the func gets reused here for the basic play/stop functionality.
+  onListVideoClick(ev: MouseEvent): void {
     const target = ev.target as HTMLVideoElement;
+    this.onVideoClick(ev);
     this.isSingleClick = true;
     const id = (!isNaN(Number(target.id.at(-1))))
       ? Number(target.id.at(-1))
@@ -302,7 +299,8 @@ export class ProjectsComponent {
     // I do this diferently than card videos bc i don't want autoplay and autopause,
     // I just pause a video in the list if other gets played (clicked)
     // and keep it on a index list so i can keep elements styled while videos are playing.
-    // the playing and pausing of the actual video is done on the onVideoClick
+    // IMPORTANT: the playing and pausing of the actual video is done on the onVideoClick
+    // thats why i dont play when paused and viceversa.
     setTimeout(() => {
       if (this.isSingleClick) {
         if (target.paused) {
@@ -318,7 +316,7 @@ export class ProjectsComponent {
         }
       }
     } 
-      , 400);
+      , 300);
     
   }
 
@@ -333,18 +331,29 @@ export class ProjectsComponent {
 
   }
 
+  // this one is the same as onListVideoClick but doesnt handle dbl click and needs a video element
+  // as this one is used for buttons not for the video functionality itself.
   toggleListVideo(ev: MouseEvent, video: HTMLVideoElement): void {
     ev.stopPropagation();
+    const id = Number(video.id.at(-1));
 
-    if (video.paused) {
-      video.muted = true;
-      void video.play().catch(() => {
-        // Si el navegador bloquea la reproducción, el póster permanece visible.
-      });
+    if (!video.paused) {
+      video.pause();
+      this.listActiveVideoIdxs.delete(id);
       return;
     }
 
-    video.pause();
+    video.muted = true;
+    void video.play().catch(() => {
+      // Si el navegador bloquea la reproducción, el póster permanece visible.
+    });
+    // Check if there's any video playing apart from the one just played and if there is pause it.
+    // and clear the number from the active list.
+    this.listActiveVideoIdxs.forEach((val) => (val !== id && this.listVideos[val]) 
+    ? this.listVideos[val].nativeElement.pause() : null);
+    this.listActiveVideoIdxs.clear();
+    this.listActiveVideoIdxs.add(id);
+
   }
 
   onListVideoTimeUpdate(ev: Event): void {
