@@ -39,6 +39,7 @@ export class ProjectsComponent {
 
   isSingleClick: boolean = false;
 
+  // Indice del elemento de la lista vertical que esta scrolleado into view. one indexed.
   listIdx: number = 1; 
   // Indice del elemento de la lista vertical que se está hovereando
   listHoverIdx: number = -1;
@@ -321,19 +322,6 @@ export class ProjectsComponent {
     
   }
 
-
-  // TODO: mira a ver si puedes hacer que algo de esto funcione,
-  // el problema es que no scrollea prueba scrollBy y a lo mejor ni siquiera en scrollingElement
-  // pero en window como tal.
-  // onOverscrollPadding(ev: WheelEvent): void {
-  //   ev.preventDefault(); ev.stopPropagation();
-  //   // if (window.document)
-  //     window.document.scrollingElement!.scrollTop += ev.deltaY;
-    
-  // }
-
-  // TODO: HAZ AQUI  DENTRO LO DE ATRAS AHORA QUE PUEDES 
-  // update if there're more than 2 vids lol
   onListWheelMove(ev: WheelEvent): void {
     ev.stopPropagation(); ev.preventDefault();
     // I use the list videos to scroll and the listVideos list to see if overflow or underflow

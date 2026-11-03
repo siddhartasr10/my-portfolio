@@ -292,6 +292,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- Overscroll -->
+        <div class="absolute -bottom-63 w-full h-63" (wheel)="($event.deltaY > 0) ? listVideos[listIdx-1].nativeElement.scrollIntoView({behavior: 'smooth', block:'center'}) : leftArrow.scrollIntoView({behavior: 'smooth', block:'center'})"> </div>
     </div>
     <!-- Idea, para que el espacio negativo quede un poco  -->
     <!-- <div> </div> -->
@@ -301,19 +304,19 @@
     <!-- snap-center snap-always snap-mandatory snap-y -->
     <div class="relative flex flex-col items-center text-white mt-61 mx-10 w-9/10 h-[680px] overflow-auto snap-start snap-always snap-mandatory snap-y"
          (wheel)="onListWheelMove($event)">
-        <!-- NOTA: se usan margenes negativos para paliar el espacio de los elementos sticky, el margen entre el primer elemento y el titulo depende de la altura del elemento
-             que en los elementos siguientes al primero se vean bien depende de que haya suficiente espacio debajo de ellos para
-             que el snap scroll los muestre en el centro y que haya algo de margen top para que no se vea el anteiror. -->
 
+        <!-- Overscroll -->
+        <div class="absolute right-0 w-full h-29" (wheel)="($event.deltaY < 0) ? leftArrow.scrollIntoView({behavior: 'smooth', block:'center'}) : ''"> </div>
 
-        <!--  -->
-        <!-- TODO: Haz el índice funcional. -->
         <!-- TODO: continua esto y eventualmente añade algun efecto de iluminacion o algo al scrollear. maybe un box-shadow con view() o algo con scroll()-->
-        <!-- TODO: Cambia de alguna manera el el scrollable para que no sea tan confuso scrollear hacia abajo -->
-        <!--  INTENTO FALLIDO: -->
-        <!-- <div class="absolute right-0 top-0 w-10/12 h-2/20 bg-black z-12" (wheel)="  onOverscrollPadding($event)"> </div> -->
-        <!-- recuerda hacer el índice como en el wireframe. -->
         <h1 class="relative self-start sticky text-[#405973] text-shadow-lg font-roboto-serif text-4xl font-bold top-0 z-10"> Algunos <br> <b class="text-white text-6xl">experimentos</b> </h1>
+
+
+        <!-- NOTA: se usan margenes negativos para paliar el espacio de los elementos sticky, -->
+        <!-- el margen entre el primer elemento y el titulo depende de la altura del elemento -->
+
+        <!-- NOTA: Para que en los elementos siguientes al primero se vean bien depende de que haya suficiente espacio debajo de ellos para -->
+        <!-- que el snap scroll los muestre en el centro y que haya algo de margen top para que no se vea el anterior. -->
 
         <nav class="experiment-index font-mono -mt-28" aria-label="Índice visual de experimentos" aria-hidden="true">
             <span class="experiment-index__item" [class]="(this.listIdx === 1) ? 'experiment-index__item--current' : ''">01</span>
@@ -410,7 +413,7 @@
 
         <div id="element-1" class="experiment-row snap-always snap-center mt-15 mb-50"
             (mouseenter)="onListHover($event)" (mouseleave)="unlistListHover()"
-            [class.is-video-active]="this.listHoverIdx === 1 || this.listActiveVideoIdxs.has(0)" [class.is-playing]="this.listActiveVideoIdxs.has(0)">
+            [class.is-video-active]="this.listHoverIdx === 1 || this.listActiveVideoIdxs.has(0)" [class.is-playing]="this.listActiveVideoIdxs.has(0) && this.listActiveVideoIdxs.values().next().value === 1">
 
             <!-- Índice visual de la colección. -->
             <!-- <nav class="experiment-index font-mono" aria-label="Índice visual de experimentos" aria-hidden="true">
@@ -463,7 +466,7 @@
             <!-- Información del experimento. -->
             <section class="experiment-info" aria-labelledby="conway-experiment-title">
                 <div class="experiment-info__eyebrow font-mono">
-                    <span class="experiment-info__number">01</span>
+                    <span class="experiment-info__number">02</span>
                     <span class="experiment-info__rule" aria-hidden="true"></span>
                     <span>INTERACTIVE / CELLULAR AUTOMATA</span>
                 </div>
