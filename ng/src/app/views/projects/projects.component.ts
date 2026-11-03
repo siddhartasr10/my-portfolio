@@ -290,7 +290,8 @@ export class ProjectsComponent {
     this.onListVideoClick(ev);
   }
 
-  onListVideoClick(ev: MouseEvent): void {
+  // Internal, the html uses func on top.
+  private onListVideoClick(ev: MouseEvent): void {
     const target = ev.target as HTMLVideoElement;
     this.isSingleClick = true;
     const id = (!isNaN(Number(target.id.at(-1))))
@@ -300,6 +301,7 @@ export class ProjectsComponent {
     // I do this diferently than card videos bc i don't want autoplay and autopause,
     // I just pause a video in the list if other gets played (clicked)
     // and keep it on a index list so i can keep elements styled while videos are playing.
+    // the playing and pausing of the actual video is done on the onVideoClick
     setTimeout(() => {
       if (this.isSingleClick) {
         if (target.paused) {
@@ -342,6 +344,7 @@ export class ProjectsComponent {
       this.listVideos[--this.listIdx-1].nativeElement.scrollIntoView({behavior: 'smooth', block:'center'});
 
   }
+
   toggleListVideo(ev: MouseEvent, video: HTMLVideoElement): void {
     ev.stopPropagation();
 
@@ -354,21 +357,6 @@ export class ProjectsComponent {
     }
 
     video.pause();
-  }
-
-  onListVideoPlay(index: number): void {
-    this.listActiveVideoIdxs.forEach((activeIndex) => {
-      if (activeIndex !== index) {
-        this.listVideos[activeIndex]?.nativeElement.pause();
-      }
-    });
-
-    this.listActiveVideoIdxs.clear();
-    this.listActiveVideoIdxs.add(index);
-  }
-
-  onListVideoPause(index: number): void {
-    this.listActiveVideoIdxs.delete(index);
   }
 
   onListVideoTimeUpdate(ev: Event): void {

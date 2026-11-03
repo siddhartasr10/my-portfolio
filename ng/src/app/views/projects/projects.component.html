@@ -345,8 +345,7 @@
                         alt="Vista previa del juego de la vida de Conway">
 
                     <video #listVideo0 class="experiment-screen__video" id="list-video-0" poster="/projects/conways_life_game.png" playsinline muted
-                        (click)="onListVideoElementClick($event)" (dblclick)="onVideoDblClick($event)" (play)="onListVideoPlay(0)"
-                        (pause)="onListVideoPause(0)" (timeupdate)="onListVideoTimeUpdate($event)">
+                        (click)="onListVideoElementClick($event)" (dblclick)="onVideoDblClick($event)" (timeupdate)="onListVideoTimeUpdate($event)">
                         <source src="/projects/conways-life-game-Max183-pattern.av1.webm" type="video/webm">
                         <source src="/projects/conways-life-game-Max183-pattern.mp4" type="video/mp4">
                     </video>
@@ -392,7 +391,7 @@
                 <button
                     class="experiment-info__link font-mono"
                     (click)="toggleListVideo($event, listVideo0)"
-                    [attr.aria-pressed]="this.listActiveVideoIdxs.has(0)">
+                    [attr.aria-pressed]="this.listActiveVideoIdxs.has(0) && this.listActiveVideoIdxs.values().next().value === 0">
                     <span class="experiment-info__arrow font-roboto-serif" aria-hidden="true">↗</span>
                     <span>{{ this.listActiveVideoIdxs.has(0) ? 'PAUSAR EXPERIMENTO' : 'VER EXPERIMENTO' }}</span>
                 </button>
@@ -439,8 +438,7 @@
                     <video #listVideo1 class="experiment-screen__video"
                         poster="/projects/conways_life_game.png" playsinline muted
                         id="list-video-1"
-                        (click)="onListVideoElementClick($event)" (dblclick)="onVideoDblClick($event)"
-                        (play)="onListVideoPlay(0)" (pause)="onListVideoPause(0)" (timeupdate)="onListVideoTimeUpdate($event)">
+                        (click)="onListVideoElementClick($event)" (dblclick)="onVideoDblClick($event)" (timeupdate)="onListVideoTimeUpdate($event)">
                         <source src="/projects/conways-life-game-Max183-pattern.av1.webm" type="video/webm">
                         <source src="/projects/conways-life-game-Max183-pattern.mp4" type="video/mp4">
                     </video>
@@ -485,10 +483,10 @@
 
                 <button
                     class="experiment-info__link font-mono"
-                    (click)="toggleListVideo($event, listVideo0)"
-                    [attr.aria-pressed]="this.listActiveVideoIdxs.has(0)">
+                    (click)="toggleListVideo($event, listVideo1)"
+                    [attr.aria-pressed]="this.listActiveVideoIdxs.has(0) && this.listActiveVideoIdxs.values().next().value === 1">
                     <span class="experiment-info__arrow font-roboto-serif" aria-hidden="true">↗</span>
-                    <span>{{ this.listActiveVideoIdxs.has(0) ? 'PAUSAR EXPERIMENTO' : 'VER EXPERIMENTO' }}</span>
+                    <span>{{ (this.listActiveVideoIdxs.has(0) && this.listActiveVideoIdxs.values().next().value === 1) ? 'PAUSAR EXPERIMENTO' : 'VER EXPERIMENTO' }}</span>
                 </button>
             </section>
 
